@@ -4,6 +4,7 @@ import com.codecool.sportbuddyfinder.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 @Repository
@@ -16,17 +17,17 @@ public class MemoryUserDAO implements UserDao {
 
     @Override
     public Set<User> getAllUser() {
-        return null;
+        return new HashSet<>(userRepository);
     }
 
     @Override
     public User getUserById(UUID id) {
-        return null;
+        return userRepository.stream().filter(user -> user.getUserID().equals(id)).findAny().orElse(null);
     }
 
     @Override
     public boolean addUser(User user) {
-        return false;
+        return userRepository.add(user);
     }
 
     @Override
@@ -36,6 +37,11 @@ public class MemoryUserDAO implements UserDao {
 
     @Override
     public boolean deleteUserByID(UUID id) {
+        Optional<User> userToDelete = userRepository.stream().filter(user -> user.getUserID().equals(id)).findAny();
+        if(userToDelete.isPresent()){
+            userRepository.remove(userToDelete.get());
+            return true;
+        }
         return false;
     }
 }

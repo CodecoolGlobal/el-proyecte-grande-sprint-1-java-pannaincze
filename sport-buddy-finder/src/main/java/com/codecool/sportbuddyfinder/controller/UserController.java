@@ -26,7 +26,7 @@ public class UserController {
         return userService.getUserById(userID);
     }
     @PostMapping
-    public boolean postUser(User user){
+    public boolean postUser(@RequestBody User user){
         return userService.addUser(user);
     }
     @DeleteMapping("/{userId}")
