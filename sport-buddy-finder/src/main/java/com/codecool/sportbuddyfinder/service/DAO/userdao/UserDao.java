@@ -9,7 +9,7 @@ public interface UserDao {
     public Set<User> getAllUser();
     public User getUserById(UUID id);
     public boolean addUser(User user);
-    public boolean updateUser(User user);
+    public boolean updateUser(UUID userID);
     public boolean deleteUserByID(UUID id);
 
 }

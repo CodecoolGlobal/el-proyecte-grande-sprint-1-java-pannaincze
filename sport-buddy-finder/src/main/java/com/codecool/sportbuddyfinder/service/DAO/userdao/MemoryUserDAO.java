@@ -30,7 +30,7 @@ public class MemoryUserDAO implements UserDao {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public boolean updateUser(UUID userId) {
         return false;
     }
 

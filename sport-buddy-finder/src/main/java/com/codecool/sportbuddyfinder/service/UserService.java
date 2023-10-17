@@ -2,10 +2,11 @@ package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.service.DAO.userdao.UserDao;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.UUID;
-
+@Service
 public class UserService {
     private UserDao userDao;
 
@@ -22,8 +23,8 @@ public class UserService {
     public boolean addUser(User user){
         return userDao.addUser(user);
     }
-    public boolean updateUser(User user){
-        return userDao.updateUser(user);
+    public boolean updateUser(UUID userID){
+        return userDao.updateUser(userID);
     }
     public boolean deleteUserById(UUID userId){
        return userDao.deleteUserByID(userId);
