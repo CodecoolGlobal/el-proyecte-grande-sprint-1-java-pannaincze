@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface ActivityDAO {
     Set<Activity> getAllActivities();
     Activity getActivityById(UUID uuid);
-    Activity addActivity(Activity activity);
-    Activity deleteActivityById(UUID uuid);
+    Activity addNewActivity(Activity activity);
+    UUID deleteActivityById(UUID uuid);
     Activity updateActivityById(UUID uuid);
 }
