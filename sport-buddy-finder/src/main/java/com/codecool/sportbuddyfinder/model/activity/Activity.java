@@ -9,10 +9,10 @@ public class Activity {
     private String description;
     private final Sport sport;
     private final String location;
-    private int minPeopleToFind;
-    private int maxPeopleToFind;
+    private Integer minPeopleToFind;
+    private Integer maxPeopleToFind;
 
-    public Activity(String title, String description, Sport sport, String location, int minPeopleToFind, int maxPeopleToFind) {
+    public Activity(String title, String description, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind) {
         this.uuid = UUID.randomUUID();
         this.title = title;
         this.description = description;
@@ -20,6 +20,34 @@ public class Activity {
         this.location = location;
         this.minPeopleToFind = minPeopleToFind;
         this.maxPeopleToFind = maxPeopleToFind;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Sport getSport() {
+        return sport;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Integer getMinPeopleToFind() {
+        return minPeopleToFind;
+    }
+
+    public Integer getMaxPeopleToFind() {
+        return maxPeopleToFind;
     }
 
     @Override
