@@ -20,5 +20,6 @@ public enum Sport {
     SKIING,
     SNOWBOARDING,
     ICE_SKATING,
-    GYMNASTICS
+    GYMNASTICS,
+    ROCK_CLIMBING
 }
