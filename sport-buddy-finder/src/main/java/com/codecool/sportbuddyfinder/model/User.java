@@ -1,7 +1,7 @@
 package com.codecool.sportbuddyfinder.model;
 
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.UUID;
 
 public class User {
@@ -65,5 +65,18 @@ public class User {
 
     public void setProfilePicURL(String profilePicURL) {
         this.profilePicURL = profilePicURL;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userID, user.userID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userID);
     }
 }
