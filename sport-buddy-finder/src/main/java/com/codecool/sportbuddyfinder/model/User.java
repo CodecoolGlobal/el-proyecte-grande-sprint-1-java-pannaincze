@@ -17,7 +17,7 @@ public class User {
     private LocalDate birthDate;
     private String profilePicURL;
     private final Set<Sport> interests;
-    private Set<Activity> postedActivities;
+    private final Set<Activity> postedActivities;
     public User(String name, String email, String password, LocalDate birthDate, List<Sport> interests) {
         this.name = name;
         this.email = email;
@@ -26,6 +26,7 @@ public class User {
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
         this.interests = new HashSet<>(interests);
         this.userID = UUID.randomUUID();
+        this.postedActivities = new HashSet<>();
     }
 
     public String getName() {
@@ -73,12 +74,21 @@ public class User {
     }
 
     public Set<Sport> getInterests() {
-        return interests;
+        return new HashSet<>(interests);
     }
     public void addInterest(Sport sport){
         interests.add(sport);
     }
     public void addInterests(Set<Sport> interests){
         this.interests.addAll(interests);
+    }
+    public void addPostedActivity(Activity activity){
+        postedActivities.add(activity);
+    }
+    public void addPostedActivities(Set<Activity> activities){
+        this.postedActivities.addAll(activities);
+    }
+    public Set<Activity> getActivityPosts(){
+        return new HashSet<>(postedActivities);
     }
 }
