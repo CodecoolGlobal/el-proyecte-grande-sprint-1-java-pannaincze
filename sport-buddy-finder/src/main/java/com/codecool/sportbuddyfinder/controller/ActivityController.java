@@ -47,7 +47,7 @@ public class ActivityController {
         return activityService.updateActivityById(id);
     }
 
-    @PutMapping("/update/{activityId}/{userId}")
+    @PatchMapping("/update/{activityId}/{userId}")
     public Activity addUserToActivity(@PathVariable UUID activityId, @PathVariable UUID userId) {
         return activityService.addUserToActivity(activityId, userService.getUserById(userId));
     }
