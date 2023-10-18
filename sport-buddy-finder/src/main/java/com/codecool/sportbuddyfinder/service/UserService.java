@@ -23,8 +23,8 @@ public class UserService {
     public boolean addUser(User user){
         return userDao.addUser(user);
     }
-    public boolean updateUser(UUID userID){
-        return userDao.updateUser(userID);
+    public boolean updateUser(UUID userID,User updatedUser){
+        return userDao.updateUser(userID, updatedUser);
     }
     public boolean deleteUserById(UUID userId){
        return userDao.deleteUserByID(userId);
