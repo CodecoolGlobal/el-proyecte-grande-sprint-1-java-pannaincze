@@ -60,7 +60,7 @@ public class MemoryUserDAO implements UserDao {
         for(Sport interest : userToUpdate.getInterests()){
             for(Sport newInterest : newInterests){
                 if(interest != newInterest){
-                    userToUpdate.addInterest(interest);
+                    userToUpdate.addInterest(newInterest);
                 }
             }
         }
