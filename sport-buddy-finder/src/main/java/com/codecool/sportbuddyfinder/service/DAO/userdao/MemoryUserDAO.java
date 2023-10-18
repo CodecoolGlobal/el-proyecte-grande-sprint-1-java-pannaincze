@@ -27,8 +27,10 @@ public class MemoryUserDAO implements UserDao {
 
     @Override
     public boolean addUser(User user) {
-        return userRepository.add(user);
+        if (!emailExistsInRepository(user)) return userRepository.add(user);
+        return false;
     }
+
 
     @Override
     public boolean updateUser(UUID userId) {
@@ -41,6 +43,14 @@ public class MemoryUserDAO implements UserDao {
         if(userToDelete.isPresent()){
             userRepository.remove(userToDelete.get());
             return true;
+        }
+        return false;
+    }
+    private boolean emailExistsInRepository(User user) {
+        for (User u : userRepository) {
+            if(u.getEmail().equals(user.getEmail())){
+                return true;
+            }
         }
         return false;
     }
