@@ -1,7 +1,12 @@
 package com.codecool.sportbuddyfinder.model;
 
+import com.codecool.sportbuddyfinder.model.activity.Activity;
+import com.codecool.sportbuddyfinder.model.activity.Sport;
+
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class User {
@@ -11,16 +16,17 @@ public class User {
     private String password;
     private LocalDate birthDate;
     private String profilePicURL;
-    //private Set<T> interests;
-
-    public User(String name, String email, String password, LocalDate birthDate) {
+    private final Set<Sport> interests;
+    private final Set<Activity> postedActivities;
+    public User(String name, String email, String password, LocalDate birthDate, List<Sport> interests) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.birthDate = birthDate;
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
-        //this.interests = new HashSet<T>(); write getter for this!
+        this.interests = new HashSet<>(interests);
         this.userID = UUID.randomUUID();
+        this.postedActivities = new HashSet<>();
     }
 
     public String getName() {
@@ -65,5 +71,24 @@ public class User {
 
     public void setProfilePicURL(String profilePicURL) {
         this.profilePicURL = profilePicURL;
+    }
+
+    public Set<Sport> getInterests() {
+        return new HashSet<>(interests);
+    }
+    public void addInterest(Sport sport){
+        interests.add(sport);
+    }
+    public void addInterests(Set<Sport> interests){
+        this.interests.addAll(interests);
+    }
+    public void addPostedActivity(Activity activity){
+        postedActivities.add(activity);
+    }
+    public void addPostedActivities(Set<Activity> activities){
+        this.postedActivities.addAll(activities);
+    }
+    public Set<Activity> getActivityPosts(){
+        return new HashSet<>(postedActivities);
     }
 }
