@@ -89,7 +89,7 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(userID);
-
+    }
     public Set<Sport> getInterests() {
         return new HashSet<>(interests);
     }
