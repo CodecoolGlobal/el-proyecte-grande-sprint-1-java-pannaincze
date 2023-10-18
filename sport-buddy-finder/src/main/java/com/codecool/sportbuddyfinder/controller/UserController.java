@@ -31,13 +31,13 @@ public class UserController {
     public boolean postUser(@RequestBody User user){
         return userService.addUser(user);
     }
-    @DeleteMapping("/{userId}")
-    public boolean deleteUser(@PathVariable UUID userId){
-        return userService.deleteUserById(userId);
-    }
     @PutMapping("/{userID}")
     public boolean updateUser(@PathVariable UUID userID, @RequestBody User updatedUser){
         return userService.updateUser(userID, updatedUser);
+    }
+    @DeleteMapping("/{userId}")
+    public boolean deleteUser(@PathVariable UUID userId){
+        return userService.deleteUserById(userId);
     }
 
 }

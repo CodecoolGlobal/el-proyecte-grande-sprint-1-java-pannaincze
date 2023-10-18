@@ -8,18 +8,27 @@ export default function (){
     const [interests, setInterests] = useState([]);
     const [sportCategories, setSportCategories] = useState([]);
     function handleRegistration(){
-        console.log(name);
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, email:email,password: password , interests: interests  })
+        };
+        fetch('http://localhost:8080/users', requestOptions)
+            .then(response => response.json());
     }
     function checkboxHandling(target){
-        console.log(target.checked);
-        console.log(target.value);
+        if(target.checked){
+            setInterests([...interests, target.value])
+        }else if (!target.checked){
+            setInterests(interests.filter(interest => interest !== target.value));
+        }
     }
     useEffect(()=>{
         fetchSports();
 
     },[])
     async function fetchSports(){
-        const response = fetch("http://localhost:8080/activities/categories", {
+        fetch("http://localhost:8080/activities/categories", {
             method: "GET",
         })
             .then((response) => response.json())
@@ -30,10 +39,6 @@ export default function (){
             })
             .catch((error) => console.log(error));
     }
-    function showCategories(){
-
-    }
-
 
     return(
         <div>
@@ -41,15 +46,15 @@ export default function (){
                 <br/>
                 <div className="mb-3 ">
                     <label htmlFor="name" className="form-label">Name: </label><br/>
-                    <input onChange={event => setName(event.target.value) } id="name" placeholder="John Doe"></input>
+                    <input onChange={event => setName(event.target.value) } id="name" placeholder="John Doe" required={true}></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address: </label><br/>
-                    <input onChange={event => setEmail(event.target.value) } id="email" type="email" placeholder="example@gmail.com"></input>
+                    <input onChange={event => setEmail(event.target.value) } id="email" type="email" placeholder="example@gmail.com" required={true}></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Password: </label><br/>
-                    <input onChange={event => setPassword(event.target.value) } id="password" type={"password"} placeholder="********"></input>
+                    <input onChange={event => setPassword(event.target.value) } id="password" type={"password"} placeholder="********" required={true}></input>
                 </div>
                 <div className="mb-3 container ">
                     <label>Choose you sport interests:</label><br/><br/>
