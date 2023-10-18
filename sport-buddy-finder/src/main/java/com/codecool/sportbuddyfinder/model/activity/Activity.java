@@ -1,6 +1,10 @@
 package com.codecool.sportbuddyfinder.model.activity;
 
+import com.codecool.sportbuddyfinder.model.User;
+
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 public class Activity {
@@ -11,8 +15,12 @@ public class Activity {
     private final String location;
     private Integer minPeopleToFind;
     private Integer maxPeopleToFind;
+    private final User user;
+    private final Set<User> appliedUsers;
+    private Status postStatus;
 
-    public Activity(String title, String description, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind) {
+    public Activity(User user, String title, String description, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind) {
+        this.user = user;
         this.uuid = UUID.randomUUID();
         this.title = title;
         this.description = description;
@@ -20,6 +28,28 @@ public class Activity {
         this.location = location;
         this.minPeopleToFind = minPeopleToFind;
         this.maxPeopleToFind = maxPeopleToFind;
+        this.postStatus = Status.OPEN;
+        this.appliedUsers = new HashSet<>();
+    }
+
+    public boolean addUserToAppliedSet(User user) {
+        if (appliedUsers.size() < maxPeopleToFind) {
+            appliedUsers.add(user);
+            return true;
+        }
+        return false;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Set<User> getAppliedUsers() {
+        return appliedUsers;
+    }
+
+    public Status getPostStatus() {
+        return postStatus;
     }
 
     public UUID getUuid() {
