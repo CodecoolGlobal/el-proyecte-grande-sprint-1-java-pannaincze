@@ -51,6 +51,7 @@ public class MemoryUserDAO implements UserDao {
             if(updatedUser.getInterests() != null){
                 addNewInterests(userToUpdate.get(),updatedUser);
             }
+            return true;
         }
         return false;
     }
