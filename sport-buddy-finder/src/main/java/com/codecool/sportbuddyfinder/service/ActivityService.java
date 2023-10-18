@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.service;
 
+import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.service.DAO.activitydao.ActivityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,8 @@ public class ActivityService {
     }
     public Activity updateActivityById(UUID uuid) {
         return activityDAO.updateActivityById(uuid);
+    }
+    public Activity addUserToActivity(UUID activityId, User user) {
+        return activityDAO.addUserToActivity(activityId, user);
     }
 }

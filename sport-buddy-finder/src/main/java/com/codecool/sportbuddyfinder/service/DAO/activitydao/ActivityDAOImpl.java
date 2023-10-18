@@ -1,11 +1,10 @@
 package com.codecool.sportbuddyfinder.service.DAO.activitydao;
 
+import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Repository
 public class ActivityDAOImpl implements ActivityDAO {
@@ -39,6 +38,20 @@ public class ActivityDAOImpl implements ActivityDAO {
 
     @Override
     public Activity updateActivityById(UUID uuid) {
+        return null;
+    }
+
+    @Override
+    public Activity addUserToActivity(UUID activityId, User user) {
+        for (Activity activity : activities) {
+            if (activity.getUuid().equals(activityId)) {
+                if (activity.addUserToAppliedSet(user)) {
+                    activity.addUserToAppliedSet(user);
+                    return activity;
+                }
+            }
+        }
+
         return null;
     }
 }

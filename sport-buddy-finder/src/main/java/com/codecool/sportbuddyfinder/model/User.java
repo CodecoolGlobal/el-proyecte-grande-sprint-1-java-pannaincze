@@ -4,9 +4,13 @@ import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 
 import java.time.LocalDate;
+
+import java.util.Objects;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import java.util.UUID;
 
 public class User {
@@ -73,6 +77,19 @@ public class User {
         this.profilePicURL = profilePicURL;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userID, user.userID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userID);
+
     public Set<Sport> getInterests() {
         return new HashSet<>(interests);
     }
@@ -90,5 +107,6 @@ public class User {
     }
     public Set<Activity> getActivityPosts(){
         return new HashSet<>(postedActivities);
+
     }
 }

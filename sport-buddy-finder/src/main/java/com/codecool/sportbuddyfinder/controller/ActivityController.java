@@ -2,6 +2,7 @@ package com.codecool.sportbuddyfinder.controller;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.service.ActivityService;
+import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +13,12 @@ import java.util.UUID;
 @RequestMapping("activities")
 public class ActivityController {
     private final ActivityService activityService;
+    private final UserService userService;
 
     @Autowired
-    public ActivityController(ActivityService activityService) {
+    public ActivityController(ActivityService activityService, UserService userService) {
         this.activityService = activityService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -42,5 +45,10 @@ public class ActivityController {
     @PatchMapping("/update/{id}")
     public Activity updateActivityById(@PathVariable UUID id) {
         return activityService.updateActivityById(id);
+    }
+
+    @PutMapping("/update/{activityId}/{userId}")
+    public Activity addUserToActivity(@PathVariable UUID activityId, @PathVariable UUID userId) {
+        return activityService.addUserToActivity(activityId, userService.getUserById(userId));
     }
 }

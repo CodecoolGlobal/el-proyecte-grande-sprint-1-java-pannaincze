@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.service.DAO.activitydao;
 
+import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 
 import java.util.Set;
@@ -11,4 +12,5 @@ public interface ActivityDAO {
     Activity addNewActivity(Activity activity);
     UUID deleteActivityById(UUID uuid);
     Activity updateActivityById(UUID uuid);
+    Activity addUserToActivity(UUID activityId, User user);
 }
