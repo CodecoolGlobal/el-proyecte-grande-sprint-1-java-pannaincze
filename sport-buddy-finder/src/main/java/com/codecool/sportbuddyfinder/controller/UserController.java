@@ -1,6 +1,8 @@
 package com.codecool.sportbuddyfinder.controller;
 
 import com.codecool.sportbuddyfinder.model.User;
+import com.codecool.sportbuddyfinder.model.activity.Activity;
+import com.codecool.sportbuddyfinder.model.activity.Sport;
 import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,18 +36,8 @@ public class UserController {
         return userService.deleteUserById(userId);
     }
     @PutMapping("/{userID}")
-    public boolean updateUser(@PathVariable UUID userID, @RequestParam Optional<String> name,
-                              @RequestParam Optional<LocalDate> birthDate){
-        User userToUpdate = userService.getUserById(userID);
-        if(name.isPresent()){
-            userToUpdate.setName(name.get());
-            return true;
-        }
-        if(birthDate.isPresent()){
-            userToUpdate.setBirthDate(birthDate.get());
-            return true;
-        }
-        return false;
+    public boolean updateUser(@PathVariable UUID userID, @RequestBody User updatedUser){
+        return userService.updateUser(userID, updatedUser);
     }
 
 }

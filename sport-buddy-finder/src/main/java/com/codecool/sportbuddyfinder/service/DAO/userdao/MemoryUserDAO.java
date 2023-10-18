@@ -1,6 +1,7 @@
 package com.codecool.sportbuddyfinder.service.DAO.userdao;
 
 import com.codecool.sportbuddyfinder.model.User;
+import com.codecool.sportbuddyfinder.model.activity.Activity;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
@@ -31,10 +32,28 @@ public class MemoryUserDAO implements UserDao {
     }
 
     @Override
-    public boolean updateUser(UUID userId) {
+    public boolean updateUser(UUID userId, User updatedUser) {
+        Optional<User> userToUpdate = userRepository.stream().filter(user -> user.getUserID().equals(userId)).findAny();
+        if(userToUpdate.isPresent()){
+            if(updatedUser.getName() != null){
+                userToUpdate.get().setName(updatedUser.getName());
+            }
+            if(updatedUser.getActivityPosts() != null){
+                addNewActivitiesToUser(userToUpdate.get(),updatedUser);
+            }
+        }
         return false;
     }
-
+    private void addNewActivitiesToUser(User userToUpdate, User updatedUser){
+        Set<Activity> newActivities = updatedUser.getActivityPosts();
+        for(Activity activity : userToUpdate.getActivityPosts()){
+            for(Activity newActivity : newActivities){
+                if(!activity.equals(newActivity)){
+                    userToUpdate.addPostedActivity(newActivity);
+                }
+            }
+        }
+    }
     @Override
     public boolean deleteUserByID(UUID id) {
         Optional<User> userToDelete = userRepository.stream().filter(user -> user.getUserID().equals(id)).findAny();
