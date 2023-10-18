@@ -6,6 +6,7 @@ export default function (){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [interests, setInterests] = useState([]);
+    const [sportCategories, setSportCategories] = useState([]);
     function handleRegistration(){
         console.log(name);
     }
@@ -15,6 +16,7 @@ export default function (){
     }
     useEffect(()=>{
         fetchSports();
+
     },[])
     async function fetchSports(){
         const response = fetch("http://localhost:8080/activities/categories", {
@@ -23,35 +25,44 @@ export default function (){
             .then((response) => response.json())
             .then((data) => {
                 //setJoke(data[0].joke);
+                setSportCategories(data);
                 console.log(data);
             })
             .catch((error) => console.log(error));
     }
+    function showCategories(){
+
+    }
+
+
     return(
         <div>
-            <form className="container">
+            <form className="container text-center">
+                <br/>
                 <div className="mb-3 ">
-                    <label htmlFor="name" className="form-label">Name: </label>
+                    <label htmlFor="name" className="form-label">Name: </label><br/>
                     <input onChange={event => setName(event.target.value) } id="name" placeholder="John Doe"></input>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email address: </label>
+                    <label htmlFor="email" className="form-label">Email address: </label><br/>
                     <input onChange={event => setEmail(event.target.value) } id="email" type="email" placeholder="example@gmail.com"></input>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password: </label>
+                    <label htmlFor="password" className="form-label">Password: </label><br/>
                     <input onChange={event => setPassword(event.target.value) } id="password" type={"password"} placeholder="********"></input>
                 </div>
                 <div className="mb-3 container ">
-                    <label>Sport interests:</label><br/>
-                    <input onClick={event =>  checkboxHandling(event.target)} type="checkbox" className="form-check-input" id="exampleCheck1" value={"Sport1"}></input>
-                    <label className="form-check-label" htmlFor="exampleCheck1">Check1</label>
-                    <input type="checkbox" className="form-check-input" id="exampleCheck2"></input>
-                    <label className="form-check-label" htmlFor="exampleCheck2">Check2</label>
-                    <input type="checkbox" className="form-check-input" id="exampleCheck3"></input>
-                    <label className="form-check-label" htmlFor="exampleCheck3">Check3</label>
+                    <label>Choose you sport interests:</label><br/><br/>
+                    {sportCategories.length > 0 &&
+                        <div className="container row">{sportCategories.map((category, index  ) =>(
+                            <div key={index} className="col-4 ">
+                                <label className="form-check-label" htmlFor={category}>{category}</label><br/>
+                                <input onClick={event =>  checkboxHandling(event.target)} type="checkbox" className="form-check-input" id={category} value={category}></input>
+                            </div>
+                        ))}</div> }
                 </div>
                 <button type={"button"} onClick={handleRegistration}> Save </button>
+
             </form>
         </div>
 
