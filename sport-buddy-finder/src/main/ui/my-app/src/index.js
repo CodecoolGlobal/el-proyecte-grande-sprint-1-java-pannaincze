@@ -29,6 +29,7 @@ const router = createBrowserRouter([
                 path:"/activities/:id",
                 element: <GetActivity />
             },
+            {
                 path:"/create",
                 element: <ActivityCreator/>
             }
