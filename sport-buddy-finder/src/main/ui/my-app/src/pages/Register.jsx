@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {Form} from "react-bootstrap";
 
 export default function () {
     const [name, setName] = useState('');
@@ -60,45 +61,43 @@ export default function () {
             {isRegisterSuccessful && <div className="container text-center mb-2 bg-success text-white">Registration Successful</div>}
             {isRegisterSuccessful === false && <div className="container text-center bg-danger text-white">This email already exists in our system!</div>}
             {!isRegisterSuccessful && <>
-                <form className="container text-center" onSubmit={event => {
+                <Form className="container text-center" onSubmit={event => {
                     event.preventDefault();
                     handleRegistration()
                 }}>
                     <br/>
-                    <div className="mb-3 ">
-                        <label htmlFor="name" className="form-label">Name: </label><br/>
-                        <input onChange={event => setName(event.target.value)} id="name" placeholder="John Doe"
-                               required={true}></input>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Email address: </label><br/>
-                        <input onChange={event => setEmail(event.target.value)} id="email" type="email"
-                               placeholder="example@gmail.com" required={true}></input>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="password" className="form-label">Password: </label><br/>
-                        <input onChange={event => setPassword(event.target.value)} id="password" type={"password"}
-                               placeholder="********" required={true}></input>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="birthdate" className="form-label">Birth Date: </label><br/>
-                        <input onChange={event => setDate(event.target.value)} id="birthdate" type="date"
-                               required={true}></input>
-                    </div>
-                    <div className="mb-3 container">
-                        <label>Choose your sport interests:</label><br/><br/>
+                    <Form.Group className="mb-3 ">
+                        <Form.Label htmlFor="name" className="form-label">Name: </Form.Label><br/>
+                        <Form.Control onChange={event => setName(event.target.value)} id="name" placeholder="John Doe"
+                               required={true}></Form.Control>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label htmlFor="email" className="form-label">Email address: </Form.Label><br/>
+                        <Form.Control onChange={event => setEmail(event.target.value)} id="email" type="email"
+                               placeholder="example@gmail.com" required={true}></Form.Control>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label htmlFor="password" className="form-label">Password: </Form.Label><br/>
+                        <Form.Control onChange={event => setPassword(event.target.value)} id="password" type={"password"}
+                               placeholder="********" required={true}></Form.Control>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label htmlFor="birthdate" className="form-label">Birth Date: </Form.Label><br/>
+                        <Form.Control onChange={event => setDate(event.target.value)} id="birthdate" type="date"
+                               required={true}></Form.Control>
+                    </Form.Group>
+                    <Form.Group className="mb-3 container">
+                        <Form.Label>Choose your sport interests:</Form.Label><br/><br/>
                         {sportCategories.length > 0 &&
-                            <div className="container row">{sportCategories.map((category, index) => (
+                            <Form.Group className="container row">{sportCategories.map((category, index) => (
                                 <div key={index} className="col-4 ">
-                                    <label className="form-check-label" htmlFor={category}>{category}</label><br/>
-                                    <input onClick={event => checkboxHandling(event.target)} type="checkbox"
-                                           className="form-check-input" id={category} value={category}></input>
+                                    <Form.Check onClick={event => checkboxHandling(event.target)} type="checkbox" id={category} value={category} label={category}></Form.Check>
                                 </div>
-                            ))}</div>}
-                    </div>
+                            ))}</Form.Group>}
+                    </Form.Group>
                     <button type="submit"> Save</button>
 
-                </form>
+                </Form>
             </>}
 
         </div>
