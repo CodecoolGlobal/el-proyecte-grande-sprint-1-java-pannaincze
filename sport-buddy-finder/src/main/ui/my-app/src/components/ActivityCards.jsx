@@ -1,11 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Button, Card} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 export default function ActivityCards({activities}) {
     return (
         <div className="ActivityCards" style={{ display: "flex", flexWrap: "wrap"}}>
         {activities.map((activity) => (
-            <Card style={{ width: '18rem', margin: "0.5rem" }}>
+            <Card style={{ width: '18rem', margin: "0.5rem" }} key={activity.uuid}>
                 <Card.Header as="h5">{activity.sport}</Card.Header>
                 <Card.Body>
                     <Card.Title>{activity.title}</Card.Title>
@@ -13,7 +14,9 @@ export default function ActivityCards({activities}) {
                     <Card.Text>
                         {`${activity.appliedUsers.length}/${activity.maxPeopleToFind}`}
                     </Card.Text>
-                    <Button variant="primary">See more</Button>
+                    <Link to={`/activities/${activity.uuid}`}>
+                        <Button variant="primary">See more</Button>
+                    </Link>
                 </Card.Body>
             </Card>
             ))}
