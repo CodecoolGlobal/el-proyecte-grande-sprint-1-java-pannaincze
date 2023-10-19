@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public class Activity {
     private final UUID uuid;
+
     private String title;
     private String description;
     private final Sport sport;
