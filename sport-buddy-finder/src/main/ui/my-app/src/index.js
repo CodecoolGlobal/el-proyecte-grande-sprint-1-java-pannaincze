@@ -30,7 +30,7 @@ const router = createBrowserRouter([
                 element: <GetActivity />
             },
             {
-                path:"/create",
+                path:"activities/create",
                 element: <ActivityCreator/>
             }
         ]
