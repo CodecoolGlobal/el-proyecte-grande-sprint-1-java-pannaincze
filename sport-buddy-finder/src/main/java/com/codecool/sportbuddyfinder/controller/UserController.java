@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.controller;
 
+import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
@@ -28,16 +29,17 @@ public class UserController {
         return userService.getUserById(userID);
     }
     @PostMapping
-    public boolean postUser(@RequestBody User user){
-        return userService.addUser(user);
-    }
-    @DeleteMapping("/{userId}")
-    public boolean deleteUser(@PathVariable UUID userId){
-        return userService.deleteUserById(userId);
+    @ResponseBody
+    public boolean postUser(@RequestBody NewUserDTO newUserDTO){
+        return userService.addUser(newUserDTO);
     }
     @PutMapping("/{userID}")
     public boolean updateUser(@PathVariable UUID userID, @RequestBody User updatedUser){
         return userService.updateUser(userID, updatedUser);
+    }
+    @DeleteMapping("/{userId}")
+    public boolean deleteUser(@PathVariable UUID userId){
+        return userService.deleteUserById(userId);
     }
 
 }

@@ -1,24 +1,31 @@
 package com.codecool.sportbuddyfinder.model.activity;
 
 import com.codecool.sportbuddyfinder.model.User;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+@Setter
 public class Activity {
     private final UUID uuid;
-
     private String title;
     private String description;
-    private final Sport sport;
-    private final String location;
+    private Sport sport;
+    private String location;
     private Integer minPeopleToFind;
     private Integer maxPeopleToFind;
-    private final User user;
+    private User user;
     private final Set<User> appliedUsers;
     private Status postStatus;
+
+    public Activity() {
+        this.uuid = UUID.randomUUID();
+        this.postStatus = Status.OPEN;
+        this.appliedUsers = new HashSet<>();
+    }
 
     public Activity(User user, String title, String description, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind) {
         this.user = user;
