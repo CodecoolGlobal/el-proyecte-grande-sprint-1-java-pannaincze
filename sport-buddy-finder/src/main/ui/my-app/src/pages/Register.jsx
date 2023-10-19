@@ -34,7 +34,6 @@ export default function () {
 
     useEffect(() => {
         fetchSports();
-
     }, [])
 
     async function fetchSports() {
@@ -68,8 +67,8 @@ export default function () {
                     <input onChange={event => setPassword(event.target.value)} id="password" type={"password"}
                            placeholder="********" required={true}></input>
                 </div>
-                <div className="mb-3 container ">
-                    <label>Choose you sport interests:</label><br/><br/>
+                <div className="mb-3 container">
+                    <label>Choose your sport interests:</label><br/><br/>
                     {sportCategories.length > 0 &&
                         <div className="container row">{sportCategories.map((category, index) => (
                             <div key={index} className="col-4 ">
