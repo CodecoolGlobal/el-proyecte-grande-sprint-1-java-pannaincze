@@ -17,7 +17,6 @@ export default function HomePage() {
             .then((activities) => {
                 setLoading(false);
                 setActivities(activities);
-                console.log(activities);
             })
     }, [])
 

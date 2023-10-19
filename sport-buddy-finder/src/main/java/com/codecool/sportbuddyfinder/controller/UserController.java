@@ -29,6 +29,7 @@ public class UserController {
         return userService.getUserById(userID);
     }
     @PostMapping
+    @ResponseBody
     public boolean postUser(@RequestBody NewUserDTO newUserDTO){
         return userService.addUser(newUserDTO);
     }
