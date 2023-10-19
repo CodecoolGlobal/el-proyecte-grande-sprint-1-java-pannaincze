@@ -1,7 +1,7 @@
 import {useState} from "react";
-import {Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 
-export const ActivityForm = ({handleSave}) => {
+export const ActivityForm = ({handleSave, onCancel}) => {
 
 
     const [title, setTitle] = useState("");
@@ -37,6 +37,7 @@ export const ActivityForm = ({handleSave}) => {
                 <Form.Label htmlFor="sport">Sport:</Form.Label>
                 <Form.Select onChange={(e) => setSport(e.target.value)} id="type" required={true}>
                     <option value="" disabled selected>Select your option</option>
+                    <option value="FOOTBALL">Football</option>
                 </Form.Select>
 
                 <Form.Label htmlFor="description">Description:</Form.Label>
@@ -56,6 +57,8 @@ export const ActivityForm = ({handleSave}) => {
                 />
 
             </Form.Group>
+            <Button type="submit">Save</Button>
+            <Button type="button" onClick={onCancel}>Cancel</Button>
         </Form>
     )
 }

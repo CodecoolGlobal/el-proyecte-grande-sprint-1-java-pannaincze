@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Register from "./pages/Register";
 import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
+import {ActivityCreator} from "./pages/ActivityCreator";
 
 
 const router = createBrowserRouter([
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />
+            },
+            {
+                path:"/create",
+                element: <ActivityCreator/>
             }
         ]
 
