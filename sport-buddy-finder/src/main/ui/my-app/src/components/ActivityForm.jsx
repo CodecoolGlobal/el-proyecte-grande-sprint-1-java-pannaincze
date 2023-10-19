@@ -48,6 +48,14 @@ export const ActivityForm = ({handleSave, onCancel}) => {
                     required={true}
                 />
 
+                <Form.Label htmlFor="minPeople">Minimum people:</Form.Label>
+                <Form.Control
+                    onChange={(e) => setMinPeople(e.target.value)}
+                    type="text"
+                    id="minPeople"
+                    required={true}
+                />
+
                 <Form.Label htmlFor="maxPeople">Maximum people:</Form.Label>
                 <Form.Control
                     onChange={(e) => setMaxPeople(e.target.value)}
