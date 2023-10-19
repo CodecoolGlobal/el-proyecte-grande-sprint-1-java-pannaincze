@@ -1,10 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Button, Container, Navbar} from "react-bootstrap";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import LoginAndRegister from "./components/LoginAndRegister";
+import {render} from "@testing-library/react";
 
 export default function Layout() {
+
+    let {state} = useLocation();
+    const [userId, setUserId] = useState(null)
+    const [userName, setUserName] = useState(null)
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (state !== null) {
+            const {name, userID, email, password, birthDate, profilePicURL, interests, postedActivities} = state;
+            setUser({name, userID, email, password, birthDate, profilePicURL, interests, postedActivities});
+            setUserId(userID);
+            setUserName(name)
+        }
+    }, [state]);
     return (
         <div>
             <Navbar className="bg-body-tertiary" data-bs-theme="dark">
@@ -14,7 +29,15 @@ export default function Layout() {
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end">
-                        <LoginAndRegister/>
+                        {state !== null ? <div ><p className="text-white d-inline">{userName}&nbsp;</p><Button onClick={() => {
+                            state = null;
+                            setUserName(null);
+                            setUserId(null);
+                            setTimeout(()=>{
+                            navigate('/');
+                            },200)
+                        }}>Logout</Button></div> : <LoginAndRegister/>}
+
                         <Link to={"/activities/create"}>
                             <Button style={{margin: "0.5rem"}}>Create new post</Button>
                         </Link>
@@ -24,7 +47,7 @@ export default function Layout() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Outlet/>
+            <Outlet context={[user, setUser]}  />
         </div>
     )
 }
