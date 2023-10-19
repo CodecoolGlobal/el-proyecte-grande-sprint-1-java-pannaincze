@@ -8,6 +8,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Register from "./pages/Register";
 import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
+import GetActivity from "./pages/GetActivity";
 import {ActivityCreator} from "./pages/ActivityCreator";
 
 
@@ -25,6 +26,9 @@ const router = createBrowserRouter([
                 element: <Register />
             },
             {
+                path:"/activities/:id",
+                element: <GetActivity />
+            },
                 path:"/create",
                 element: <ActivityCreator/>
             }
