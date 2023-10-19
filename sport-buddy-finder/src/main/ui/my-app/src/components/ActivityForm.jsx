@@ -17,8 +17,8 @@ export const ActivityForm = ({handleSave, onCancel}) => {
             title,
             description,
             sport,
-            minPeople,
-            maxPeople,
+            minPeopleToFind: minPeople,
+            maxPeopleToFind: maxPeople,
         })
     }
 
@@ -51,7 +51,7 @@ export const ActivityForm = ({handleSave, onCancel}) => {
                 <Form.Label htmlFor="minPeople">Minimum people:</Form.Label>
                 <Form.Control
                     onChange={(e) => setMinPeople(e.target.value)}
-                    type="text"
+                    type="number"
                     id="minPeople"
                     required={true}
                 />
@@ -59,7 +59,7 @@ export const ActivityForm = ({handleSave, onCancel}) => {
                 <Form.Label htmlFor="maxPeople">Maximum people:</Form.Label>
                 <Form.Control
                     onChange={(e) => setMaxPeople(e.target.value)}
-                    type="text"
+                    type="number"
                     id="maxPeople"
                     required={true}
                 />

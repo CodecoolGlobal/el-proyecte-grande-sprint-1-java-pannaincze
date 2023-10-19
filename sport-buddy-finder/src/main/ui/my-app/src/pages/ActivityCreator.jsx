@@ -2,13 +2,13 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {ActivityForm} from "../components/ActivityForm";
 
-const createActivity = (newActivityDTO) => {
+const createActivity = (newActivity) => {
     return fetch("http://localhost:8080/activities/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(newActivityDTO),
+        body: JSON.stringify(newActivity),
     }).then(res => res.json());
 }
 
