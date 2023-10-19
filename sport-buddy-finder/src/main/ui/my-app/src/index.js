@@ -9,9 +9,11 @@ import Register from "./pages/Register";
 import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import {ActivityCreator} from "./pages/ActivityCreator";
+import Login from "./pages/Login";
 
 
 const router = createBrowserRouter([
+
     {
         path: "/",
         element: <Layout />,
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />
+            },
+            {
+                path: "/login",
+                element: <Login />
             },
             {
                 path:"/create",
