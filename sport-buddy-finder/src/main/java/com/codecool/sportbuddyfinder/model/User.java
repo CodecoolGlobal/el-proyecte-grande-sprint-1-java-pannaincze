@@ -22,13 +22,13 @@ public class User {
     private String profilePicURL;
     private final Set<Sport> interests;
     private final Set<Activity> postedActivities;
-    public User(String name, String email, String password, LocalDate birthDate, List<Sport> interests) {
+    public User(String name, String email, String password, LocalDate birthDate) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.birthDate = birthDate;
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
-        this.interests = new HashSet<>(interests);
+        this.interests = new HashSet<>();
         this.userID = UUID.randomUUID();
         this.postedActivities = new HashSet<>();
     }

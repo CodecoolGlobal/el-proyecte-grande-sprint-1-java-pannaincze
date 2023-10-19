@@ -1,6 +1,7 @@
 package com.codecool.sportbuddyfinder.controller;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
+import com.codecool.sportbuddyfinder.model.activity.Sport;
 import com.codecool.sportbuddyfinder.service.ActivityService;
 import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,10 @@ public class ActivityController {
     @GetMapping("/{id}")
     public Activity getActivityById(@PathVariable UUID id) {
         return activityService.getActivityById(id);
+    }
+    @GetMapping("/categories")
+    public Sport[] getAllSport(){
+        return Sport.values();
     }
 
     @PostMapping("/create")

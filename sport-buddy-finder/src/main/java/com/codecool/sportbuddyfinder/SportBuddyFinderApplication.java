@@ -10,4 +10,5 @@ public class SportBuddyFinderApplication {
 		SpringApplication.run(SportBuddyFinderApplication.class, args);
 	}
 
+
 }

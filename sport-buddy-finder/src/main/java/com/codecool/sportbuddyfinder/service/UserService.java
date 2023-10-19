@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.service;
 
+import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.service.DAO.userdao.UserDao;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class UserService {
     public User getUserById(UUID id){
         return userDao.getUserById(id);
     }
-    public boolean addUser(User user){
-        return userDao.addUser(user);
+    public boolean addUser(NewUserDTO newUserDTO){
+        return userDao.addUser(newUserDTO);
     }
     public boolean updateUser(UUID userID,User updatedUser){
         return userDao.updateUser(userID, updatedUser);

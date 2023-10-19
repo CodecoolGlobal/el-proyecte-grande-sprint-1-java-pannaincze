@@ -1,14 +1,13 @@
 package com.codecool.sportbuddyfinder.service.DAO.userdao;
 
+import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 @Repository
 public class MemoryUserDAO implements UserDao {
     private final Set<User> userRepository;
@@ -28,7 +27,9 @@ public class MemoryUserDAO implements UserDao {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public boolean addUser(NewUserDTO newUserDTO) {
+        User user = new User(newUserDTO.name(), newUserDTO.email(), newUserDTO.password(), null);
+        user.addInterests(Set.of(newUserDTO.interests()));
         if (!emailExistsInRepository(user)) return userRepository.add(user);
         return false;
     }
