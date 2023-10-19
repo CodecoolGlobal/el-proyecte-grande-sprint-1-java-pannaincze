@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.service.DAO.userdao;
 
+import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
@@ -32,6 +33,16 @@ public class MemoryUserDAO implements UserDao {
         user.addInterests(Set.of(newUserDTO.interests()));
         if (!emailExistsInRepository(user)) return userRepository.add(user);
         return false;
+    }
+
+    @Override
+    public User loginUser(LoginUserDTO loginUserDTO) {
+        for (User user : userRepository){
+            if (user.getEmail().equals(loginUserDTO.email()) && user.getPassword().equals(loginUserDTO.password())){
+                return user;
+            }
+        }
+        return null;
     }
 
 

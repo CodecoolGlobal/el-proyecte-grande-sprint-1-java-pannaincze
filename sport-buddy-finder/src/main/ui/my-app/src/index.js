@@ -10,9 +10,11 @@ import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import GetActivity from "./pages/GetActivity";
 import {ActivityCreator} from "./pages/ActivityCreator";
+import Login from "./pages/Login";
 
 
 const router = createBrowserRouter([
+
     {
         path: "/",
         element: <Layout />,
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />
+            },
+            {
+                path: "/login",
+                element: <Login />
             },
             {
                 path:"/activities/:id",
