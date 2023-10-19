@@ -24,7 +24,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
 
 
     return (
-        <Form className='mx-5' onSubmit={onSubmit}>
+        <Form className='m-5' onSubmit={onSubmit}>
             <Form.Group className='mb-3'>
                 <Form.Label htmlFor="title">Title:</Form.Label>
                 <Form.Control
@@ -32,6 +32,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
                     type="text"
                     id="title"
                     required={true}
+
                 />
 
                 <Form.Label htmlFor="sport">Sport:</Form.Label>
@@ -46,6 +47,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
                     type="text"
                     id="description"
                     required={true}
+                    as="textarea" rows="3"
                 />
 
                 <Form.Label htmlFor="minPeople">Minimum people:</Form.Label>
@@ -65,8 +67,8 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
                 />
 
             </Form.Group>
-            <Button type="submit">Save</Button>
-            <Button type="button" onClick={onCancel}>Cancel</Button>
+            <Button type="submit" style={{margin: "0.2rem"}}>Save</Button>
+            <Button type="button" onClick={onCancel} style={{margin: "0.2rem"}}>Cancel</Button>
         </Form>
     )
 }
