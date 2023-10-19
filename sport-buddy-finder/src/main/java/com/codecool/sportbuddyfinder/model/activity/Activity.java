@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Setter
 public class Activity {
-    private UUID uuid;
+    private final UUID uuid;
     private String title;
     private String description;
     private Sport sport;
