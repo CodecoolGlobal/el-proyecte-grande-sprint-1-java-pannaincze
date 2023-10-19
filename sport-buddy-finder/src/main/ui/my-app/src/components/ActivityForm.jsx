@@ -37,8 +37,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
                 <Form.Label htmlFor="sport">Sport:</Form.Label>
                 <Form.Select onChange={(e) => setSport(e.target.value)} id="type" required={true}>
                     <option value="" disabled selected>Select your option</option>
-                    {sportCategories.map((category, index) => <option value={category}>{category}</option>
-                    )}
+                    {sportCategories.map((category) => <option value={category} key={category}>{category}</option>)}
                 </Form.Select>
 
                 <Form.Label htmlFor="description">Description:</Form.Label>
