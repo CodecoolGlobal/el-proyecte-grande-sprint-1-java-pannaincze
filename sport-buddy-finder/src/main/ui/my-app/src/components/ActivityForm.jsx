@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Button, Form} from "react-bootstrap";
 
-export const ActivityForm = ({handleSave, onCancel}) => {
+export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
 
 
     const [title, setTitle] = useState("");
@@ -37,7 +37,7 @@ export const ActivityForm = ({handleSave, onCancel}) => {
                 <Form.Label htmlFor="sport">Sport:</Form.Label>
                 <Form.Select onChange={(e) => setSport(e.target.value)} id="type" required={true}>
                     <option value="" disabled selected>Select your option</option>
-                    <option value="FOOTBALL">Football</option>
+                    {sportCategories.map((category) => <option value={category} key={category}>{category}</option>)}
                 </Form.Select>
 
                 <Form.Label htmlFor="description">Description:</Form.Label>
