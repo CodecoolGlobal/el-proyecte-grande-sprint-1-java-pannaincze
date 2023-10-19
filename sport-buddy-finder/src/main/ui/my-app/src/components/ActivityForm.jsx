@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Button, Form} from "react-bootstrap";
 
-export const ActivityForm = ({handleSave, onCancel}) => {
+export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
 
 
     const [title, setTitle] = useState("");
@@ -24,7 +24,7 @@ export const ActivityForm = ({handleSave, onCancel}) => {
 
 
     return (
-        <Form className='mx-5' onSubmit={onSubmit}>
+        <Form className='m-5' onSubmit={onSubmit}>
             <Form.Group className='mb-3'>
                 <Form.Label htmlFor="title">Title:</Form.Label>
                 <Form.Control
@@ -32,12 +32,13 @@ export const ActivityForm = ({handleSave, onCancel}) => {
                     type="text"
                     id="title"
                     required={true}
+
                 />
 
                 <Form.Label htmlFor="sport">Sport:</Form.Label>
                 <Form.Select onChange={(e) => setSport(e.target.value)} id="type" required={true}>
                     <option value="" disabled selected>Select your option</option>
-                    <option value="FOOTBALL">Football</option>
+                    {sportCategories.map((category) => <option value={category} key={category}>{category}</option>)}
                 </Form.Select>
 
                 <Form.Label htmlFor="description">Description:</Form.Label>
@@ -46,6 +47,7 @@ export const ActivityForm = ({handleSave, onCancel}) => {
                     type="text"
                     id="description"
                     required={true}
+                    as="textarea" rows="3"
                 />
 
                 <Form.Label htmlFor="minPeople">Minimum people:</Form.Label>
@@ -65,8 +67,8 @@ export const ActivityForm = ({handleSave, onCancel}) => {
                 />
 
             </Form.Group>
-            <Button type="submit">Save</Button>
-            <Button type="button" onClick={onCancel}>Cancel</Button>
+            <Button type="submit" style={{margin: "0.2rem"}}>Save</Button>
+            <Button type="button" onClick={onCancel} style={{margin: "0.2rem"}}>Cancel</Button>
         </Form>
     )
 }
