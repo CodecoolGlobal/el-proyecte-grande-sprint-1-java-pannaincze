@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {Container, Navbar} from "react-bootstrap";
 import {Outlet, useLocation} from "react-router-dom";
 import LoginAndRegister from "./components/LoginAndRegister";
+import Profile from "./components/Profile"
 
 export default function Layout() {
 
@@ -14,6 +15,7 @@ export default function Layout() {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <LoginAndRegister />
+                        <Profile />
                         <Navbar.Text>
                             By: Team team = new Team();
                         </Navbar.Text>
