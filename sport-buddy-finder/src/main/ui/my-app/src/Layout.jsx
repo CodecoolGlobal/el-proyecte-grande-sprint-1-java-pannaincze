@@ -30,7 +30,7 @@ export default function Layout() {
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end">
-                        {user !== null ? <div ><p className="text-white d-inline"><Link to={"/profile"} state={{ from: userId }}>{userName}</Link>&nbsp;</p><Button onClick={() => {
+                        {user !== null ? <div ><p className="text-white d-inline"><Link to={"/profile"} state={{ id: userId }}>{userName}</Link>&nbsp;</p><Button onClick={() => {
                             state = null;
                             setUserName(null);
                             setUserId(null);

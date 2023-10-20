@@ -7,7 +7,7 @@ import {useLocation, useParams} from "react-router-dom";
 
 export default function ProfilePage(){
     const location = useLocation()
-    const { from } = location.state
+    const { id } = location.state
     const [user, setUser] = useState({
         name:"",
         email:"",
@@ -26,8 +26,8 @@ export default function ProfilePage(){
             .catch((error) => console.log(error));
     }
     useEffect(()=> {
-        console.log(from)
-        fetchUser(from)
+        console.log(id)
+        fetchUser(id)
     },[])
     return (
         <div>
@@ -38,16 +38,7 @@ export default function ProfilePage(){
             </Container>
             <h1>{user.name}</h1>
             <h2>{user.email}</h2>
-            <ul>
-                {user.interests.map((interest) => {
-                    return <li>{interest}</li>
-                })}
-            </ul>
-            <ul>
-                {user.postedActivities.map((activity) => {
-                    return <li>{activity}</li>
-                })}
-            </ul>
+
         </div>
     )
 }
