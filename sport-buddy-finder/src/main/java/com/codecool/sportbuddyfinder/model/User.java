@@ -2,26 +2,34 @@ package com.codecool.sportbuddyfinder.model;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 import java.util.Objects;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import java.util.UUID;
-
+@Setter
 public class User {
     private String name;
-    private final UUID userID;
+    private UUID userID;
     private String email;
     private String password;
     private LocalDate birthDate;
     private String profilePicURL;
     private final Set<Sport> interests;
     private final Set<Activity> postedActivities;
+
+    public User() {
+        this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
+        this.interests = new HashSet<>();
+        this.userID = UUID.randomUUID();
+        this.postedActivities = new HashSet<>();
+    }
+
     public User(String name, String email, String password, LocalDate birthDate) {
         this.name = name;
         this.email = email;

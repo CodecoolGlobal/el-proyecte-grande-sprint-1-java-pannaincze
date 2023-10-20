@@ -10,8 +10,13 @@ import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 
+import GetActivity from "./pages/GetActivity";
+import {ActivityCreator} from "./pages/ActivityCreator";
+import Login from "./pages/Login";
+
 
 const router = createBrowserRouter([
+
     {
         path: "/",
         element: <Layout />,
@@ -27,6 +32,18 @@ const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <ProfilePage />
+            },
+            {
+                path: "/login",
+                element: <Login />
+            },
+            {
+                path:"/activities/:id",
+                element: <GetActivity />
+            },
+            {
+                path:"activities/create",
+                element: <ActivityCreator/>
             }
         ]
 

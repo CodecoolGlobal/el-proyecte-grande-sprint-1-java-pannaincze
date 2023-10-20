@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.controller;
 
+import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
@@ -28,10 +29,17 @@ public class UserController {
     public User getUserByID(@PathVariable UUID userID){
         return userService.getUserById(userID);
     }
+    @GetMapping("/login/{email}/{password}")
+    public User loginUser(@PathVariable String email, @PathVariable String password){
+        return userService.loginUser(new LoginUserDTO(email, password));
+    }
     @PostMapping
+    @ResponseBody
     public boolean postUser(@RequestBody NewUserDTO newUserDTO){
         return userService.addUser(newUserDTO);
     }
+
+
     @PutMapping("/{userID}")
     public boolean updateUser(@PathVariable UUID userID, @RequestBody User updatedUser){
         return userService.updateUser(userID, updatedUser);
