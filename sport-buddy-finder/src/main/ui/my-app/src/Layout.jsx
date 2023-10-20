@@ -24,12 +24,12 @@ export default function Layout() {
         <div>
             <Navbar className="bg-body-tertiary" data-bs-theme="dark">
                 <Container>
-                    <Navbar.Brand href="/">Sport Buddy Finder
+                    <Navbar.Brand> <Link to={"/"} className="text-white text-decoration-none">Sport Buddy Finder</Link>
                         <span className="material-symbols-outlined">hiking</span>
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end">
-                        {state !== null ? <div ><p className="text-white d-inline">{userName}&nbsp;</p><Button onClick={() => {
+                        {user !== null ? <div ><p className="text-white d-inline">{userName}&nbsp;</p><Button onClick={() => {
                             state = null;
                             setUserName(null);
                             setUserId(null);
