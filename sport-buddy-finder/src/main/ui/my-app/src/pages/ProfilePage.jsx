@@ -22,7 +22,8 @@ export default function ProfilePage(){
             method: "GET",
         })
             .then((response) => response.json())
-            .then((data) => setUser(data))
+            .then((data) => {console.log(data)
+                setUser(data)})
             .catch((error) => console.log(error));
     }
     useEffect(()=> {
@@ -38,7 +39,6 @@ export default function ProfilePage(){
             </Container>
             <h1>{user.name}</h1>
             <h2>{user.email}</h2>
-
         </div>
     )
 }
