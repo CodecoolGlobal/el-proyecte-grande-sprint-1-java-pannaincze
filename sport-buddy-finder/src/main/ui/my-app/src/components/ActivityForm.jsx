@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Button, Form} from "react-bootstrap";
+import MultiRangeSlider from "./MultiRangeSlider/MultiRangeSlider";
 
 export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
 
@@ -50,6 +51,14 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
                     as="textarea" rows="3"
                 />
 
+                <MultiRangeSlider
+                    min={1}
+                    onChange={({min, max}) => {
+                        setMinPeople(min);
+                        setMaxPeople(max);
+                    }}
+                    max={50}/>
+
                 <Form.Label htmlFor="minPeople">Minimum people:</Form.Label>
                 <Form.Control
                     onChange={(e) => setMinPeople(e.target.value)}
@@ -65,7 +74,6 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
                     id="maxPeople"
                     required={true}
                 />
-
             </Form.Group>
             <Button type="submit" style={{margin: "0.2rem"}}>Save</Button>
             <Button type="button" onClick={onCancel} style={{margin: "0.2rem"}}>Cancel</Button>

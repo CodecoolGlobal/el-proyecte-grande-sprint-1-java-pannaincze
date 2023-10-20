@@ -46,7 +46,6 @@ public class ActivityDAOImpl implements ActivityDAO {
         for (Activity activity : activities) {
             if (activity.getUuid().equals(activityId)) {
                 if (activity.addUserToAppliedSet(user)) {
-                    activity.addUserToAppliedSet(user);
                     return activity;
                 }
             }
