@@ -2,8 +2,12 @@ import {useState, useEffect} from "react";
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
-export default function ProfilePage({userID}){
+import {useLocation, useParams} from "react-router-dom";
 
+
+export default function ProfilePage(){
+    const location = useLocation()
+    const { from } = location.state
     const [user, setUser] = useState({
         name:"",
         email:"",
@@ -22,8 +26,8 @@ export default function ProfilePage({userID}){
             .catch((error) => console.log(error));
     }
     useEffect(()=> {
-        console.log(userID)
-        fetchUser(userID)
+        console.log(from)
+        fetchUser(from)
     },[])
     return (
         <div>

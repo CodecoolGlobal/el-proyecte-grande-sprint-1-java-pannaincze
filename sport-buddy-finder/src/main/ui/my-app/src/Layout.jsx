@@ -30,16 +30,14 @@ export default function Layout() {
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end">
-                        {user !== null ? <div ><p className="text-white d-inline">{userName}&nbsp;</p><Button onClick={() => {
+                        {user !== null ? <div ><p className="text-white d-inline"><Link to={"/profile"} state={{ from: userId }}>{userName}</Link>&nbsp;</p><Button onClick={() => {
                             state = null;
                             setUserName(null);
                             setUserId(null);
                             setTimeout(()=>{
                             navigate('/');
                             },200)
-                        }}>Logout</Button></div> : <LoginAndRegister/>}
-                        <Profile />
-
+                        }}>Logout</Button></div> : <LoginAndRegister />}
                         <Link to={"/activities/create"}>
                             <Button style={{margin: "0.5rem"}}>Create new post</Button>
                         </Link>
