@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 
 export default function () {
     const [name, setName] = useState('');
@@ -26,7 +26,7 @@ export default function () {
                     setTimeout(() => {
                         setRegisterSuccessAs(null);
                         navigate("/");
-                    }, "2200");
+                    }, "1800");
                 }
             });
         }
@@ -95,7 +95,7 @@ export default function () {
                                 </div>
                             ))}</Form.Group>}
                     </Form.Group>
-                    <button type="submit"> Save</button>
+                    <Button type="submit"> Save</Button>
 
                 </Form>
             </>}

@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -14,7 +14,6 @@ import GetActivity from "./pages/GetActivity";
 import {ActivityCreator} from "./pages/ActivityCreator";
 import Login from "./pages/Login";
 
-
 const router = createBrowserRouter([
 
     {
@@ -23,7 +22,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <HomePage />
+                element: <HomePage  />
             },
             {
                 path: "/register",
@@ -53,6 +52,8 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    
+
   <React.StrictMode>
       <RouterProvider router={router}/>
   </React.StrictMode>
