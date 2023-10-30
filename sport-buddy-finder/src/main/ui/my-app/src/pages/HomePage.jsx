@@ -1,5 +1,3 @@
-import LoginAndRegister from "../components/LoginAndRegister";
-import Loading from "../components/Loading";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useEffect, useState} from "react";
 import ActivityCards from "../components/ActivityCards";

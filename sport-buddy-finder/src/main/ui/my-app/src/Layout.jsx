@@ -4,6 +4,7 @@ import {Button, Container, Navbar} from "react-bootstrap";
 import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import LoginAndRegister from "./components/LoginAndRegister";
 import {render} from "@testing-library/react";
+import Profile from "./components/Profile"
 
 export default function Layout() {
 
@@ -38,6 +39,7 @@ export default function Layout() {
                             navigate('/');
                             },200)
                         }}>Logout</Button></div> : <LoginAndRegister/>}
+                        <Profile />
 
                         <Link to={"/activities/create"}>
                             <Button style={{margin: "0.5rem"}}>Create new post</Button>
