@@ -1,6 +1,7 @@
 package com.codecool.sportbuddyfinder.model.activity;
 
 import com.codecool.sportbuddyfinder.model.User;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+@Getter
 @Setter
 public class Activity {
     private final UUID uuid;
@@ -46,46 +48,6 @@ public class Activity {
             return true;
         }
         return false;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Set<User> getAppliedUsers() {
-        return appliedUsers;
-    }
-
-    public Status getPostStatus() {
-        return postStatus;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Sport getSport() {
-        return sport;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public Integer getMinPeopleToFind() {
-        return minPeopleToFind;
-    }
-
-    public Integer getMaxPeopleToFind() {
-        return maxPeopleToFind;
     }
 
     @Override
