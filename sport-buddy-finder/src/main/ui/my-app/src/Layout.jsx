@@ -50,7 +50,7 @@ export default function Layout() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Outlet context={[userId, setUserId]}  />
+            <Outlet context={[user, setUser]}  />
         </div>
     )
 }
