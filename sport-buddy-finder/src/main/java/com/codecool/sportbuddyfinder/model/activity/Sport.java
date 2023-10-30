@@ -7,6 +7,7 @@ public enum Sport {
     GOLF,
     SWIMMING,
     BASEBALL,
+    HIKING,
     VOLLEYBALL,
     TABLE_TENNIS,
     BADMINTON,
@@ -21,5 +22,6 @@ public enum Sport {
     SNOWBOARDING,
     ICE_SKATING,
     GYMNASTICS,
-    ROCK_CLIMBING
+    ROCK_CLIMBING,
+    YOGA
 }
