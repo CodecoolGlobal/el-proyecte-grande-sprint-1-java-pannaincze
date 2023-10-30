@@ -35,19 +35,21 @@ export default function ProfilePage(){
         <div>
             <Container>
                     <Col xs={6} md={4}>
-                        <Image src={user.profilePicURL} rounded />
+                        <Image src={user.profilePicURL} roundedCircle />
                     </Col>
             </Container>
-            <h1>{user.name}</h1>
-            <h2>{user.email}</h2>
-            {user.postedActivities ? <div>
-                <ActivityCards activities={user.postedActivities}/>
-            </div> : <></>}
-            {user.interests ? <ul>
-                {user.interests.map(interest => {
-                    return <li>{interest}</li>
-                })}
-            </ul> : <></>}
+            <div className={"userDataContainer"}>
+                <h1>{"USER NAME: " + user.name}</h1>
+                <h2>{"EMAIL: " + user.email}</h2>
+                {user.postedActivities ? <div>
+                    <ActivityCards activities={user.postedActivities}/>
+                </div> : <></>}
+                {user.interests ? <ul>
+                    {user.interests.map(interest => {
+                        return <li>{interest}</li>
+                    })}
+                </ul> : <></>}
+            </div>
         </div>
     )
 }
