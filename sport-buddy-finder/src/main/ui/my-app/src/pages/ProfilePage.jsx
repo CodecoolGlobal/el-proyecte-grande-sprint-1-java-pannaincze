@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import {useLocation, useParams} from "react-router-dom";
+import ActivityCards from "../components/ActivityCards";
 
 
 export default function ProfilePage(){
@@ -39,6 +40,14 @@ export default function ProfilePage(){
             </Container>
             <h1>{user.name}</h1>
             <h2>{user.email}</h2>
+            {user.postedActivities ? <div>
+                <ActivityCards activities={user.postedActivities}/>
+            </div> : <></>}
+            {user.interests ? <ul>
+                {user.interests.map(interest => {
+                    return <li>{interest}</li>
+                })}
+            </ul> : <></>}
         </div>
     )
 }
