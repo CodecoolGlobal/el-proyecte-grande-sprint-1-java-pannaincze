@@ -32,6 +32,7 @@ export default function Layout() {
                     <Navbar.Collapse className="justify-content-end">
                         {user !== null ? <div ><p className="text-white d-inline"><Link to={"/profile"} state={{ id: userId }}>{userName}</Link>&nbsp;</p><Button onClick={() => {
                             state = null;
+                            setUser(null);
                             setUserName(null);
                             setUserId(null);
                             setTimeout(()=>{
