@@ -1,16 +1,17 @@
-import LoginAndRegister from "../components/LoginAndRegister";
-import Loading from "../components/Loading";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useEffect, useState} from "react";
 import ActivityCards from "../components/ActivityCards";
+import {useOutletContext} from "react-router-dom";
 
 const fetchActivities = () => {
-    return fetch("/activities/").then((res) => res.json());
+    return fetch("http://localhost:8080/activities/").then((res) => res.json());
 }
 
 export default function HomePage() {
     const [activities, setActivities] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useOutletContext();
+    const [name, setName] = useState(null);
 
     useEffect(() => {
         fetchActivities()
@@ -19,6 +20,12 @@ export default function HomePage() {
                 setActivities(activities);
             })
     }, [])
+    useEffect(() => {
+        if (user !== null) {
+            const {name, userID, email, password, birthDate, profilePicURL, interests, postedActivities} = user;
+            setName(name);
+        }
+    }, [user])
 
     return (
         <div>

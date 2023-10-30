@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react";
 import {Button, Form} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 
 export default function () {
+    const [user, setUser] = useState(null);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
-    const [user, setUser] = useState(null);
-
+    const navigate = useNavigate();
     function handleLogin() {
         fetch(`http://localhost:8080/users/login/${email}/${password}`, {
             method: "GET",
@@ -15,8 +16,14 @@ export default function () {
             .then((user) => {
                 setUser(user);
                 console.log(user);
+                if(user !== null){
+                    setTimeout(()=>{
+                        navigate('/', {state : user})
+                    },300)
+                }
             })
             .catch((error) => console.log(error));
+
     }
     return (
 
