@@ -31,6 +31,7 @@ export default function Layout() {
                     <Navbar.Collapse className="justify-content-end">
                         {user !== null ? <div ><p className="text-white d-inline">{userName}&nbsp;</p><Button onClick={() => {
                             state = null;
+                            setUser(null);
                             setUserName(null);
                             setUserId(null);
                             setTimeout(()=>{
@@ -47,7 +48,7 @@ export default function Layout() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Outlet context={[user, setUser]}  />
+            <Outlet context={[userId, setUserId]}  />
         </div>
     )
 }
