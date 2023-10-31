@@ -22,7 +22,7 @@ export default function HomePage() {
     }, [])
     useEffect(() => {
         if (user !== null) {
-            const {name, userID, email, password, birthDate, profilePicURL, interests, postedActivities} = user;
+            const {name, id, email, password, birthDate, profilePicURL, interests, postedActivities} = user;
             setName(name);
         }
     }, [user])

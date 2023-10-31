@@ -9,15 +9,15 @@ import Profile from "./components/Profile"
 export default function Layout() {
 
     let {state} = useLocation();
-    const [userId, setUserId] = useState(null)
+    const [id, setId] = useState(null)
     const [userName, setUserName] = useState(null)
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
     useEffect(() => {
         if (state !== null) {
-            const {name, userID, email, password, birthDate, profilePicURL, interests, postedActivities} = state;
-            setUser({name, userID, email, password, birthDate, profilePicURL, interests, postedActivities});
-            setUserId(userID);
+            const {name, id, email, password, birthDate, profilePicURL, interests, postedActivities} = state;
+            setUser({name, id, email, password, birthDate, profilePicURL, interests, postedActivities});
+            setId(id);
             setUserName(name)
         }
     }, [state]);
@@ -30,11 +30,11 @@ export default function Layout() {
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end">
-                        {user !== null ? <div ><p className="text-white d-inline"><Link to={"/profile"} state={{ id: userId }}>{userName}</Link>&nbsp;</p><Button onClick={() => {
+                        {user !== null ? <div ><p className="text-white d-inline"><Link to={"/profile"} state={{ id: id }}>{userName}</Link>&nbsp;</p><Button onClick={() => {
                             state = null;
                             setUser(null);
                             setUserName(null);
-                            setUserId(null);
+                            setId(null);
                             setTimeout(()=>{
                             navigate('/');
                             },200)
