@@ -6,7 +6,6 @@ import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -22,7 +21,7 @@ public class UserService {
         return null;
     }
     public User getUserById(long id){
-        return userRepository.getById(id).get();
+        return userRepository.findById(id).get();
     }
     public boolean addUser(NewUserDTO newUserDTO){
         //return userRepository.addUser(newUserDTO);
