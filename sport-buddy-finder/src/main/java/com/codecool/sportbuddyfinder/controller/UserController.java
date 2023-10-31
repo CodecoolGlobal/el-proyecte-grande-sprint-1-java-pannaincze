@@ -25,7 +25,7 @@ public class UserController {
         return userService.getAllUsers();
     }
     @GetMapping("/{userID}")
-    public User getUserByID(@PathVariable int userID){
+    public User getUserByID(@PathVariable long userID){
         return userService.getUserById(userID);
     }
     @GetMapping("/login/{email}/{password}")
