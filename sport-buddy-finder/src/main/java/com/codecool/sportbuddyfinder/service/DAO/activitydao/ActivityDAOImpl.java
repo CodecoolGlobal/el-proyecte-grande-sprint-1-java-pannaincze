@@ -25,6 +25,7 @@ public class ActivityDAOImpl implements ActivityDAO {
         return null;
     }
 
+
     @Override
     public Activity addNewActivity(Activity activity) {
         activities.add(activity);
@@ -55,4 +56,6 @@ public class ActivityDAOImpl implements ActivityDAO {
 
         return null;
     }
+
+
 }

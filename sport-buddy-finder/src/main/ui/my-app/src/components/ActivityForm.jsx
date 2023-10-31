@@ -5,6 +5,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
 
 
     const [title, setTitle] = useState("");
+    const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
     const [sport, setSport] = useState("");
     const [minPeople, setMinPeople] = useState(0);
@@ -15,6 +16,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
 
         return handleSave({
             title,
+            location,
             description,
             sport,
             minPeopleToFind: minPeople,
@@ -41,6 +43,14 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
                     {sportCategories.map((category) => <option value={category} key={category}>{category}</option>)}
                 </Form.Select>
 
+                <Form.Label htmlFor="location">Location:</Form.Label>
+                <Form.Control
+                    onChange={(e) => setLocation(e.target.value)}
+                    type="text"
+                    id="location"
+                    required={true}
+                    as="textarea" rows="3"
+                />
                 <Form.Label htmlFor="description">Description:</Form.Label>
                 <Form.Control
                     onChange={(e) => setDescription(e.target.value)}

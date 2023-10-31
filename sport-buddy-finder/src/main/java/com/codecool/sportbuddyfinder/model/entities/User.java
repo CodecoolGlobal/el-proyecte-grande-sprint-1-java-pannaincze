@@ -22,7 +22,7 @@ public class User {
     private String password;
     private LocalDate birthDate;
     private String profilePicURL;
-    @OneToMany
+    //@OneToMany
     private final Set<Sport> interests;
     @OneToMany(mappedBy = "user")
     private final Set<Activity> postedActivities;
