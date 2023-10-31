@@ -13,7 +13,6 @@ import ProfilePage from "./pages/ProfilePage";
 import GetActivity from "./pages/GetActivity";
 import {ActivityCreator} from "./pages/ActivityCreator";
 import Login from "./pages/Login";
-import {ComponentPreviews, useInitial} from "./dev";
 
 const router = createBrowserRouter([
 
@@ -54,11 +53,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <DevSupport ComponentPreviews={ComponentPreviews}
-                    useInitialHook={useInitial}
-        >
             <RouterProvider router={router}/>
-        </DevSupport>
     </React.StrictMode>
 );
 
