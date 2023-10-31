@@ -1,7 +1,8 @@
-package com.codecool.sportbuddyfinder.model;
+package com.codecool.sportbuddyfinder.model.entities;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,21 +16,28 @@ import java.util.Set;
 import java.util.UUID;
 @Setter
 @Getter
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue
+    private int user_ID;
     private String name;
-    private UUID userID;
     private String email;
     private String password;
     private LocalDate birthDate;
     private String profilePicURL;
+    @OneToMany
     private final Set<Sport> interests;
+    @OneToMany(mappedBy = "user")
     private final Set<Activity> postedActivities;
-
+    @ManyToMany
+    private final Set<Activity> appliedActivities;
     public User() {
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
         this.interests = new HashSet<>();
-        this.userID = UUID.randomUUID();
         this.postedActivities = new HashSet<>();
+        this.appliedActivities = new HashSet<>();
     }
 
     public User(String name, String email, String password, LocalDate birthDate) {
@@ -39,22 +47,8 @@ public class User {
         this.birthDate = birthDate;
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
         this.interests = new HashSet<>();
-        this.userID = UUID.randomUUID();
         this.postedActivities = new HashSet<>();
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userID, user.userID);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userID);
+        this.appliedActivities = new HashSet<>();
     }
     public Set<Sport> getInterests() {
         return new HashSet<>(interests);

@@ -2,9 +2,8 @@ package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
-import com.codecool.sportbuddyfinder.model.User;
+import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.service.DAO.userdao.UserDao;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

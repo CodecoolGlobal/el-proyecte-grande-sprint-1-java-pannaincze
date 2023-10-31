@@ -2,7 +2,7 @@ package com.codecool.sportbuddyfinder.service.DAO.userdao;
 
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
-import com.codecool.sportbuddyfinder.model.User;
+import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import org.springframework.stereotype.Repository;
