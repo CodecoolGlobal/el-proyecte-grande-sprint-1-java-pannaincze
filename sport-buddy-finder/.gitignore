@@ -10,7 +10,6 @@
 .springBeans
 .sts4-cache
 .env.properties
-.env
 env.properties
 # Created by https://www.gitignore.io/api/git,java,maven,eclipse,windows
 
