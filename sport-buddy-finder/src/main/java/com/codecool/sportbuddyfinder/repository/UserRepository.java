@@ -12,5 +12,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
      // boolean addUser(NewUserDTO newUser);
      User findByEmailAndPassword(String email, String password);
      // boolean updateUser(long userID, User updatedUser);
-     // boolean deleteUserByID(long id);
+     void deleteUserById(long id);
 }
