@@ -1,6 +1,6 @@
 package com.codecool.sportbuddyfinder.model.activity;
 
-import com.codecool.sportbuddyfinder.model.User;
+import com.codecool.sportbuddyfinder.model.entities.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
