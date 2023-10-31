@@ -8,6 +8,12 @@ const fetchActivity = (id) => {
         .then((res) => res.json());
 };
 
+const deleteActivity = (id) => {
+    return fetch(`/activities/${id}`,
+        {method: "DELETE"})
+        .then((res) => res.json());
+}
+
 export default function GetActivity() {
     const {id} = useParams();
     const [activity, setActivity] = useState(null);
@@ -25,6 +31,14 @@ export default function GetActivity() {
             })
     }, [id]);
 
+    const handleDelete = (id) => {
+        deleteActivity(id);
+
+        setActivity((activities) => {
+            return activities.filter((activity) => activity.id !== id);
+        });
+    }
+
     if (activityLoading) {
         return <Loading/>;
     }
@@ -33,6 +47,7 @@ export default function GetActivity() {
         <div>
             <DisplayActivity
                 activity={activity}
+                onDelete={handleDelete}
                 onBack={() => navigate("/")}
             />
         </div>

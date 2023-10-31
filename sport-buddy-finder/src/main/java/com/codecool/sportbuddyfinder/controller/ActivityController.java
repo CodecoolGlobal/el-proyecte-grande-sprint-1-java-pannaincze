@@ -5,8 +5,11 @@ import com.codecool.sportbuddyfinder.model.activity.Sport;
 import com.codecool.sportbuddyfinder.service.ActivityService;
 import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,12 +26,12 @@ public class ActivityController {
     }
 
     @GetMapping("/")
-    public Set<Activity> getAllActivities() {
+    public List<Activity> getAllActivities() {
         return activityService.getAllActivities();
     }
 
     @GetMapping("/{id}")
-    public Activity getActivityById(@PathVariable UUID id) {
+    public Optional<Activity> getActivityById(@PathVariable long id) {
         return activityService.getActivityById(id);
     }
     @GetMapping("/categories")
@@ -37,23 +40,22 @@ public class ActivityController {
     }
 
     @PostMapping("/create")
-    @ResponseBody
     public Activity addNewActivity(@RequestBody Activity activity) {
-        return activityService.addNewActivity(activity);
+        return activityService.addNewActivityToDB(activity);
     }
 
     @DeleteMapping("/{id}")
-    public UUID deleteActivityById(@PathVariable UUID id) {
+    public boolean deleteActivityById(@PathVariable long id) {
         return activityService.deleteActivityById(id);
     }
 
-    @PatchMapping("/update/{id}")
-    public Activity updateActivityById(@PathVariable UUID id) {
-        return activityService.updateActivityById(id);
-    }
+//    @PutMapping("/update/{id}")
+//    public Activity updateActivityById(@PathVariable long id, @RequestBody Activity activity) {
+//        return activityService.updateActivityById(id, activity);
+//    }
 
-    @PatchMapping("/update/{activityId}/{userId}")
-    public Activity addUserToActivity(@PathVariable UUID activityId, @PathVariable int userId) {
-        return activityService.addUserToActivity(activityId, userService.getUserById(userId));
-    }
+//    @PatchMapping("/update/{activityId}/{userId}")
+//    public Activity addUserToActivity(@PathVariable UUID activityId, @PathVariable int userId) {
+//        return activityService.addUserToActivity(activityId, userService.getUserById(userId));
+//    }
 }

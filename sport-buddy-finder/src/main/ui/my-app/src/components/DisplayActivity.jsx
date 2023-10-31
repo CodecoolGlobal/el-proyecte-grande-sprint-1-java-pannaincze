@@ -1,6 +1,6 @@
 import {Card, Button} from "react-bootstrap";
 
-export default function DisplayActivity({activity, onBack}) {
+export default function DisplayActivity({activity, onBack, onDelete}) {
     return (
         <div className="activityConatiner" style={{margin: "3rem"}}>
             <Card className="activity">
@@ -34,6 +34,7 @@ export default function DisplayActivity({activity, onBack}) {
                         ""
                     }
                 </Card.Body>
+                <Button className="button" type="button" onClick={onDelete} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button>
                 <Button className="button" type="button" onClick={onBack} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
             </Card>
         </div>

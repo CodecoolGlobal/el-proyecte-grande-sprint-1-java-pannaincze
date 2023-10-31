@@ -19,10 +19,6 @@ public class ActivityDAOImpl implements ActivityDAO {
         return activities;
     }
 
-    @Override
-    public Activity getActivityById(UUID uuid) {
-        return activities.stream().filter(activity -> activity.getUuid().equals(uuid)).findFirst().orElseThrow();
-    }
 
     @Override
     public Activity addNewActivity(Activity activity) {
@@ -30,28 +26,4 @@ public class ActivityDAOImpl implements ActivityDAO {
         return activity;
     }
 
-    @Override
-    public UUID deleteActivityById(UUID uuid) {
-        activities.removeIf(activity -> activity.getUuid().equals(uuid));
-        return uuid;
-    }
-
-    @Override
-    public Activity updateActivityById(UUID uuid) {
-        return null;
-    }
-
-    @Override
-    public Activity addUserToActivity(UUID activityId, User user) {
-        for (Activity activity : activities) {
-            if (activity.getUuid().equals(activityId)) {
-                if (activity.addUserToAppliedSet(user)) {
-                    activity.addUserToAppliedSet(user);
-                    return activity;
-                }
-            }
-        }
-
-        return null;
-    }
 }
