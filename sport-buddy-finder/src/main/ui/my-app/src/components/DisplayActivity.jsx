@@ -28,7 +28,7 @@ export default function DisplayActivity({activity, onBack, onDelete}) {
                         <Card.Text>
                         Applied users:
                         {activity.appliedUsers.map((user) => (
-                            <Card.Text key={activity.uuid}>{user.name}</Card.Text>
+                            <Card.Text key={activity.id}>{user.name}</Card.Text>
                         ))}
                     </Card.Text> :
                         ""
