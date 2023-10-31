@@ -2,9 +2,8 @@ package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
-import com.codecool.sportbuddyfinder.model.User;
+import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.service.DAO.userdao.UserDao;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -20,7 +19,7 @@ public class UserService {
     public Set<User> getAllUsers(){
         return userDao.getAllUser();
     }
-    public User getUserById(UUID id){
+    public User getUserById(int id){
         return userDao.getUserById(id);
     }
     public boolean addUser(NewUserDTO newUserDTO){
@@ -29,10 +28,10 @@ public class UserService {
     public User loginUser(LoginUserDTO loginUserDTO){
         return userDao.loginUser(loginUserDTO);
     }
-    public boolean updateUser(UUID userID,User updatedUser){
+    public boolean updateUser(int userID,User updatedUser){
         return userDao.updateUser(userID, updatedUser);
     }
-    public boolean deleteUserById(UUID userId){
+    public boolean deleteUserById(int userId){
        return userDao.deleteUserByID(userId);
     }
 

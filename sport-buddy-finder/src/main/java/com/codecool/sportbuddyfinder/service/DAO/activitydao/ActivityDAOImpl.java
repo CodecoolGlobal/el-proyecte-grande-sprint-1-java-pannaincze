@@ -1,6 +1,6 @@
 package com.codecool.sportbuddyfinder.service.DAO.activitydao;
 
-import com.codecool.sportbuddyfinder.model.User;
+import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import org.springframework.stereotype.Repository;
 

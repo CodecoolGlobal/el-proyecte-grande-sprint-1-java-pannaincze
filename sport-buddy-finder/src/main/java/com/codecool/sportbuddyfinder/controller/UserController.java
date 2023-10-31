@@ -2,14 +2,10 @@ package com.codecool.sportbuddyfinder.controller;
 
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
-import com.codecool.sportbuddyfinder.model.User;
-import com.codecool.sportbuddyfinder.model.activity.Activity;
-import com.codecool.sportbuddyfinder.model.activity.Sport;
+import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,7 +22,7 @@ public class UserController {
         return userService.getAllUsers();
     }
     @GetMapping("/{userID}")
-    public User getUserByID(@PathVariable UUID userID){
+    public User getUserByID(@PathVariable int userID){
         return userService.getUserById(userID);
     }
     @GetMapping("/login/{email}/{password}")
@@ -41,11 +37,11 @@ public class UserController {
 
 
     @PutMapping("/{userID}")
-    public boolean updateUser(@PathVariable UUID userID, @RequestBody User updatedUser){
+    public boolean updateUser(@PathVariable int userID, @RequestBody User updatedUser){
         return userService.updateUser(userID, updatedUser);
     }
     @DeleteMapping("/{userId}")
-    public boolean deleteUser(@PathVariable UUID userId){
+    public boolean deleteUser(@PathVariable int userId){
         return userService.deleteUserById(userId);
     }
 

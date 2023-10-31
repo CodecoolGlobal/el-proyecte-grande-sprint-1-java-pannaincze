@@ -2,7 +2,7 @@ package com.codecool.sportbuddyfinder.service.DAO.userdao;
 
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
-import com.codecool.sportbuddyfinder.model.User;
+import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import org.springframework.stereotype.Repository;
@@ -23,8 +23,8 @@ public class MemoryUserDAO implements UserDao {
     }
 
     @Override
-    public User getUserById(UUID id) {
-        return userRepository.stream().filter(user -> user.getUserID().equals(id)).findAny().orElse(null);
+    public User getUserById(int id) {
+        return userRepository.stream().filter(user -> user.getUser_ID() == (id)).findAny().orElse(null);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class MemoryUserDAO implements UserDao {
 
 
     @Override
-    public boolean updateUser(UUID userId, User updatedUser) {
-        Optional<User> userToUpdate = userRepository.stream().filter(user -> user.getUserID().equals(userId)).findAny();
+    public boolean updateUser(int userId, User updatedUser) {
+        Optional<User> userToUpdate = userRepository.stream().filter(user -> user.getUser_ID() == (userId)).findAny();
         if(userToUpdate.isPresent()){
             if(updatedUser.getName() != null && !updatedUser.getName().isEmpty()){
                 userToUpdate.get().setName(updatedUser.getName());
@@ -90,8 +90,8 @@ public class MemoryUserDAO implements UserDao {
         }
     }
     @Override
-    public boolean deleteUserByID(UUID id) {
-        Optional<User> userToDelete = userRepository.stream().filter(user -> user.getUserID().equals(id)).findAny();
+    public boolean deleteUserByID(int id) {
+        Optional<User> userToDelete = userRepository.stream().filter(user -> user.getUser_ID() == (id)).findAny();
         if(userToDelete.isPresent()){
             userRepository.remove(userToDelete.get());
             return true;
