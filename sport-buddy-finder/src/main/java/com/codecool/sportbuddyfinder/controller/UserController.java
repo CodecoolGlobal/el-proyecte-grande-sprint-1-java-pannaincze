@@ -22,7 +22,7 @@ public class UserController {
         return userService.getAllUsers();
     }
     @GetMapping("/{userID}")
-    public User getUserByID(@PathVariable UUID userID){
+    public User getUserByID(@PathVariable int userID){
         return userService.getUserById(userID);
     }
     @GetMapping("/login/{email}/{password}")
@@ -37,11 +37,11 @@ public class UserController {
 
 
     @PutMapping("/{userID}")
-    public boolean updateUser(@PathVariable UUID userID, @RequestBody User updatedUser){
+    public boolean updateUser(@PathVariable int userID, @RequestBody User updatedUser){
         return userService.updateUser(userID, updatedUser);
     }
     @DeleteMapping("/{userId}")
-    public boolean deleteUser(@PathVariable UUID userId){
+    public boolean deleteUser(@PathVariable int userId){
         return userService.deleteUserById(userId);
     }
 

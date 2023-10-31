@@ -53,7 +53,7 @@ public class ActivityController {
     }
 
     @PatchMapping("/update/{activityId}/{userId}")
-    public Activity addUserToActivity(@PathVariable UUID activityId, @PathVariable UUID userId) {
+    public Activity addUserToActivity(@PathVariable UUID activityId, @PathVariable int userId) {
         return activityService.addUserToActivity(activityId, userService.getUserById(userId));
     }
 }

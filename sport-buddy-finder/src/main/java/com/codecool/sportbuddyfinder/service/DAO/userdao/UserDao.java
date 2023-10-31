@@ -9,10 +9,10 @@ import java.util.UUID;
 
 public interface UserDao {
     public Set<User> getAllUser();
-    public User getUserById(UUID id);
+    public User getUserById(int id);
     public boolean addUser(NewUserDTO newUser);
     public User loginUser(LoginUserDTO loginUserDTO);
-    public boolean updateUser(UUID userID, User updatedUser);
-    public boolean deleteUserByID(UUID id);
+    public boolean updateUser(int userID, User updatedUser);
+    public boolean deleteUserByID(int id);
 
 }
