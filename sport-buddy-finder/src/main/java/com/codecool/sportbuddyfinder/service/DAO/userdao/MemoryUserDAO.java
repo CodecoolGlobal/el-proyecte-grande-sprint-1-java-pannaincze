@@ -24,7 +24,7 @@ public class MemoryUserDAO implements UserDao {
 
     @Override
     public User getUserById(int id) {
-        return userRepository.stream().filter(user -> user.getUser_ID() == (id)).findAny().orElse(null);
+        return userRepository.stream().filter(user -> user.getId() == (id)).findAny().orElse(null);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MemoryUserDAO implements UserDao {
 
     @Override
     public boolean updateUser(int userId, User updatedUser) {
-        Optional<User> userToUpdate = userRepository.stream().filter(user -> user.getUser_ID() == (userId)).findAny();
+        Optional<User> userToUpdate = userRepository.stream().filter(user -> user.getId() == (userId)).findAny();
         if(userToUpdate.isPresent()){
             if(updatedUser.getName() != null && !updatedUser.getName().isEmpty()){
                 userToUpdate.get().setName(updatedUser.getName());
@@ -91,7 +91,7 @@ public class MemoryUserDAO implements UserDao {
     }
     @Override
     public boolean deleteUserByID(int id) {
-        Optional<User> userToDelete = userRepository.stream().filter(user -> user.getUser_ID() == (id)).findAny();
+        Optional<User> userToDelete = userRepository.stream().filter(user -> user.getId() == (id)).findAny();
         if(userToDelete.isPresent()){
             userRepository.remove(userToDelete.get());
             return true;
