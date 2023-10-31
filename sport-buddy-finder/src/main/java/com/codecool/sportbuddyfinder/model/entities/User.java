@@ -16,7 +16,6 @@ public class User {
 
     @Id
     @GeneratedValue
-
     private long id;
     private String name;
     private String email;
@@ -65,4 +64,6 @@ public class User {
         return new HashSet<>(postedActivities);
 
     }
+
+
 }

@@ -35,7 +35,8 @@ public class UserController {
     @PostMapping
     @ResponseBody
     public boolean postUser(@RequestBody NewUserDTO newUserDTO){
-        return userService.addUser(newUserDTO);
+        userService.addUser(newUserDTO);
+        return false;
     }
 
 
