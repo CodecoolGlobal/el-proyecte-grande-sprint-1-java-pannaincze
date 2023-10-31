@@ -1,6 +1,6 @@
 package com.codecool.sportbuddyfinder.model.DTO;
 
-import com.codecool.sportbuddyfinder.model.activity.Sport;
+import com.codecool.sportbuddyfinder.model.entities.Sport;
 
 import java.time.LocalDate;
 
