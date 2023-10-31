@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Button, Form} from "react-bootstrap";
+import {useOutletContext} from "react-router-dom";
 
 export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
 
@@ -10,15 +11,17 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories}) => {
     const [sport, setSport] = useState("");
     const [minPeople, setMinPeople] = useState(0);
     const [maxPeople, setMaxPeople] = useState(0);
-
+    const [user, setUser] = useOutletContext();
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log(user)
 
         return handleSave({
             title,
             location,
             description,
             sport,
+            user,
             minPeopleToFind: minPeople,
             maxPeopleToFind: maxPeople,
         })
