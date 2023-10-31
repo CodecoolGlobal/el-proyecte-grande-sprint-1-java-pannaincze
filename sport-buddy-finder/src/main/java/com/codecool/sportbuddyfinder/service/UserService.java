@@ -4,6 +4,7 @@ import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -36,9 +37,9 @@ public class UserService {
         //return userRepository.updateUser(userID, updatedUser);
         return false;
     }
-    public boolean deleteUserById(int userId){
-       return false;
-        //return userRepository.deleteUserByID(userId);
+    @Transactional
+    public void deleteUserById(long userId){
+        userRepository.deleteUserById(userId);
     }
 
 }
