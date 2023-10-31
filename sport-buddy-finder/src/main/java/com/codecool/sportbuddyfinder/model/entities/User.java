@@ -11,11 +11,12 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue
-    private int user_ID;
+    private long user_ID;
     private String name;
     private String email;
     private String password;
