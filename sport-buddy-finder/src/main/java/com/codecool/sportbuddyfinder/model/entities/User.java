@@ -17,17 +17,18 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
+@Table(name = "app_user")
 public class User {
 
     @Id
     @GeneratedValue
-    private int user_ID;
+    private long id;
     private String name;
     private String email;
     private String password;
     private LocalDate birthDate;
     private String profilePicURL;
-    @OneToMany
+    //@OneToMany
     private final Set<Sport> interests;
     @OneToMany(mappedBy = "user")
     private final Set<Activity> postedActivities;
