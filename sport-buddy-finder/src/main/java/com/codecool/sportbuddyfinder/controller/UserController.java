@@ -3,6 +3,7 @@ package com.codecool.sportbuddyfinder.controller;
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.User;
+import com.codecool.sportbuddyfinder.repository.UserRepository;
 import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,9 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+
+    public UserController(UserService userService)
+    {
         this.userService = userService;
     }
     @GetMapping
@@ -22,7 +25,7 @@ public class UserController {
         return userService.getAllUsers();
     }
     @GetMapping("/{userID}")
-    public User getUserByID(@PathVariable int userID){
+    public User getUserByID(@PathVariable long userID){
         return userService.getUserById(userID);
     }
     @GetMapping("/login/{email}/{password}")
@@ -32,7 +35,8 @@ public class UserController {
     @PostMapping
     @ResponseBody
     public boolean postUser(@RequestBody NewUserDTO newUserDTO){
-        return userService.addUser(newUserDTO);
+        userService.addUser(newUserDTO);
+        return false;
     }
 
 
@@ -41,8 +45,8 @@ public class UserController {
         return userService.updateUser(userID, updatedUser);
     }
     @DeleteMapping("/{userId}")
-    public boolean deleteUser(@PathVariable int userId){
-        return userService.deleteUserById(userId);
+    public void deleteUser(@PathVariable long userId){
+        userService.deleteUserById(userId);
     }
 
 }

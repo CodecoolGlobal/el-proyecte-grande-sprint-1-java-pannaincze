@@ -21,4 +21,5 @@ INSERT INTO SPORT (sport_id, NAME) VALUES (20, 'Ice skating');
 INSERT INTO SPORT (sport_id, NAME) VALUES (21, 'Gymnastics');
 INSERT INTO SPORT (sport_id, NAME) VALUES (22, 'Rock climbing');
 INSERT INTO SPORT (sport_id, NAME) VALUES (23, 'Yoga');
+INSERT INTO APP_USER (id, birth_date,email,name,password,profile_picurl) VALUES (1,'1996-10-10','ex@gmail.com','Johny','123','http://vlmi');
 
