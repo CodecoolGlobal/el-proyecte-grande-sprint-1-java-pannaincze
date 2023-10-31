@@ -13,35 +13,36 @@ import ProfilePage from "./pages/ProfilePage";
 import GetActivity from "./pages/GetActivity";
 import {ActivityCreator} from "./pages/ActivityCreator";
 import Login from "./pages/Login";
+import {ComponentPreviews, useInitial} from "./dev";
 
 const router = createBrowserRouter([
 
     {
         path: "/",
-        element: <Layout />,
+        element: <Layout/>,
         children: [
             {
                 path: "/",
-                element: <HomePage  />
+                element: <HomePage/>
             },
             {
                 path: "/register",
-                element: <Register />
+                element: <Register/>
             },
             {
                 path: "/profile",
-                element: <ProfilePage />
+                element: <ProfilePage/>
             },
             {
                 path: "/login",
-                element: <Login />
+                element: <Login/>
             },
             {
-                path:"/activities/:id",
-                element: <GetActivity />
+                path: "/activities/:id",
+                element: <GetActivity/>
             },
             {
-                path:"activities/create",
+                path: "activities/create",
                 element: <ActivityCreator/>
             }
         ]
@@ -52,11 +53,13 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    
-
-  <React.StrictMode>
-      <RouterProvider router={router}/>
-  </React.StrictMode>
+    <React.StrictMode>
+        <DevSupport ComponentPreviews={ComponentPreviews}
+                    useInitialHook={useInitial}
+        >
+            <RouterProvider router={router}/>
+        </DevSupport>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
