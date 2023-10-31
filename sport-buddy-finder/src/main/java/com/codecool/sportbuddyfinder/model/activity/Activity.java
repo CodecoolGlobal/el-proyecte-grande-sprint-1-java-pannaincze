@@ -1,9 +1,13 @@
 package com.codecool.sportbuddyfinder.model.activity;
 
 import com.codecool.sportbuddyfinder.model.entities.User;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +27,12 @@ public class Activity {
     private Integer maxPeopleToFind;
 
     @ManyToOne
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id"
+    )
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany

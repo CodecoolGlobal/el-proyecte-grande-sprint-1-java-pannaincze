@@ -1,6 +1,7 @@
 package com.codecool.sportbuddyfinder.model.entities;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
 @Setter
 @Getter
 @Entity
@@ -24,10 +26,14 @@ public class User {
     private String profilePicURL;
     @OneToMany
     private final Set<Sport> interests;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private final Set<Activity> postedActivities;
     @ManyToMany
     private final Set<Activity> appliedActivities;
+
     public User() {
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
         this.interests = new HashSet<>();
@@ -45,22 +51,28 @@ public class User {
         this.postedActivities = new HashSet<>();
         this.appliedActivities = new HashSet<>();
     }
+
     public Set<Sport> getInterests() {
         return new HashSet<>(interests);
     }
-    public void addInterest(Sport sport){
+
+    public void addInterest(Sport sport) {
         interests.add(sport);
     }
-    public void addInterests(Set<Sport> interests){
+
+    public void addInterests(Set<Sport> interests) {
         this.interests.addAll(interests);
     }
-    public void addPostedActivity(Activity activity){
+
+    public void addPostedActivity(Activity activity) {
         postedActivities.add(activity);
     }
-    public void addPostedActivities(Set<Activity> activities){
+
+    public void addPostedActivities(Set<Activity> activities) {
         this.postedActivities.addAll(activities);
     }
-    public Set<Activity> getActivityPosts(){
+
+    public Set<Activity> getActivityPosts() {
         return new HashSet<>(postedActivities);
 
     }
