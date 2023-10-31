@@ -2,38 +2,61 @@ package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
+import com.codecool.sportbuddyfinder.repository.ActivityRepository;
 import com.codecool.sportbuddyfinder.service.DAO.activitydao.ActivityDAO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class ActivityService {
+    private final ActivityRepository activityRepository;
+    private final RestTemplate restTemplate;
     private final ActivityDAO activityDAO;
 
     @Autowired
-    public ActivityService(ActivityDAO activityDAO) {
+    public ActivityService(ActivityRepository activityRepository, RestTemplate restTemplate, ActivityDAO activityDAO) {
+        this.activityRepository = activityRepository;
+        this.restTemplate = restTemplate;
         this.activityDAO = activityDAO;
     }
 
-    public Set<Activity> getAllActivities() {
-        return activityDAO.getAllActivities();
+    public List<Activity> getAllActivities() {
+        return activityRepository.findAll();
     }
-    public Activity getActivityById(UUID uuid) {
-        return activityDAO.getActivityById(uuid);
+    public Optional<Activity> getActivityById(long activityId) {
+        return activityRepository.findById(activityId);
     }
-    public Activity addNewActivity(Activity activity) {
-        return activityDAO.addNewActivity(activity);
+    public Activity addNewActivityToDB(Activity activity) {
+        return activityRepository.save(activity);
     }
-    public UUID deleteActivityById(UUID uuid) {
-        return activityDAO.deleteActivityById(uuid);
+    public boolean deleteActivityById(long activityId) {
+        return activityRepository.deleteById(activityId);
     }
-    public Activity updateActivityById(UUID uuid) {
-        return activityDAO.updateActivityById(uuid);
-    }
-    public Activity addUserToActivity(UUID activityId, User user) {
-        return activityDAO.addUserToActivity(activityId, user);
-    }
+
+    //    public Activity updateActivityById(long activityId, Activity activity) {
+//        Activity updatedActivity = activityRepository.updateById(activityId, activity).orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + activityId));
+//
+//        activity.setId(updatedActivity.getId());
+//        activity.setTitle(activity.getTitle());
+//        activity.setDescription(activity.getDescription());
+//        activity.setSport(activity.getSport());
+//        activity.setLocation(activity.getLocation());
+//        activity.setMinPeopleToFind(activity.getMinPeopleToFind());
+//        activity.setMaxPeopleToFind(activity.getMaxPeopleToFind());
+//        activity.setUser(activity.getUser());
+//        activity.setPostStatus(activity.getPostStatus());
+//        //needs fix
+//        //activity.addUsersToAppliedSet(activity.getAppliedUsers());
+//
+//        return activityRepository.save(updatedActivity);
+//    }
+//    public Activity addUserToActivity(UUID activityId, User user) {
+//        return activityDAO.addUserToActivity(activityId, user);
+//    }
 }
