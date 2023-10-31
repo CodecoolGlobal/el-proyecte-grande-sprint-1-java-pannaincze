@@ -14,7 +14,7 @@ import java.util.Set;
 public class Activity {
     @Id
     @GeneratedValue
-    private long activity_id;
+    private long id;
     private String title;
     private String description;
     private Sport sport;
