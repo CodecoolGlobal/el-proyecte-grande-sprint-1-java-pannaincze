@@ -3,10 +3,8 @@ package com.codecool.sportbuddyfinder.service;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.repository.ActivityRepository;
 import com.codecool.sportbuddyfinder.repository.UserRepository;
-import com.codecool.sportbuddyfinder.service.DAO.activitydao.ActivityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,15 +12,11 @@ import java.util.Optional;
 @Service
 public class ActivityService {
     private final ActivityRepository activityRepository;
-    private final RestTemplate restTemplate;
-    private final ActivityDAO activityDAO;
     private final UserRepository userRepository;
 
     @Autowired
-    public ActivityService(ActivityRepository activityRepository, RestTemplate restTemplate, ActivityDAO activityDAO, UserRepository userRepository) {
+    public ActivityService(ActivityRepository activityRepository, UserRepository userRepository) {
         this.activityRepository = activityRepository;
-        this.restTemplate = restTemplate;
-        this.activityDAO = activityDAO;
         this.userRepository = userRepository;
     }
 
@@ -36,6 +30,27 @@ public class ActivityService {
         activity.setUser(userRepository.findById(activity.getUser().getId()).get());
         return activityRepository.save(activity);
     }
+
+    public Activity updateActivity(Activity updatedActivity, long id) {
+        return activityRepository.findById(id)
+                .map(activity -> {
+                    activity.setTitle(updatedActivity.getTitle());
+                    activity.setDescription(updatedActivity.getDescription());
+                    activity.setSport(updatedActivity.getSport());
+                    activity.setLocation(updatedActivity.getLocation());
+                    activity.setMinPeopleToFind(updatedActivity.getMinPeopleToFind());
+                    activity.setMaxPeopleToFind(updatedActivity.getMaxPeopleToFind());
+                    //applied users not yet
+                    activity.setPostStatus(updatedActivity.getPostStatus());
+
+                    return activityRepository.save(activity);
+                })
+                .orElseGet(() -> {
+                    updatedActivity.setId(id);
+                    return activityRepository.save(updatedActivity);
+                });
+    }
+
     public boolean deleteActivityById(long activityId) {
         activityRepository.deleteById(activityId);
         return true;
