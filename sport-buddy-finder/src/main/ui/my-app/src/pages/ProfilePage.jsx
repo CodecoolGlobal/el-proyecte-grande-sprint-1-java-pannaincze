@@ -46,7 +46,7 @@ export default function ProfilePage(){
                     <Col xs={6} md={4}>
                         <Image src={user.profilePicURL} roundedCircle style={{
                             width: "40vh",
-                            border: "1.5vh solid #0d6efd",
+
                         }} />
                     </Col>
             </Container>
@@ -60,10 +60,16 @@ export default function ProfilePage(){
             </div>
             <div className={"userInfo"} style={{
                 color: "#e6e7f0",
-                fontFamily: "inherit"
+                fontFamily: "inherit",
+                borderRadius: "15px",
+                width: "25vw",
+                height: "20vh",
+                padding: "50px",
+                justifyContent: "center",
+
             }}>
-                <h2 style={{ fontSize: "1.8em"} }>{"User Name: " + user.name}</h2>
-                <h2 style={{ fontSize: "1.8em"} }>{"Email: " + user.email}</h2>
+                <h2 style={{ fontSize: "1.5em"} }>{"User Name: " + user.name}</h2>
+                <h2 style={{ fontSize: "1.5em"} }>{"Email: " + user.email}</h2>
                 {user.interests ? <ul>
                     {user.interests.map(interest => {
                         return <li>{interest}</li>
