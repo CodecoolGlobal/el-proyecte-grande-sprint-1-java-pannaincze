@@ -55,7 +55,8 @@ export default function ProfilePage(){
                 height: "35vh",
                 backgroundImage: `url("https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "cover"
+                backgroundSize: "cover",
+                backgroundPosition: "10%"
             }}>
             </div>
             <div className={"userInfo"} style={{
