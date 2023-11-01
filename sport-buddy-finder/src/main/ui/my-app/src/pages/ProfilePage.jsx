@@ -33,12 +33,22 @@ export default function ProfilePage(){
     },[])
     return (
         <div>
-            <Container>
+            <Container style={{
+                paddingTop: "4vh",
+                paddingLeft: "3.5vw",
+                width: "30vw",
+                float: "left"
+            }}>
                     <Col xs={6} md={4}>
-                        <Image src={user.profilePicURL} roundedCircle />
+                        <Image src={user.profilePicURL} roundedCircle style={{
+                            width: "40vh",
+                            border: "1.5vh solid #0d6efd",
+                        }} />
                     </Col>
             </Container>
-            <div className={"userDataContainer"}>
+            <div style={{
+                float: "left"
+            }}>
                 <h1>{"USER NAME: " + user.name}</h1>
                 <h2>{"EMAIL: " + user.email}</h2>
                 {user.postedActivities ? <div>
