@@ -1,29 +1,29 @@
 package com.codecool.sportbuddyfinder.service;
 
-import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.repository.ActivityRepository;
+import com.codecool.sportbuddyfinder.repository.UserRepository;
 import com.codecool.sportbuddyfinder.service.DAO.activitydao.ActivityDAO;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ActivityService {
     private final ActivityRepository activityRepository;
     private final RestTemplate restTemplate;
     private final ActivityDAO activityDAO;
+    private final UserRepository userRepository;
 
     @Autowired
-    public ActivityService(ActivityRepository activityRepository, RestTemplate restTemplate, ActivityDAO activityDAO) {
+    public ActivityService(ActivityRepository activityRepository, RestTemplate restTemplate, ActivityDAO activityDAO, UserRepository userRepository) {
         this.activityRepository = activityRepository;
         this.restTemplate = restTemplate;
         this.activityDAO = activityDAO;
+        this.userRepository = userRepository;
     }
 
     public List<Activity> getAllActivities() {
@@ -33,10 +33,12 @@ public class ActivityService {
         return activityRepository.findById(activityId);
     }
     public Activity addNewActivityToDB(Activity activity) {
+        activity.setUser(userRepository.findById(activity.getUser().getId()).get());
         return activityRepository.save(activity);
     }
     public boolean deleteActivityById(long activityId) {
-        return activityRepository.deleteById(activityId);
+        activityRepository.deleteById(activityId);
+        return true;
     }
 
     //    public Activity updateActivityById(long activityId, Activity activity) {

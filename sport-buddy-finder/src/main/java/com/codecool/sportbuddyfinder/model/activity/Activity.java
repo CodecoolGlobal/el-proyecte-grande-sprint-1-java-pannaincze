@@ -31,8 +31,7 @@ public class Activity {
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id"
     )
-    @Cascade(CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @Cascade(CascadeType.MERGE)
     private User user;
 
     @ManyToMany
