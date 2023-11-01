@@ -3,26 +3,20 @@ package com.codecool.sportbuddyfinder.controller;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import com.codecool.sportbuddyfinder.service.ActivityService;
-import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("activities")
 public class ActivityController {
     private final ActivityService activityService;
-    private final UserService userService;
 
     @Autowired
-    public ActivityController(ActivityService activityService, UserService userService) {
+    public ActivityController(ActivityService activityService) {
         this.activityService = activityService;
-        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -42,6 +36,11 @@ public class ActivityController {
     @PostMapping("/create")
     public Activity addNewActivity(@RequestBody Activity activity) {
         return activityService.addNewActivityToDB(activity);
+    }
+
+    @PutMapping("/update/{id}")
+    public Activity updateActivity(@RequestBody Activity updatedActivity, @PathVariable long id) {
+        return activityService.updateActivity(updatedActivity, id);
     }
 
     @DeleteMapping("/{id}")
