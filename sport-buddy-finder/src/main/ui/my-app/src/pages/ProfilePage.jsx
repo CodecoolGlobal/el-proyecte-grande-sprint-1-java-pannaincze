@@ -32,7 +32,11 @@ export default function ProfilePage(){
         fetchUser(id)
     },[])
     return (
-        <div>
+        <div className={"profilePageContainer"} style={{
+            backgroundColor: "#282c34",
+            width: "100vw",
+            height: "100vh"
+        }}>
             <Container style={{
                 paddingTop: "4vh",
                 paddingLeft: "3.5vw",
@@ -46,19 +50,30 @@ export default function ProfilePage(){
                         }} />
                     </Col>
             </Container>
-            <div style={{
-                float: "left"
+            <div className={"banner"} style={{
+                width: "100vw",
+                height: "35vh",
+                backgroundImage: `url("https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover"
             }}>
-                <h1>{"USER NAME: " + user.name}</h1>
-                <h2>{"EMAIL: " + user.email}</h2>
-                {user.postedActivities ? <div>
-                    <ActivityCards activities={user.postedActivities}/>
-                </div> : <></>}
+            </div>
+            <div className={"userInfo"} style={{
+                color: "#e6e7f0",
+                fontFamily: "inherit"
+            }}>
+                <h2 style={{ fontSize: "1.8em"} }>{"User Name: " + user.name}</h2>
+                <h2 style={{ fontSize: "1.8em"} }>{"Email: " + user.email}</h2>
                 {user.interests ? <ul>
                     {user.interests.map(interest => {
                         return <li>{interest}</li>
                     })}
                 </ul> : <></>}
+            </div>
+            <div className={"profileActivities"}>
+                {user.postedActivities ? <div>
+                    <ActivityCards activities={user.postedActivities}/>
+                </div> : <></>}
             </div>
         </div>
     )
