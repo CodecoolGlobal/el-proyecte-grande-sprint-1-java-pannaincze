@@ -73,6 +73,7 @@ export default function GetActivity() {
                 onBack={() => navigate("/")}
                 onSignUp={handleSignUp}
                 onWithdraw={handleWithdraw}
+
             />
         </div>
     )

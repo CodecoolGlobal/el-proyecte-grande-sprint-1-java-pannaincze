@@ -8,6 +8,7 @@ export default function () {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const navigate = useNavigate();
+    const [loginFail, setLoginFail] = useState(null);
     function handleLogin() {
         fetch(`http://localhost:8080/users/login/${email}/${password}`, {
             method: "GET",
@@ -20,6 +21,8 @@ export default function () {
                     setTimeout(()=>{
                         navigate('/', {state : user})
                     },300)
+                }else{
+                    setLoginFail(true);
                 }
             })
             .catch((error) => console.log(error));
@@ -33,6 +36,7 @@ export default function () {
                 handleLogin()
             }}>
                 <br/>
+                {loginFail && <div className="container text-center bg-danger text-white">This email-password combination does not exists!</div>}
 
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="email" className="form-label">Email address: </Form.Label><br/>
