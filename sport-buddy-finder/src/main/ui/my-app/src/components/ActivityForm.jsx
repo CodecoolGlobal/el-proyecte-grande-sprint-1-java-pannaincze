@@ -1,8 +1,8 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import {useOutletContext} from "react-router-dom";
 
-export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) => {
+export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, fetchImage}) => {
 
 
     const [title, setTitle] = useState(activity?.title ?? "");
@@ -11,7 +11,19 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
     const [sport, setSport] = useState(activity?.sport ?? "");
     const [minPeople, setMinPeople] = useState(activity?.minPeopleToFind ?? 0);
     const [maxPeople, setMaxPeople] = useState(activity?.maxPeopleToFind ?? 0);
+    const [image, setImage] = useState(activity?.image);
     const [user, setUser] = useOutletContext();
+
+    useEffect(() => {
+        if (sport) {
+            fetchImage(sport)
+                .then(fetchedImage => {
+                    setImage(fetchedImage);
+                    console.log(image)
+                })
+        }
+    }, [sport])
+
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(user)
@@ -24,6 +36,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
                 description,
                 sport,
                 user,
+                image,
                 minPeopleToFind: minPeople,
                 maxPeopleToFind: maxPeople,
             })
@@ -35,6 +48,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
             description,
             sport,
             user,
+            image,
             minPeopleToFind: minPeople,
             maxPeopleToFind: maxPeople,
         })
@@ -86,7 +100,6 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
                     type="number"
                     id="minPeople"
                     required={true}
-                    min={1}
                 />
 
                 <Form.Label htmlFor="maxPeople">Maximum people:</Form.Label>
@@ -96,12 +109,11 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
                     type="number"
                     id="maxPeople"
                     required={true}
-                    min={minPeople}
                 />
 
             </Form.Group>
-            <Button type="submit" style={{margin: "0.2rem"}}>Save</Button>
-            <Button type="button" onClick={onCancel} style={{margin: "0.2rem"}}>Cancel</Button>
+            <Button type="submit" style={{margin: "0.3rem"}}>Save</Button>
+            <Button type="button" onClick={onCancel} style={{margin: "0.3rem"}}>Cancel</Button>
         </Form>
     )
 }
