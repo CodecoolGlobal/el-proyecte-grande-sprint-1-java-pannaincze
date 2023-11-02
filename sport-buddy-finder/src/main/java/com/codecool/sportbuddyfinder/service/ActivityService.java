@@ -1,6 +1,7 @@
 package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
+import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.repository.ActivityRepository;
 import com.codecool.sportbuddyfinder.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,24 +60,21 @@ public class ActivityService {
         return true;
     }
 
-    //    public Activity updateActivityById(long activityId, Activity activity) {
-//        Activity updatedActivity = activityRepository.updateById(activityId, activity).orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + activityId));
-//
-//        activity.setId(updatedActivity.getId());
-//        activity.setTitle(activity.getTitle());
-//        activity.setDescription(activity.getDescription());
-//        activity.setSport(activity.getSport());
-//        activity.setLocation(activity.getLocation());
-//        activity.setMinPeopleToFind(activity.getMinPeopleToFind());
-//        activity.setMaxPeopleToFind(activity.getMaxPeopleToFind());
-//        activity.setUser(activity.getUser());
-//        activity.setPostStatus(activity.getPostStatus());
-//        //needs fix
-//        //activity.addUsersToAppliedSet(activity.getAppliedUsers());
-//
-//        return activityRepository.save(updatedActivity);
-//    }
-//    public Activity addUserToActivity(UUID activityId, User user) {
-//        return activityDAO.addUserToActivity(activityId, user);
-//    }
+    public Activity addUserToParticipants(long id, long userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        Activity activity = activityRepository.findById(id).orElseThrow();
+
+        activity.getAppliedUsers().add(user);
+
+        return activityRepository.save(activity);
+    }
+    public  Activity removeUserFromParticipants(long id, long userId){
+        User user = userRepository.findById(userId).orElseThrow();
+        Activity activity = activityRepository.findById(id).orElseThrow();
+
+        activity.getAppliedUsers().remove(user);
+
+        return activityRepository.save(activity);
+    }
+
 }

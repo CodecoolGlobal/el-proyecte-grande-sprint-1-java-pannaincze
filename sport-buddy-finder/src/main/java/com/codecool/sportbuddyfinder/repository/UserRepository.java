@@ -10,7 +10,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      // Set<User> findAllUser();
      Optional<User> findById(long id);
      // boolean addUser(NewUserDTO newUser);
-     User findByEmailAndPassword(String email, String password);
+     Optional<User> findByEmailAndPassword(String email, String password);
      // boolean updateUser(long userID, User updatedUser);
      void deleteUserById(long id);
 }
