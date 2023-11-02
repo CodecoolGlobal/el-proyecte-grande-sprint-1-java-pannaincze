@@ -18,6 +18,11 @@ const addUserToParticipants = (id, userId) => {
         {method: "PUT"})
         .then(res => res.json());
 }
+const removeUserToParticipants = (id, userId) => {
+    return fetch(`/activities/update/${id}/${userId}`,
+        {method: "DELETE"})
+        .then(res => res.json());
+}
 
 export default function GetActivity() {
     const {id} = useParams();
@@ -43,7 +48,12 @@ export default function GetActivity() {
     const handleApplication = (id, user) => {
         console.log(user)
       addUserToParticipants(id, user.id)
-          .then(() => navigate("/"))
+          .then(() => fetchActivity(id)
+              .then((activity) => {
+                  setActivity(activity);
+                  console.log(activity);
+                  setActivityLoading(false);
+              }))
     }
 
     if (activityLoading) {
