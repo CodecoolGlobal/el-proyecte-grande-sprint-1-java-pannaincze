@@ -1,8 +1,9 @@
 import {Card, Button} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useOutletContext} from "react-router-dom";
 
 export default function DisplayActivity({activity, onDelete}) {
     const navigate = useNavigate();
+    const [user, setUser] = useOutletContext();
     return (
         <div className="activityConatiner" style={{margin: "3rem"}}>
             <Card className="activity">
@@ -39,7 +40,7 @@ export default function DisplayActivity({activity, onDelete}) {
                 <Link to={`/activities/update/${activity.id}`}>
                     <Button className="button" type="button">Edit</Button>
                 </Link>
-                <Button className="button" type="button" onClick={() =>{onDelete(activity.id)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button>
+                {(user && user.id == activity.user?.id) ? <Button className="button" type="button" onClick={() =>{onDelete(activity.id)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button> : <></>}
                 <Button className="button" type="button" onClick={()=>{navigate(-1)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
             </Card>
         </div>
