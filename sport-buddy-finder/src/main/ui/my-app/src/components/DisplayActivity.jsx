@@ -44,9 +44,9 @@ export default function DisplayActivity({activity, onDelete, onApply}) {
                 </Link>
                 {(user && user.id == activity.user?.id) ? <Button className="button" type="button" onClick={() =>{onDelete(activity.id)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button> : <></>}
                 <Button className="button" type="button" onClick={()=>{navigate(-1)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
-                <Button className="button" type="button" onClick={() => {
+                {user?.id !== activity.user.id && <Button className="button" type="button" onClick={() => {
                     onApply(activity.id, user)
-                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Apply</Button>
+                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Apply</Button>}
             </Card>
         </div>
     )
