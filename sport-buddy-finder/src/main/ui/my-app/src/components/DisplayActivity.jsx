@@ -1,7 +1,7 @@
 import {Card, Button} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 
-export default function DisplayActivity({activity, onBack, onDelete}) {
+export default function DisplayActivity({activity, onDelete}) {
     const navigate = useNavigate();
     return (
         <div className="activityConatiner" style={{margin: "3rem"}}>
@@ -40,7 +40,7 @@ export default function DisplayActivity({activity, onBack, onDelete}) {
                     <Button className="button" type="button">Edit</Button>
                 </Link>
                 <Button className="button" type="button" onClick={() =>{onDelete(activity.id)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button>
-                <Button className="button" type="button" onClick={onBack} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
+                <Button className="button" type="button" onClick={()=>{navigate(-1)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
             </Card>
         </div>
     )
