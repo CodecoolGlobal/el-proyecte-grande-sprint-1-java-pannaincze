@@ -62,8 +62,10 @@ public class ActivityService {
     }
 
     public Activity addUserToParticipants(long id, long userId) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        Activity activity = activityRepository.findById(id).orElseThrow(ActivityNotFoundException::new);
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+        Activity activity = activityRepository.findById(id)
+                .orElseThrow(ActivityNotFoundException::new);
 
         activity.getAppliedUsers().add(user);
 
