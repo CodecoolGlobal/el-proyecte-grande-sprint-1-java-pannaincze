@@ -33,10 +33,13 @@ export default function GetActivity() {
 
     const handleDelete = (id) => {
         deleteActivity(id);
-
-        setActivity((activities) => {
-            return activities.filter((activity) => activity.id !== id);
-        });
+        setTimeout(()=>{navigate("/");},200)
+        //
+        //don't know why do we need this setActivity is it just remains of the previous sprint?!
+        //I commented it out because it caused errors.
+        // setActivity((activities) => {
+        //     return activities.filter((activity) => activity.id !== id);
+        // });
     }
 
     if (activityLoading) {
