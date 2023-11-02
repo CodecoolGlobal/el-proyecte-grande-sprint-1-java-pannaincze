@@ -6,8 +6,12 @@ import {useLocation, useOutletContext, useParams} from "react-router-dom";
 import ActivityCards from "../components/ActivityCards";
 
 
-export default function ProfilePage(){
+export default function ProfilePage() {
     const [user, setUser] = useOutletContext();
+    const [activies, setActivities] = useState([]);
+    const fetchActivities = () => {
+        return fetch(`http://localhost:8080/activities/user-id/${user.id}`).then((res) => res.json());
+    }
     //
     //const location = useLocation()
     // const { id } = location.state
@@ -20,19 +24,25 @@ export default function ProfilePage(){
     //     profilePicURL:"",
     //     interests: [],
     //     postedActivities: []})
-    async function fetchUser(userID){
-        fetch(`http://localhost:8080/users/${userID}`,{
+    async function fetchUser(userID) {
+        fetch(`http://localhost:8080/users/${userID}`, {
             method: "GET",
         })
             .then((response) => response.json())
-            .then((data) => {console.log(data)
-                setUser(data)})
+            .then((data) => {
+                console.log(data)
+                setUser(data)
+            })
             .catch((error) => console.log(error));
     }
-    useEffect(()=> {
+
+    useEffect(() => {
         console.log(user.id)
         fetchUser(user.id)
-    },[])
+        fetchActivities()
+            .then((activities) => {
+                setActivities(activities);})
+    }, [])
     return (
         <div className={"profilePageContainer"} style={{
             backgroundColor: "#282c34",
@@ -45,12 +55,12 @@ export default function ProfilePage(){
                 width: "30vw",
                 float: "left"
             }}>
-                    <Col xs={6} md={4}>
-                        <Image src={user.profilePicURL} roundedCircle style={{
-                            width: "40vh",
+                <Col xs={6} md={4}>
+                    <Image src={user.profilePicURL} roundedCircle style={{
+                        width: "40vh",
 
-                        }} />
-                    </Col>
+                    }}/>
+                </Col>
             </Container>
             <div className={"banner"} style={{
                 width: "100vw",
@@ -71,8 +81,8 @@ export default function ProfilePage(){
                 justifyContent: "center",
 
             }}>
-                <h2 style={{ fontSize: "1.5em"} }>{"User Name: " + user.name}</h2>
-                <h2 style={{ fontSize: "1.5em"} }>{"Email: " + user.email}</h2>
+                <h2 style={{fontSize: "1.5em"}}>{"User Name: " + user.name}</h2>
+                <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
                 {user.interests ? <ul>
                     {user.interests.map(interest => {
                         return <li>{interest}</li>
@@ -80,8 +90,8 @@ export default function ProfilePage(){
                 </ul> : <></>}
             </div>
             <div className={"profileActivities"}>
-                {user.postedActivities ? <div>
-                    <ActivityCards activities={user.postedActivities}/>
+                {activies ? <div>
+                    <ActivityCards activities={activies}/>
                 </div> : <></>}
             </div>
         </div>
