@@ -1,7 +1,10 @@
 import {Card, Button} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useOutletContext} from "react-router-dom";
+import {useState} from "react";
 
-export default function DisplayActivity({activity, onBack, onDelete}) {
+export default function DisplayActivity({activity, onBack, onDelete, onApply}) {
+
+    const [user, setUser] = useOutletContext();
     const navigate = useNavigate();
     return (
         <div className="activityConatiner" style={{margin: "3rem"}}>
@@ -20,7 +23,7 @@ export default function DisplayActivity({activity, onBack, onDelete}) {
                     <Card.Text>
                         Location: {activity.location}
                     </Card.Text>
-                     <Card.Text>
+                    <Card.Text>
                         User: {activity.user.name}
                     </Card.Text>
                     <Card.Text>
@@ -28,19 +31,25 @@ export default function DisplayActivity({activity, onBack, onDelete}) {
                     </Card.Text>
                     {activity.appliedUsers.length !== 0 ?
                         <Card.Text>
-                        Applied users:
-                        {activity.appliedUsers.map((user) => (
-                            <Card.Text key={activity.id}>{user.name}</Card.Text>
-                        ))}
-                    </Card.Text> :
+                            Applied users:
+                            {activity.appliedUsers.map((user) => (
+                                <Card.Text key={activity.id}>{user.name}</Card.Text>
+                            ))}
+                        </Card.Text> :
                         ""
                     }
                 </Card.Body>
                 <Link to={`/activities/update/${activity.id}`}>
                     <Button className="button" type="button">Edit</Button>
                 </Link>
-                <Button className="button" type="button" onClick={() =>{onDelete(activity.id)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button>
-                <Button className="button" type="button" onClick={onBack} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
+                <Button className="button" type="button" onClick={() => {
+                    onDelete(activity.id)
+                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button>
+                <Button className="button" type="button" onClick={onBack}
+                        style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
+                <Button className="button" type="button" onClick={() => {
+                    onApply(activity.id, user)
+                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Apply</Button>
             </Card>
         </div>
     )
