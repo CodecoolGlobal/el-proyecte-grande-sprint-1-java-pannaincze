@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, {useState} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -13,6 +13,7 @@ import ProfilePage from "./pages/ProfilePage";
 import GetActivity from "./pages/GetActivity";
 import {ActivityCreator} from "./pages/ActivityCreator";
 import Login from "./pages/Login";
+import {ActivityUpdater} from "./pages/ActivityUpdater";
 
 const router = createBrowserRouter([
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             {
                 path: "activities/create",
                 element: <ActivityCreator/>
+            },
+            {
+                path: "activities/update/:id",
+                element: <ActivityUpdater/>
             }
         ]
 
