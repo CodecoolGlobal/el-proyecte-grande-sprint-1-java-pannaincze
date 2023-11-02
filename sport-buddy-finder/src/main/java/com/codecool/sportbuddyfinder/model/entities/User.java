@@ -2,6 +2,7 @@ package com.codecool.sportbuddyfinder.model.entities;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class User {
     private String password;
     private LocalDate birthDate;
     private String profilePicURL;
-    @OneToMany
+    @ManyToMany
     private final Set<Sport> interests;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
