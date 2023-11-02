@@ -49,7 +49,7 @@ export default function DisplayActivity({activity, onBack, onDelete, onApply}) {
                         style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
                 <Button className="button" type="button" onClick={() => {
                     onApply(activity.id, user)
-                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Apply</Button>
+                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Apply</Button>
             </Card>
         </div>
     )
