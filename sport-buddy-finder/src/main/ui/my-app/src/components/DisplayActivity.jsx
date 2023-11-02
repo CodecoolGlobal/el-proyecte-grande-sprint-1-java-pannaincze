@@ -2,7 +2,7 @@ import {Card, Button} from "react-bootstrap";
 import {Link, useNavigate, useOutletContext} from "react-router-dom";
 import {useState} from "react";
 
-export default function DisplayActivity({activity, onBack, onDelete, onApply}) {
+export default function DisplayActivity({activity, onBack, onDelete, onSignUp}) {
 
     const [user, setUser] = useOutletContext();
     const navigate = useNavigate();
@@ -48,8 +48,8 @@ export default function DisplayActivity({activity, onBack, onDelete, onApply}) {
                 <Button className="button" type="button" onClick={onBack}
                         style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
                 <Button className="button" type="button" onClick={() => {
-                    onApply(activity.id, user)
-                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Apply</Button>
+                    onSignUp(activity.id, user)
+                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Sign Up</Button>
             </Card>
         </div>
     )

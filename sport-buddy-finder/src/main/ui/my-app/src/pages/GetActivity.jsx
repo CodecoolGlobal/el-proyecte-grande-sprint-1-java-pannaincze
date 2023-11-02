@@ -45,7 +45,7 @@ export default function GetActivity() {
         deleteActivity(id);
         setTimeout(()=>{navigate("/");},200)
     }
-    const handleApplication = (id, user) => {
+    const handleSignUp = (id, user) => {
         console.log(user)
       addUserToParticipants(id, user.id)
           .then(() => fetchActivity(id)
@@ -66,7 +66,7 @@ export default function GetActivity() {
                 activity={activity}
                 onDelete={handleDelete}
                 onBack={() => navigate("/")}
-                onApply={handleApplication}
+                onSignUp={handleSignUp}
             />
         </div>
     )
