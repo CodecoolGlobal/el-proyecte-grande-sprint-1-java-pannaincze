@@ -83,11 +83,12 @@ export default function ProfilePage() {
             }}>
                 <h2 style={{fontSize: "1.5em"}}>{"User Name: " + user.name}</h2>
                 <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
-                {user.interests ? <ul>
+                {user.interests?.length > 0 ? <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2><ul>
+
                     {user.interests.map(interest => {
-                        return <li>{interest}</li>
+                        return <li>{interest.name}</li>
                     })}
-                </ul> : <></>}
+                </ul></div> : <></>}
             </div>
             <div className={"profileActivities"}>
                 {activies ? <div>
