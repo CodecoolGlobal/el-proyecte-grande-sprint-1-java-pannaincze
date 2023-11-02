@@ -43,7 +43,7 @@ public class User {
         this.interests = new HashSet<>();
     }
 
-    public User(String name, String email, String password, LocalDate birthDate, Sport[] interests) {
+    public User(String name, String email, String password, LocalDate birthDate) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -51,7 +51,7 @@ public class User {
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
         this.postedActivities = new HashSet<>();
         this.appliedActivities = new HashSet<>();
-        this.interests = new HashSet<>(Arrays.asList(interests));
+        this.interests = new HashSet<>();
     }
 
     public Set<Sport> getInterests() {
@@ -62,8 +62,8 @@ public class User {
         interests.add(sport);
     }
 
-    public void addInterests(Set<Sport> interests) {
-        this.interests.addAll(interests);
+    public void addInterests(Sport[] interests) {
+        this.interests.addAll(Arrays.asList(interests));
     }
 
     public void addPostedActivity(Activity activity) {

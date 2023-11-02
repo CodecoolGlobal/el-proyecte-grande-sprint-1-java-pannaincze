@@ -29,7 +29,7 @@ public class MemoryUserDAO implements UserDao {
 
     @Override
     public boolean addUser(NewUserDTO newUserDTO) {
-        User user = new User(newUserDTO.name(), newUserDTO.email(), newUserDTO.password(), newUserDTO.date(), newUserDTO.interests());
+        User user = new User(newUserDTO.name(), newUserDTO.email(), newUserDTO.password(), newUserDTO.date());
         //user.addInterests(Set.of(newUserDTO.interests()));
         if (!emailExistsInRepository(user)) return userRepository.add(user);
         return false;

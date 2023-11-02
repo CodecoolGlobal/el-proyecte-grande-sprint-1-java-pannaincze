@@ -27,7 +27,7 @@ export default function () {
                     setTimeout(() => {
                         setRegisterSuccessAs(null);
                         navigate("/");
-                    }, "1800");
+                    }, "800");
                 }
             });
         }
@@ -46,7 +46,7 @@ export default function () {
     }, [])
 
     async function fetchSports() {
-        fetch("http://localhost:8080/activities/categories", {
+        fetch("http://localhost:8080/sports", {
             method: "GET",
         })
             .then((response) => response.json())
@@ -92,7 +92,7 @@ export default function () {
                         {sportCategories.length > 0 &&
                             <Form.Group className="container row">{sportCategories.map((category, index) => (
                                 <div key={index} className="col-4 ">
-                                    <Form.Check onClick={event => checkboxHandling(event.target)} type="checkbox" id={category} value={category} label={category}></Form.Check>
+                                    <Form.Check onClick={event => checkboxHandling(event.target)} type="checkbox" id={category.id} value={category.id} label={category.name}></Form.Check>
                                 </div>
                             ))}</Form.Group>}
                     </Form.Group>
