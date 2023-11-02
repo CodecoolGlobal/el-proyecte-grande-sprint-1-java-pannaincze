@@ -24,7 +24,7 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp, o
                         Location: {activity.location}
                     </Card.Text>
                     <Card.Text>
-                        User: {activity.user.name}
+                        Created: {activity.user.name}
                     </Card.Text>
                     <Card.Text>
                         {`${activity.appliedUsers.length}/${activity.maxPeopleToFind}`}
