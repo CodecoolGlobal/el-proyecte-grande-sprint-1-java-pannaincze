@@ -1,12 +1,14 @@
 package com.codecool.sportbuddyfinder.model.entities;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,20 +38,20 @@ public class User {
 
     public User() {
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
-        this.interests = new HashSet<>();
         this.postedActivities = new HashSet<>();
         this.appliedActivities = new HashSet<>();
+        this.interests = new HashSet<>();
     }
 
-    public User(String name, String email, String password, LocalDate birthDate) {
+    public User(String name, String email, String password, LocalDate birthDate, Sport[] interests) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.birthDate = birthDate;
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
-        this.interests = new HashSet<>();
         this.postedActivities = new HashSet<>();
         this.appliedActivities = new HashSet<>();
+        this.interests = new HashSet<>(Arrays.asList(interests));
     }
 
     public Set<Sport> getInterests() {

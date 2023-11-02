@@ -27,8 +27,8 @@ public class UserService {
     public boolean addUser(NewUserDTO newUserDTO){
         //return userRepository.addUser(newUserDTO);
         //TODO
-        User user = new User(newUserDTO.name(), newUserDTO.email(), newUserDTO.password(), newUserDTO.date());
-        user.addInterests(Set.of(newUserDTO.interests()));
+        User user = new User(newUserDTO.name(), newUserDTO.email(), newUserDTO.password(), newUserDTO.date(), newUserDTO.interests());
+        //user.addInterests(Set.of(newUserDTO.interests()));
         userRepository.save(user);
         return false;
     }

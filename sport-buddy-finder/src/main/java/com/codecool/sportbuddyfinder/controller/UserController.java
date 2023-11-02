@@ -14,8 +14,6 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
-
-
     public UserController(UserService userService)
     {
         this.userService = userService;
@@ -35,7 +33,6 @@ public class UserController {
     @PostMapping
     @ResponseBody
     public boolean postUser(@RequestBody NewUserDTO newUserDTO){
-
         userService.addUser(newUserDTO);
         return true;
     }

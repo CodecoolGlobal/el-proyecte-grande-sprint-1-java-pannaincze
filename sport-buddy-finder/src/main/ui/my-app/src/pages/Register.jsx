@@ -13,6 +13,7 @@ export default function () {
     const [isRegisterSuccessful, setRegisterSuccessAs] = useState(null);
 
     function handleRegistration() {
+        console.log(JSON.stringify({name: name, email: email, password: password, interests: interests, date: date}))
         if (name.length > 0 && email.length > 4 && email.includes("@") && email.includes(".") && password.length > 0 && date !== null) {
             const requestOptions = {
                 method: 'POST',
