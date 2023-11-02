@@ -67,7 +67,14 @@ public class ActivityService {
         activity.getAppliedUsers().add(user);
 
         return activityRepository.save(activity);
+    }
+    public  Activity removeUserFromParticipants(long id, long userId){
+        User user = userRepository.findById(userId).orElseThrow();
+        Activity activity = activityRepository.findById(id).orElseThrow();
 
+        activity.getAppliedUsers().remove(user);
+
+        return activityRepository.save(activity);
     }
 
 }
