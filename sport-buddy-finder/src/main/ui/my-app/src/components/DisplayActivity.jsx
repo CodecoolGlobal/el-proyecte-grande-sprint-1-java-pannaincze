@@ -1,6 +1,7 @@
 import {Card, Button} from "react-bootstrap";
 import {Link, useNavigate, useOutletContext} from "react-router-dom";
 import {useState} from "react";
+import {SignUpButton} from "./SignUpButton";
 
 export default function DisplayActivity({activity, onBack, onDelete, onSignUp, onWithdraw}) {
 
@@ -51,15 +52,12 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp, o
                         style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
 
 
-                {activity.appliedUsers.filter(u => u.id === user?.id).length === 0 ?
-                    <Button className="button" type="button" onClick={() => {
-                        onSignUp(activity.id, user)
-                    }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Sign Up</Button>
-                :
-                    <Button className="button" type="button" onClick={() => {
-                        onWithdraw(activity.id, user)
-                    }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Withdraw</Button>
-                }
+                <SignUpButton
+                    onSignUp={onSignUp}
+                    onWithdraw={onWithdraw}
+                    activity={activity}
+                    user={user}
+                />
             </Card>
         </div>
     )
