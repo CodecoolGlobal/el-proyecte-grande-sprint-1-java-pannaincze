@@ -40,7 +40,7 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp, o
                     }
                 </Card.Body>
                 <Link to={`/activities/update/${activity.id}`}>
-                    <Button className="button" type="button">Edit</Button>
+                    <Button className="button" type="button" style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Edit</Button>
                 </Link>
 
                 {(user && user.id == activity.user?.id) ? <Button className="button" type="button" onClick={() => {
