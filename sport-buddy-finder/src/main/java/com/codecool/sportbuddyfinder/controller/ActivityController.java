@@ -46,6 +46,10 @@ public class ActivityController {
     public Activity updateActivity(@RequestBody Activity updatedActivity, @PathVariable long id) {
         return activityService.updateActivity(updatedActivity, id);
     }
+    @PutMapping("/update/{id}/{userId}")
+    public Activity addUserToParticipants(@PathVariable long id, @PathVariable long userId) {
+        return activityService.addUserToParticipants(id, userId);
+    }
 
     @DeleteMapping("/{id}")
     public boolean deleteActivityById(@PathVariable long id) {
