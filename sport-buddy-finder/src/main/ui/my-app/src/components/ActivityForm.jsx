@@ -13,7 +13,6 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, f
     const [maxPeople, setMaxPeople] = useState(activity?.maxPeopleToFind ?? 0);
     const [image, setImage] = useState(activity?.image);
     const [user, setUser] = useOutletContext();
-    const [changePhoto, setChangePhoto] = useState(false);
 
     useEffect(() => {
         if (sport) {
@@ -113,20 +112,6 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, f
                 />
 
             </Form.Group>
-            {/*<Form.Group>*/}
-            {/*    <Form.Label>Do you want to change the basic photo for the post?</Form.Label>*/}
-            {/*    <span>*/}
-            {/*        <Button onClick={() => setChangePhoto(true)} style={{margin : "0.1rem"}}>Yes</Button>*/}
-            {/*        <Button onClick={() => setChangePhoto(false)} style={{margin : "0.1rem"}}>No</Button>*/}
-            {/*    </span>*/}
-            {/*</Form.Group>*/}
-            {/*{changePhoto ?*/}
-            {/*    <Form.Group>*/}
-            {/*        <Form.Label>Add photo URL:</Form.Label>*/}
-            {/*        <Form.Control onChange={(e) => setImage(e.target.value)} type="text"></Form.Control>*/}
-            {/*    </Form.Group>*/}
-            {/*    : ""}*/}
-
             <Button type="submit" style={{margin: "0.3rem"}}>Save</Button>
             <Button type="button" onClick={onCancel} style={{margin: "0.3rem"}}>Cancel</Button>
         </Form>
