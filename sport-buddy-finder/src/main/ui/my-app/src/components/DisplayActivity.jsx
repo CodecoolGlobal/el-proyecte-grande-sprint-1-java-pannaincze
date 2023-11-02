@@ -2,7 +2,7 @@ import {Card, Button} from "react-bootstrap";
 import {Link, useNavigate, useOutletContext} from "react-router-dom";
 import {useState} from "react";
 
-export default function DisplayActivity({activity, onBack, onDelete, onSignUp}) {
+export default function DisplayActivity({activity, onBack, onDelete, onSignUp, onWithdraw}) {
 
     const [user, setUser] = useOutletContext();
     const navigate = useNavigate();
@@ -42,14 +42,24 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp}) 
                 <Link to={`/activities/update/${activity.id}`}>
                     <Button className="button" type="button">Edit</Button>
                 </Link>
+
                 <Button className="button" type="button" onClick={() => {
                     onDelete(activity.id)
                 }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button>
+
                 <Button className="button" type="button" onClick={onBack}
                         style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
-                <Button className="button" type="button" onClick={() => {
-                    onSignUp(activity.id, user)
-                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Sign Up</Button>
+
+
+                {activity.appliedUsers.filter(u => u.id === user?.id).length === 0 ?
+                    <Button className="button" type="button" onClick={() => {
+                        onSignUp(activity.id, user)
+                    }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Sign Up</Button>
+                :
+                    <Button className="button" type="button" onClick={() => {
+                        onWithdraw(activity.id, user)
+                    }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Withdraw</Button>
+                }
             </Card>
         </div>
     )
