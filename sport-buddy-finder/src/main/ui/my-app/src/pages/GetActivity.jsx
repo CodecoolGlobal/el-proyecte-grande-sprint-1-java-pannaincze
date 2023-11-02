@@ -32,28 +32,33 @@ export default function GetActivity() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        getActivity();
+    }, [id]);
+
+    const getActivity = () => {
         setActivityLoading(true);
-        fetchActivity(id)
+        return fetchActivity(id)
             .then((activity) => {
                 setActivity(activity);
                 console.log(activity);
                 setActivityLoading(false);
             })
-    }, [id]);
-
+    }
     const handleDelete = (id) => {
         deleteActivity(id);
-        setTimeout(()=>{navigate("/");},200)
+        setTimeout(() => {
+            navigate("/");
+        }, 200)
     }
     const handleSignUp = (id, user) => {
         console.log(user)
-      addUserToParticipants(id, user.id)
-          .then(() => fetchActivity(id)
-              .then((activity) => {
-                  setActivity(activity);
-                  console.log(activity);
-                  setActivityLoading(false);
-              }))
+        addUserToParticipants(id, user.id)
+            .then(() => getActivity())
+    }
+    const handleWithdraw = (id, user) => {
+        console.log(user)
+        removeUserToParticipants(id, user.id)
+            .then(() => getActivity())
     }
 
     if (activityLoading) {
@@ -67,6 +72,7 @@ export default function GetActivity() {
                 onDelete={handleDelete}
                 onBack={() => navigate("/")}
                 onSignUp={handleSignUp}
+                onWithdraw={handleWithdraw}
             />
         </div>
     )
