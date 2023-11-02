@@ -7,6 +7,7 @@ export default function ActivityCards({activities}) {
         <div className="ActivityCards" style={{ display: "flex", flexWrap: "wrap"}}>
         {activities.map((activity) => (
             <Card style={{ width: '18rem', margin: "0.5rem" }} key={activity.id}>
+                <Card.Img variant="top" src={activity.image} style={{ width: "286px", height: "191px", objectFit: "cover" }}/>
                 <Card.Header as="h5">{activity.sport}</Card.Header>
                 <Card.Body>
                     <Card.Title>{activity.title}</Card.Title>
