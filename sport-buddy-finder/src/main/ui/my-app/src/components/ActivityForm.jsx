@@ -86,6 +86,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
                     type="number"
                     id="minPeople"
                     required={true}
+                    min={1}
                 />
 
                 <Form.Label htmlFor="maxPeople">Maximum people:</Form.Label>
@@ -95,6 +96,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
                     type="number"
                     id="maxPeople"
                     required={true}
+                    min={minPeople}
                 />
 
             </Form.Group>

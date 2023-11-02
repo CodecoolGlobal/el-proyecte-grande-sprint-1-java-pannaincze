@@ -13,6 +13,16 @@ const deleteActivity = (id) => {
         {method: "DELETE"})
         .then((res) => res.json());
 }
+const addUserToParticipants = (id, userId) => {
+    return fetch(`/activities/update/${id}/${userId}`,
+        {method: "PUT"})
+        .then(res => res.json());
+}
+const removeUserToParticipants = (id, userId) => {
+    return fetch(`/activities/update/${id}/${userId}`,
+        {method: "DELETE"})
+        .then(res => res.json());
+}
 
 export default function GetActivity() {
     const {id} = useParams();
@@ -22,24 +32,33 @@ export default function GetActivity() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        getActivity();
+    }, [id]);
+
+    const getActivity = () => {
         setActivityLoading(true);
-        fetchActivity(id)
+        return fetchActivity(id)
             .then((activity) => {
                 setActivity(activity);
                 console.log(activity);
                 setActivityLoading(false);
             })
-    }, [id]);
-
+    }
     const handleDelete = (id) => {
         deleteActivity(id);
-        setTimeout(()=>{navigate("/");},200)
-        //
-        //don't know why do we need this setActivity is it just remains of the previous sprint?!
-        //I commented it out because it caused errors.
-        // setActivity((activities) => {
-        //     return activities.filter((activity) => activity.id !== id);
-        // });
+        setTimeout(() => {
+            navigate("/");
+        }, 200)
+    }
+    const handleSignUp = (id, user) => {
+        console.log(user)
+        addUserToParticipants(id, user.id)
+            .then(() => getActivity())
+    }
+    const handleWithdraw = (id, user) => {
+        console.log(user)
+        removeUserToParticipants(id, user.id)
+            .then(() => getActivity())
     }
 
     if (activityLoading) {
@@ -52,6 +71,9 @@ export default function GetActivity() {
                 activity={activity}
                 onDelete={handleDelete}
                 onBack={() => navigate("/")}
+                onSignUp={handleSignUp}
+                onWithdraw={handleWithdraw}
+
             />
         </div>
     )
