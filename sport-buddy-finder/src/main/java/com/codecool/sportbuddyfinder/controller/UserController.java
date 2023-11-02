@@ -7,6 +7,7 @@ import com.codecool.sportbuddyfinder.repository.UserRepository;
 import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class UserController {
         return userService.getUserById(userID);
     }
     @GetMapping("/login/{email}/{password}")
-    public User loginUser(@PathVariable String email, @PathVariable String password){
+    public Optional<User> loginUser(@PathVariable String email, @PathVariable String password){
         return userService.loginUser(new LoginUserDTO(email, password));
     }
     @PostMapping

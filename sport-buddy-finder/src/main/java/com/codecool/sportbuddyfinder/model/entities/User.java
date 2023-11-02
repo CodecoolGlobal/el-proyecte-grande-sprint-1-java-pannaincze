@@ -29,9 +29,7 @@ public class User {
     @OneToMany
     private final Set<Sport> interests;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIdentityInfo(
-            generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id")
+    @JsonIgnore
     private final Set<Activity> postedActivities;
     @ManyToMany
     private final Set<Activity> appliedActivities;
@@ -74,10 +72,10 @@ public class User {
         this.postedActivities.addAll(activities);
     }
 
-    public Set<Activity> getActivityPosts() {
-        return new HashSet<>(postedActivities);
+//    public Set<Activity> getActivityPosts() {
+//        return new HashSet<>(postedActivities);
+//    }
 
-    }
 
 
 }

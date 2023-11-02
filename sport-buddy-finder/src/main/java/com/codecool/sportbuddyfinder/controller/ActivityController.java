@@ -28,6 +28,10 @@ public class ActivityController {
     public Optional<Activity> getActivityById(@PathVariable long id) {
         return activityService.getActivityById(id);
     }
+    @GetMapping("/user-id/{user_id}")
+    public Optional<List<Activity>> getActivitiesByUserId(@PathVariable long user_id) {
+        return activityService.findActivitiesByUserId(user_id);
+    }
     @GetMapping("/categories")
     public Sport[] getAllSport(){
         return Sport.values();
@@ -42,19 +46,17 @@ public class ActivityController {
     public Activity updateActivity(@RequestBody Activity updatedActivity, @PathVariable long id) {
         return activityService.updateActivity(updatedActivity, id);
     }
+    @PutMapping("/update/{id}/{userId}")
+    public Activity addUserToParticipants(@PathVariable long id, @PathVariable long userId) {
+        return activityService.addUserToParticipants(id, userId);
+    }
+    @DeleteMapping("/update/{id}/{userId}")
+    public Activity removeUserFromParticipants(@PathVariable long id, @PathVariable long userId) {
+        return activityService.removeUserFromParticipants(id, userId);
+    }
 
     @DeleteMapping("/{id}")
     public boolean deleteActivityById(@PathVariable long id) {
         return activityService.deleteActivityById(id);
     }
-
-//    @PutMapping("/update/{id}")
-//    public Activity updateActivityById(@PathVariable long id, @RequestBody Activity activity) {
-//        return activityService.updateActivityById(id, activity);
-//    }
-
-//    @PatchMapping("/update/{activityId}/{userId}")
-//    public Activity addUserToActivity(@PathVariable UUID activityId, @PathVariable int userId) {
-//        return activityService.addUserToActivity(activityId, userService.getUserById(userId));
-//    }
 }

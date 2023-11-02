@@ -31,17 +31,18 @@ export default function Layout() {
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end">
                         {user !== null ? <div ><p className="text-white d-inline"><Link to={"/profile"}>{userName}</Link>&nbsp;</p><Button onClick={() => {
+                            navigate('/');
                             state = null;
                             setUser(null);
                             setUserName(null);
                             setId(null);
-                            setTimeout(()=>{
-                            navigate('/');
-                            },200)
+                            // setTimeout(()=>{
+                            // navigate('/');
+                            // },200)
                         }}>Logout</Button></div> : <LoginAndRegister />}
-                        <Link to={"/activities/create"}>
+                        {user && <Link to={"/activities/create"}>
                             <Button style={{margin: "0.5rem"}}>Create new post</Button>
-                        </Link>
+                        </Link>}
                         <Navbar.Text>
                             By: Team team = new Team();
                         </Navbar.Text>

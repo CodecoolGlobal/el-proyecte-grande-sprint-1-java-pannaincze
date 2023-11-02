@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
     Optional<Activity> findById(long activityId);
     void deleteById(long activityId);
+    Optional<List<Activity>> findByUser_Id(long userId);
 
 //    Optional<Activity> updateById(long id, Activity activity);
 

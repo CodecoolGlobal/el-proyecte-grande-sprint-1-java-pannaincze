@@ -19,6 +19,7 @@ public class Activity {
     @Id
     @GeneratedValue
     private long id;
+    private String image;
     private String title;
     private String description;
     private Sport sport;
@@ -39,13 +40,15 @@ public class Activity {
     private Status postStatus;
 
     public Activity() {
+        this.image = "https://images.pexels.com/photos/163444/sport-treadmill-tor-route-163444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
         this.postStatus = Status.OPEN;
         this.appliedUsers = new HashSet<>();
     }
 
-    public Activity(User user, String title, String description, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind) {
+    public Activity(User user, String title, String image, String description, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind) {
         this.user = user;
         this.title = title;
+        this.image = "https://images.pexels.com/photos/163444/sport-treadmill-tor-route-163444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
         this.description = description;
         this.sport = sport;
         this.location = location;

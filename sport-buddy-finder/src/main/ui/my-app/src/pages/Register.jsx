@@ -27,7 +27,8 @@ export default function () {
                     setTimeout(() => {
                         setRegisterSuccessAs(null);
                         navigate("/");
-                    }, "800");
+
+                    }, "450");
                 }
             });
         }

@@ -7,12 +7,13 @@ export default function ActivityCards({activities}) {
         <div className="ActivityCards" style={{ display: "flex", flexWrap: "wrap"}}>
         {activities.map((activity) => (
             <Card style={{ width: '18rem', margin: "0.5rem" }} key={activity.id}>
+                <Card.Img variant="top" src={activity.image} style={{ width: "286px", height: "191px", objectFit: "cover" }}/>
                 <Card.Header as="h5">{activity.sport}</Card.Header>
                 <Card.Body>
                     <Card.Title>{activity.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{activity.location}</Card.Subtitle>
                     <Card.Text>
-                        {`${activity.appliedUsers.length}/${activity.maxPeopleToFind}`}
+                        {`${activity.appliedUsers?.length}/${activity.maxPeopleToFind}`}
                     </Card.Text>
                     <Link to={`/activities/${activity.id}`}>
                         <Button variant="primary">See more</Button>
