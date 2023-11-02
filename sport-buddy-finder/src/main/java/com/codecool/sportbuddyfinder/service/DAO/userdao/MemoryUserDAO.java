@@ -53,9 +53,9 @@ public class MemoryUserDAO implements UserDao {
             if(updatedUser.getName() != null && !updatedUser.getName().isEmpty()){
                 userToUpdate.get().setName(updatedUser.getName());
             }
-            if(updatedUser.getActivityPosts() != null){
-                addNewActivitiesToUser(userToUpdate.get(),updatedUser);
-            }
+//            if(updatedUser.getActivityPosts() != null){
+//                addNewActivitiesToUser(userToUpdate.get(),updatedUser);
+//            }
             if(updatedUser.getBirthDate() != null){
                 userToUpdate.get().setBirthDate(updatedUser.getBirthDate());
             }
@@ -80,14 +80,14 @@ public class MemoryUserDAO implements UserDao {
         }
     }
     private void addNewActivitiesToUser(User userToUpdate, User updatedUser){
-        Set<Activity> newActivities = updatedUser.getActivityPosts();
-        for(Activity activity : userToUpdate.getActivityPosts()){
-            for(Activity newActivity : newActivities){
-                if(!activity.equals(newActivity)){
-                    userToUpdate.addPostedActivity(newActivity);
-                }
-            }
-        }
+//        Set<Activity> newActivities = updatedUser.getActivityPosts();
+//        for(Activity activity : userToUpdate.getActivityPosts()){
+//            for(Activity newActivity : newActivities){
+//                if(!activity.equals(newActivity)){
+//                    userToUpdate.addPostedActivity(newActivity);
+//                }
+//            }
+//        }
     }
     @Override
     public boolean deleteUserByID(int id) {

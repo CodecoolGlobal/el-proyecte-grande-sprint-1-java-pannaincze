@@ -12,7 +12,7 @@ export default function ActivityCards({activities}) {
                     <Card.Title>{activity.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{activity.location}</Card.Subtitle>
                     <Card.Text>
-                        {`${activity.appliedUsers.length}/${activity.maxPeopleToFind}`}
+                        {`${activity.appliedUsers?.length}/${activity.maxPeopleToFind}`}
                     </Card.Text>
                     <Link to={`/activities/${activity.id}`}>
                         <Button variant="primary">See more</Button>

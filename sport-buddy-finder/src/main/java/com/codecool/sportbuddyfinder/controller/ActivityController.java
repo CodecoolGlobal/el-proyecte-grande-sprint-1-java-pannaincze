@@ -28,6 +28,10 @@ public class ActivityController {
     public Optional<Activity> getActivityById(@PathVariable long id) {
         return activityService.getActivityById(id);
     }
+    @GetMapping("/user-id/{user_id}")
+    public Optional<List<Activity>> getActivitiesByUserId(@PathVariable long user_id) {
+        return activityService.findActivitiesByUserId(user_id);
+    }
     @GetMapping("/categories")
     public Sport[] getAllSport(){
         return Sport.values();

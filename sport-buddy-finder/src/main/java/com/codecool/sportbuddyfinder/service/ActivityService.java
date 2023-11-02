@@ -26,6 +26,9 @@ public class ActivityService {
     public Optional<Activity> getActivityById(long activityId) {
         return activityRepository.findById(activityId);
     }
+    public Optional<List<Activity>> findActivitiesByUserId(long id){
+        return activityRepository.findByUser_Id(id);
+    }
     public Activity addNewActivityToDB(Activity activity) {
         activity.setUser(userRepository.findById(activity.getUser().getId()).get());
         return activityRepository.save(activity);
