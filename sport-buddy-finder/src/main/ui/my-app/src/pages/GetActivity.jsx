@@ -13,6 +13,11 @@ const deleteActivity = (id) => {
         {method: "DELETE"})
         .then((res) => res.json());
 }
+const addUserToParticipants = (id, userId) => {
+    return fetch(`/activities/update/${id}/${userId}`,
+        {method: "PUT"})
+        .then(res => res.json());
+}
 
 export default function GetActivity() {
     const {id} = useParams();
@@ -34,12 +39,11 @@ export default function GetActivity() {
     const handleDelete = (id) => {
         deleteActivity(id);
         setTimeout(()=>{navigate("/");},200)
-        //
-        //don't know why do we need this setActivity is it just remains of the previous sprint?!
-        //I commented it out because it caused errors.
-        // setActivity((activities) => {
-        //     return activities.filter((activity) => activity.id !== id);
-        // });
+    }
+    const handleApplication = (id, user) => {
+        console.log(user)
+      addUserToParticipants(id, user.id)
+          .then(() => navigate("/"))
     }
 
     if (activityLoading) {
