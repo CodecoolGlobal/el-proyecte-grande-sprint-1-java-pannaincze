@@ -55,8 +55,6 @@ export default function GetActivity() {
             <DisplayActivity
                 activity={activity}
                 onDelete={handleDelete}
-                onBack={() => navigate("/")}
-                onApply={handleApplication}
             />
         </div>
     )

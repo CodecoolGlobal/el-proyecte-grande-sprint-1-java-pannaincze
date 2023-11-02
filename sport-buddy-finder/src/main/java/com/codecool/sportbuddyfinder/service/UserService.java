@@ -7,6 +7,7 @@ import com.codecool.sportbuddyfinder.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -32,7 +33,7 @@ public class UserService {
         userRepository.save(user);
         return false;
     }
-    public User loginUser(LoginUserDTO loginUserDTO){
+    public Optional<User> loginUser(LoginUserDTO loginUserDTO){
         return userRepository.findByEmailAndPassword(loginUserDTO.email(), loginUserDTO.password());
     }
     public boolean updateUser(int userID,User updatedUser){

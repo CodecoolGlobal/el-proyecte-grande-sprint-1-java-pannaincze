@@ -1,11 +1,11 @@
 import {Card, Button} from "react-bootstrap";
 import {Link, useNavigate, useOutletContext} from "react-router-dom";
+
 import {useState} from "react";
 
-export default function DisplayActivity({activity, onBack, onDelete, onApply}) {
-
-    const [user, setUser] = useOutletContext();
+export default function DisplayActivity({activity, onDelete, onApply}) {
     const navigate = useNavigate();
+    const [user, setUser] = useOutletContext();
     return (
         <div className="activityConatiner" style={{margin: "3rem"}}>
             <Card className="activity">
@@ -42,14 +42,11 @@ export default function DisplayActivity({activity, onBack, onDelete, onApply}) {
                 <Link to={`/activities/update/${activity.id}`}>
                     <Button className="button" type="button">Edit</Button>
                 </Link>
-                <Button className="button" type="button" onClick={() => {
-                    onDelete(activity.id)
-                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button>
-                <Button className="button" type="button" onClick={onBack}
-                        style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
-                <Button className="button" type="button" onClick={() => {
+                {(user && user.id == activity.user?.id) ? <Button className="button" type="button" onClick={() =>{onDelete(activity.id)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Delete</Button> : <></>}
+                <Button className="button" type="button" onClick={()=>{navigate(-1)}} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
+                {user?.id !== activity.user.id && <Button className="button" type="button" onClick={() => {
                     onApply(activity.id, user)
-                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Apply</Button>
+                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Apply</Button>}
             </Card>
         </div>
     )
