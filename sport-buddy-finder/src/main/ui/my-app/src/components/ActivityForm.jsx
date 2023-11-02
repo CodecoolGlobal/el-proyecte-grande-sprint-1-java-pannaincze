@@ -1,8 +1,8 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import {useOutletContext} from "react-router-dom";
 
-export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) => {
+export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, fetchImage}) => {
 
 
     const [title, setTitle] = useState(activity?.title ?? "");
@@ -11,7 +11,20 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
     const [sport, setSport] = useState(activity?.sport ?? "");
     const [minPeople, setMinPeople] = useState(activity?.minPeopleToFind ?? 0);
     const [maxPeople, setMaxPeople] = useState(activity?.maxPeopleToFind ?? 0);
+    const [image, setImage] = useState(activity?.image);
     const [user, setUser] = useOutletContext();
+    const [changePhoto, setChangePhoto] = useState(false);
+
+    useEffect(() => {
+        if (sport) {
+            fetchImage(sport)
+                .then(fetchedImage => {
+                    setImage(fetchedImage);
+                    console.log(image)
+                })
+        }
+    }, [sport])
+
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(user)
@@ -24,6 +37,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
                 description,
                 sport,
                 user,
+                image,
                 minPeopleToFind: minPeople,
                 maxPeopleToFind: maxPeople,
             })
@@ -35,6 +49,7 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
             description,
             sport,
             user,
+            image,
             minPeopleToFind: minPeople,
             maxPeopleToFind: maxPeople,
         })
@@ -98,8 +113,22 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity}) 
                 />
 
             </Form.Group>
-            <Button type="submit" style={{margin: "0.2rem"}}>Save</Button>
-            <Button type="button" onClick={onCancel} style={{margin: "0.2rem"}}>Cancel</Button>
+            {/*<Form.Group>*/}
+            {/*    <Form.Label>Do you want to change the basic photo for the post?</Form.Label>*/}
+            {/*    <span>*/}
+            {/*        <Button onClick={() => setChangePhoto(true)} style={{margin : "0.1rem"}}>Yes</Button>*/}
+            {/*        <Button onClick={() => setChangePhoto(false)} style={{margin : "0.1rem"}}>No</Button>*/}
+            {/*    </span>*/}
+            {/*</Form.Group>*/}
+            {/*{changePhoto ?*/}
+            {/*    <Form.Group>*/}
+            {/*        <Form.Label>Add photo URL:</Form.Label>*/}
+            {/*        <Form.Control onChange={(e) => setImage(e.target.value)} type="text"></Form.Control>*/}
+            {/*    </Form.Group>*/}
+            {/*    : ""}*/}
+
+            <Button type="submit" style={{margin: "0.3rem"}}>Save</Button>
+            <Button type="button" onClick={onCancel} style={{margin: "0.3rem"}}>Cancel</Button>
         </Form>
     )
 }
