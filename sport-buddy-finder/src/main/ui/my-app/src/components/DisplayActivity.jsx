@@ -39,9 +39,10 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp, o
                         ""
                     }
                 </Card.Body>
-                <Link to={`/activities/update/${activity.id}`}>
+                {(user && user.id == activity.user?.id) && <Link to={`/activities/update/${activity.id}`}>
                     <Button className="button" type="button" style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Edit</Button>
-                </Link>
+                </Link>}
+
 
                 {(user && user.id == activity.user?.id) ? <Button className="button" type="button" onClick={() => {
                         onDelete(activity.id)
@@ -51,12 +52,13 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp, o
                 <Button className="button" type="button" onClick={() => {
                     navigate(-1)
                 }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Back</Button>
-                {user?.id !== activity.user.id && <SignUpButton
+                {user?.id !== activity.user.id && <><SignUpButton
                     onSignUp={onSignUp}
                     onWithdraw={onWithdraw}
                     activity={activity}
                     user={user}
-                />}
+                />
+                {user === null && <p> Sign in to apply!</p>}</>}
             </Card>
         </div>
     )
