@@ -2,6 +2,7 @@ package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.exception.ActivityNotFoundException;
 import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
+import com.codecool.sportbuddyfinder.model.DTO.ActivityCardDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.repository.ActivityRepository;
@@ -23,8 +24,8 @@ public class ActivityService {
         this.userRepository = userRepository;
     }
 
-    public List<Activity> getAllActivities() {
-        return activityRepository.findAll();
+    public List<ActivityCardDTO> getAllActivities() {
+        return activityRepository.findAll().stream().map(Activity::toDTO).toList();
     }
     public Optional<Activity> getActivityById(long activityId) {
         return activityRepository.findById(activityId);
