@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {ActivityForm} from "../components/ActivityForm";
+import Loading from "../components/Loading";
 
 const createActivity = (newActivity) => {
     return fetch("http://localhost:8080/activities/create", {
@@ -55,6 +56,9 @@ export const ActivityCreator = () => {
         fetchSports().then(res => res);
     }, [])
 
+    if(loading){
+        return <Loading/>;
+    }
     return (
         <ActivityForm
             handleSave={handleCreate}

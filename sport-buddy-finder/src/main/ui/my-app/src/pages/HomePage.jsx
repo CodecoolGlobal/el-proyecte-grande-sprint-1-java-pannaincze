@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {useEffect, useState} from "react";
 import ActivityCards from "../components/ActivityCards";
 import {useOutletContext} from "react-router-dom";
+import Loading from "../components/Loading";
 
 const fetchActivities = () => {
     return fetch("http://localhost:8080/activities/").then((res) => res.json());
@@ -26,6 +27,9 @@ export default function HomePage() {
             setName(name);
         }
     }, [user])
+    if(loading){
+        return <Loading/>;
+    }
 
     return (
         <div>
