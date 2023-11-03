@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.model.activity;
 
+import com.codecool.sportbuddyfinder.model.DTO.ActivityCardDTO;
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -64,6 +65,10 @@ public class Activity {
             return true;
         }
         return false;
+    }
+
+    public ActivityCardDTO toDTO(){
+        return new ActivityCardDTO(this);
     }
 
 }
