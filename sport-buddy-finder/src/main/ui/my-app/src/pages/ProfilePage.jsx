@@ -12,18 +12,6 @@ export default function ProfilePage() {
     const fetchActivities = () => {
         return fetch(`http://localhost:8080/activities/user-id/${user.id}`).then((res) => res.json());
     }
-    //
-    //const location = useLocation()
-    // const { id } = location.state
-    // const [user, setUser] = useState({
-    //     name:"",
-    //     email:"",
-    //     password:"",
-    //     birthDate:"",
-    //     userID:"",
-    //     profilePicURL:"",
-    //     interests: [],
-    //     postedActivities: []})
     async function fetchUser(userID) {
         fetch(`http://localhost:8080/users/${userID}`, {
             method: "GET",
