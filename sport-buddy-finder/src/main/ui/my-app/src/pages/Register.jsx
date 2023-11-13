@@ -13,6 +13,7 @@ export default function () {
     const [isRegisterSuccessful, setRegisterSuccessAs] = useState(null);
 
     function handleRegistration() {
+        console.log(JSON.stringify({name: name, email: email, password: password, interests: interests, date: date}))
         if (name.length > 0 && email.length > 4 && email.includes("@") && email.includes(".") && password.length > 0 && date !== null) {
             const requestOptions = {
                 method: 'POST',
@@ -26,7 +27,8 @@ export default function () {
                     setTimeout(() => {
                         setRegisterSuccessAs(null);
                         navigate("/");
-                    }, "350");
+
+                    }, "450");
                 }
             });
         }
@@ -45,7 +47,7 @@ export default function () {
     }, [])
 
     async function fetchSports() {
-        fetch("http://localhost:8080/activities/categories", {
+        fetch("http://localhost:8080/sports", {
             method: "GET",
         })
             .then((response) => response.json())
@@ -91,7 +93,7 @@ export default function () {
                         {sportCategories.length > 0 &&
                             <Form.Group className="container row">{sportCategories.map((category, index) => (
                                 <div key={index} className="col-4 ">
-                                    <Form.Check onClick={event => checkboxHandling(event.target)} type="checkbox" id={category} value={category} label={category}></Form.Check>
+                                    <Form.Check onClick={event => checkboxHandling(event.target)} type="checkbox" id={category.id} value={category.id} label={category.name}></Form.Check>
                                 </div>
                             ))}</Form.Group>}
                     </Form.Group>

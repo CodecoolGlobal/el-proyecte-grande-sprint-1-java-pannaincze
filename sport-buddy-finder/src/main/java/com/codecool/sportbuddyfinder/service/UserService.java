@@ -3,6 +3,7 @@ package com.codecool.sportbuddyfinder.service;
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.User;
+import com.codecool.sportbuddyfinder.repository.SportRepository;
 import com.codecool.sportbuddyfinder.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,11 @@ import java.util.Set;
 @Service
 public class UserService {
     private UserRepository userRepository;
+    private final SportRepository sportRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, SportRepository sportRepository) {
         this.userRepository = userRepository;
+        this.sportRepository = sportRepository;
     }
 
     public Set<User> getAllUsers(){
@@ -29,7 +32,10 @@ public class UserService {
         //return userRepository.addUser(newUserDTO);
         //TODO
         User user = new User(newUserDTO.name(), newUserDTO.email(), newUserDTO.password(), newUserDTO.date());
-        user.addInterests(Set.of(newUserDTO.interests()));
+        //user.addInterests(newUserDTO.interests());
+        for (int sportId: newUserDTO.interests()) {
+            user.addInterest(sportRepository.findSportById(sportId).get());
+        }
         userRepository.save(user);
         return false;
     }
