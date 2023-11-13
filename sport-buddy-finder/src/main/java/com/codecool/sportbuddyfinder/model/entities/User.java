@@ -73,10 +73,4 @@ public class User {
         this.postedActivities.addAll(activities);
     }
 
-//    public Set<Activity> getActivityPosts() {
-//        return new HashSet<>(postedActivities);
-//    }
-
-
-
 }

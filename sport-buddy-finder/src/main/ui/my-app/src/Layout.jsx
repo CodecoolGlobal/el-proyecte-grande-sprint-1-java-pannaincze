@@ -30,7 +30,7 @@ export default function Layout() {
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end">
-                        {user !== null ? <div ><p className="text-white d-inline"><Link to={"/profile"}>{userName}</Link>&nbsp;</p><Button onClick={() => {
+                        {user !== null ? <div ><Button onClick={()=>{navigate("/profile")}}>{userName}</Button>&nbsp;&nbsp;<Button onClick={() => {
                             navigate('/');
                             state = null;
                             setUser(null);
