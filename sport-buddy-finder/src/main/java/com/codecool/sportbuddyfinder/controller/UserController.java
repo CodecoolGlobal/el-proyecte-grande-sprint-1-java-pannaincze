@@ -3,16 +3,14 @@ package com.codecool.sportbuddyfinder.controller;
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.User;
-import com.codecool.sportbuddyfinder.repository.UserRepository;
 import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
     public UserController(UserService userService)
