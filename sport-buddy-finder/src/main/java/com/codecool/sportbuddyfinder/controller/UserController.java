@@ -3,6 +3,7 @@ package com.codecool.sportbuddyfinder.controller;
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.User;
+import com.codecool.sportbuddyfinder.model.payload.TokenAndUserResponse;
 import com.codecool.sportbuddyfinder.model.payload.TokenResponse;
 import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,9 @@ public class UserController {
     public User getUserByID(@PathVariable long userID){
         return userService.getUserById(userID);
     }
-    @GetMapping("/login/{email}/{password}")
-    public Optional<User> loginUser(@PathVariable String email, @PathVariable String password){
-        return userService.loginUser(new LoginUserDTO(email, password));
+    @PostMapping("/login")
+    public ResponseEntity<TokenAndUserResponse> loginUser(@RequestBody LoginUserDTO loginRequest){
+        return ResponseEntity.ok(userService.loginUser(loginRequest));
     }
     @PostMapping
     public ResponseEntity<TokenResponse> registerUser(@RequestBody NewUserDTO newUserDTO){
