@@ -36,7 +36,7 @@ export default function () {
 
     function checkboxHandling(target) {
         if (target.checked) {
-            setInterests([...interests, target.value])
+            setInterests([...interests, parseInt(target.value)])
         } else if (!target.checked) {
             setInterests(interests.filter(interest => interest !== target.value));
         }
