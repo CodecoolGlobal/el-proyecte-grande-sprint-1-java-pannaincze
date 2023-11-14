@@ -5,19 +5,22 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-@Setter
 @Getter
+@Setter
 @Entity
+@AllArgsConstructor
+@Builder
 @Table(name = "app_user")
-public class User {
+
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -34,12 +37,15 @@ public class User {
     private final Set<Activity> postedActivities;
     @ManyToMany
     private final Set<Activity> appliedActivities;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User() {
         this.profilePicURL = "https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg";
         this.postedActivities = new HashSet<>();
         this.appliedActivities = new HashSet<>();
         this.interests = new HashSet<>();
+        this.role = Role.USER;
     }
 
     public User(String name, String email, String password, LocalDate birthDate) {
@@ -51,6 +57,7 @@ public class User {
         this.postedActivities = new HashSet<>();
         this.appliedActivities = new HashSet<>();
         this.interests = new HashSet<>();
+        this.role = Role.USER;
     }
 
     public Set<Sport> getInterests() {
@@ -73,4 +80,33 @@ public class User {
         this.postedActivities.addAll(activities);
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

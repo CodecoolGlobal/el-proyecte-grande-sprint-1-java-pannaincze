@@ -12,7 +12,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     Optional<List<Activity>> findByUser_Id(long userId);
 
 //    Optional<Activity> updateById(long id, Activity activity);
-
 //    Activity addNewActivity(Activity activity);
 //    UUID deleteActivityById(UUID uuid);
 //    Activity updateActivityById(UUID uuid);
