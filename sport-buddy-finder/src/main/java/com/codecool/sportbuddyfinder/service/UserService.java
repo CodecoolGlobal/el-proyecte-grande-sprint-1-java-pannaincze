@@ -40,20 +40,12 @@ public class UserService {
         //return userRepository.addUser(newUserDTO);
         //TODO
 
-//        User user = new User(newUserDTO.name(), newUserDTO.email(), newUserDTO.password(), newUserDTO.date());
-//        //user.addInterests(newUserDTO.interests());
-//        for (int sportId: newUserDTO.interests()) {
-//            user.addInterest(sportRepository.findSportById(sportId).get());
-//        }
-        User user = User.builder()
-                .name(newUserDTO.name())
-                .email(newUserDTO.email())
-                .password(passwordEncoder.encode(newUserDTO.password()))
-                .birthDate(newUserDTO.date())
-                .build();
+        User user = new User(newUserDTO.name(), newUserDTO.email(), passwordEncoder.encode(newUserDTO.password()), newUserDTO.date());
+        //user.addInterests(newUserDTO.interests());
         for (int sportId: newUserDTO.interests()) {
             user.addInterest(sportRepository.findSportById(sportId).get());
         }
+
         userRepository.save(user);
         String jwtToken = jwtService.generateToken(user);
         return TokenResponse.builder().token(jwtToken).build();
