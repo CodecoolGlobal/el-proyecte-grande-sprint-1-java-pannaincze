@@ -10,7 +10,7 @@ export default function ProfilePage() {
     const [user, setUser] = useOutletContext();
     const [activies, setActivities] = useState([]);
     const fetchActivities = () => {
-        return fetch(`http://localhost:8080/activities/user-id/${user.id}`).then((res) => res.json());
+        return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
     }
     //
     //const location = useLocation()
@@ -25,7 +25,7 @@ export default function ProfilePage() {
     //     interests: [],
     //     postedActivities: []})
     async function fetchUser(userID) {
-        fetch(`http://localhost:8080/users/${userID}`, {
+        fetch(`/api/users/${userID}`, {
             method: "GET",
         })
             .then((response) => response.json())

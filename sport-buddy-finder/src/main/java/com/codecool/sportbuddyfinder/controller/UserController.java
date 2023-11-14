@@ -3,16 +3,17 @@ package com.codecool.sportbuddyfinder.controller;
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.User;
-import com.codecool.sportbuddyfinder.repository.UserRepository;
+import com.codecool.sportbuddyfinder.model.payload.TokenAndUserResponse;
+import com.codecool.sportbuddyfinder.model.payload.TokenResponse;
 import com.codecool.sportbuddyfinder.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
     public UserController(UserService userService)
@@ -27,15 +28,13 @@ public class UserController {
     public User getUserByID(@PathVariable long userID){
         return userService.getUserById(userID);
     }
-    @GetMapping("/login/{email}/{password}")
-    public Optional<User> loginUser(@PathVariable String email, @PathVariable String password){
-        return userService.loginUser(new LoginUserDTO(email, password));
+    @PostMapping("/login")
+    public ResponseEntity<TokenAndUserResponse> loginUser(@RequestBody LoginUserDTO loginRequest){
+        return ResponseEntity.ok(userService.loginUser(loginRequest));
     }
     @PostMapping
-    @ResponseBody
-    public boolean postUser(@RequestBody NewUserDTO newUserDTO){
-        userService.addUser(newUserDTO);
-        return true;
+    public ResponseEntity<TokenResponse> registerUser(@RequestBody NewUserDTO newUserDTO){
+        return ResponseEntity.ok(userService.addUser(newUserDTO));
     }
 
 

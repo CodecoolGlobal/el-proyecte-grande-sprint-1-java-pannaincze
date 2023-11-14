@@ -9,12 +9,15 @@ export default function () {
     const [password, setPassword] = useState(null);
     const navigate = useNavigate();
     const [loginFail, setLoginFail] = useState(null);
+
     function handleLogin() {
-        fetch(`http://localhost:8080/users/login/${email}/${password}`, {
-            method: "GET",
+        fetch(`/api/users/login`, {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email, password: password})
         })
             .then((response) => response.json())
-            .then((user) => {
+            .then(({token, user}) => {
                 setUser(user);
                 console.log(user);
                 if(user !== null){

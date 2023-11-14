@@ -20,7 +20,7 @@ export default function () {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({name: name, email: email, password: password, interests: interests, date: date})
             };
-            fetch('http://localhost:8080/users', requestOptions)
+            fetch('/api/users', requestOptions)
                 .then(response => response.json()).then((bool) => {
                 setRegisterSuccessAs(bool);
                 if(bool){
@@ -36,7 +36,7 @@ export default function () {
 
     function checkboxHandling(target) {
         if (target.checked) {
-            setInterests([...interests, target.value])
+            setInterests([...interests, parseInt(target.value)])
         } else if (!target.checked) {
             setInterests(interests.filter(interest => interest !== target.value));
         }
@@ -47,7 +47,7 @@ export default function () {
     }, [])
 
     async function fetchSports() {
-        fetch("http://localhost:8080/sports", {
+        fetch("/api/sports", {
             method: "GET",
         })
             .then((response) => response.json())

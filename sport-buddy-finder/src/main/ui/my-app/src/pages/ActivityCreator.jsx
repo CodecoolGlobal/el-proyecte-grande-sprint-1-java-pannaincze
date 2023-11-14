@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {ActivityForm} from "../components/ActivityForm";
 
 const createActivity = (newActivity) => {
-    return fetch("http://localhost:8080/activities/create", {
+    return fetch("/api/activities/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -31,7 +31,7 @@ export const ActivityCreator = () => {
     const navigate = useNavigate();
 
     async function fetchSports() {
-        fetch("http://localhost:8080/activities/categories", {
+        fetch("/api/activities/categories", {
             method: "GET",
         })
             .then((response) => response.json())
