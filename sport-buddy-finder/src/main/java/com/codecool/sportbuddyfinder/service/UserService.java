@@ -50,7 +50,10 @@ public class UserService {
                 .email(newUserDTO.email())
                 .password(passwordEncoder.encode(newUserDTO.password()))
                 .birthDate(newUserDTO.date())
+                .role(Role.USER)
+                .profilePicURL("https://thumbs.dreamstime.com/b/head-silhouette-face-front-view-human-elegant-part-human-vector-illustration-79409597.jpg")
                 .build();
+
         for (int sportId: newUserDTO.interests()) {
             user.addInterest(sportRepository.findSportById(sportId).get());
         }
