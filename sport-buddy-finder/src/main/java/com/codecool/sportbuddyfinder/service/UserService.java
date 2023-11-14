@@ -4,6 +4,7 @@ import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.Role;
 import com.codecool.sportbuddyfinder.model.entities.User;
+import com.codecool.sportbuddyfinder.model.payload.TokenAndUserResponse;
 import com.codecool.sportbuddyfinder.model.payload.TokenResponse;
 import com.codecool.sportbuddyfinder.repository.SportRepository;
 import com.codecool.sportbuddyfinder.repository.UserRepository;
@@ -11,10 +12,10 @@ import com.codecool.sportbuddyfinder.security.configuration.JwtUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -62,8 +63,20 @@ public class UserService {
         return TokenResponse.builder().token(jwtToken).build();
     }
 
-    public Optional<User> loginUser(LoginUserDTO loginUserDTO) {
-        return userRepository.findByEmailAndPassword(loginUserDTO.email(), loginUserDTO.password());
+    public TokenAndUserResponse loginUser(LoginUserDTO loginRequest) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginRequest.email(),
+                loginRequest.password()
+        ));
+
+        User user = userRepository.findByEmail(loginRequest.email()).orElseThrow();
+
+        String jwtToken = jwtService.generateToken(user);
+
+        return TokenAndUserResponse.builder()
+                .token(jwtToken)
+                .user(user)
+                .build();
     }
 
     public boolean updateUser(int userID, User updatedUser) {
