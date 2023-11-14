@@ -10,7 +10,7 @@ export default function () {
     const navigate = useNavigate();
     const [loginFail, setLoginFail] = useState(null);
     function handleLogin() {
-        fetch(`http://localhost:8080/users/login/${email}/${password}`, {
+        fetch(`/api/users/login/${email}/${password}`, {
             method: "GET",
         })
             .then((response) => response.json())

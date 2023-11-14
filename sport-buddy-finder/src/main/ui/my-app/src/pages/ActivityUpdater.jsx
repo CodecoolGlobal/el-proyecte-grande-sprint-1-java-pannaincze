@@ -4,15 +4,15 @@ import {ActivityForm} from "../components/ActivityForm";
 import Loading from "../components/Loading";
 
 const fetchActivity = (id) => {
-    return fetch(`/activities/${id}`).then((res) => res.json());
+    return fetch(`/api/activities/${id}`).then((res) => res.json());
 }
 
 const fetchSports = () => {
-    return fetch(`/activities/categories`).then((res) => res.json());
+    return fetch(`/api/activities/categories`).then((res) => res.json());
 }
 
 const updateActivity = (activity) => {
-    return fetch(`/activities/update/${activity.id}`, {
+    return fetch(`/api/activities/update/${activity.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

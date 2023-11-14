@@ -4,7 +4,7 @@ import ActivityCards from "../components/ActivityCards";
 import {useOutletContext} from "react-router-dom";
 
 const fetchActivities = () => {
-    return fetch("http://localhost:8080/activities/").then((res) => res.json());
+    return fetch("/api/activities/").then((res) => res.json());
 }
 
 export default function HomePage() {

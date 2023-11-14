@@ -4,22 +4,22 @@ import Loading from "../components/Loading";
 import DisplayActivity from "../components/DisplayActivity";
 
 const fetchActivity = (id) => {
-    return fetch(`/activities/${id}`)
+    return fetch(`/api/activities/${id}`)
         .then((res) => res.json());
 };
 
 const deleteActivity = (id) => {
-    return fetch(`/activities/${id}`,
+    return fetch(`/api/activities/${id}`,
         {method: "DELETE"})
         .then((res) => res.json());
 }
 const addUserToParticipants = (id, userId) => {
-    return fetch(`/activities/update/${id}/${userId}`,
+    return fetch(`/api/activities/update/${id}/${userId}`,
         {method: "PUT"})
         .then(res => res.json());
 }
 const removeUserToParticipants = (id, userId) => {
-    return fetch(`/activities/update/${id}/${userId}`,
+    return fetch(`/api/activities/update/${id}/${userId}`,
         {method: "DELETE"})
         .then(res => res.json());
 }
