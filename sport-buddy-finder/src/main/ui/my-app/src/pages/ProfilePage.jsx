@@ -13,18 +13,6 @@ export default function ProfilePage() {
     const fetchActivities = () => {
         return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
     }
-    //
-    //const location = useLocation()
-    // const { id } = location.state
-    // const [user, setUser] = useState({
-    //     name:"",
-    //     email:"",
-    //     password:"",
-    //     birthDate:"",
-    //     userID:"",
-    //     profilePicURL:"",
-    //     interests: [],
-    //     postedActivities: []})
     async function fetchUser(userID) {
         fetch(`/api/users/${userID}`, {
             method: "GET",
@@ -58,7 +46,7 @@ export default function ProfilePage() {
                 <Col xs={6} md={4}>
                     <Image src={user.profilePicURL} roundedCircle style={{
                         width: "40vh",
-
+                        marginBottom: "1.3vh"
                     }}/>
                 </Col>
             </Container>
