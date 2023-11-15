@@ -2,8 +2,9 @@ import {useState, useEffect} from "react";
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
-import {useLocation, useOutletContext, useParams} from "react-router-dom";
+import {useOutletContext} from "react-router-dom";
 import ActivityCards from "../components/ActivityCards";
+import {Button} from "react-bootstrap";
 
 
 export default function ProfilePage() {
@@ -76,19 +77,24 @@ export default function ProfilePage() {
                     borderRadius: "15px",
                     width: "fit-content",
                     height: "fit-content",
-                    padding: "50px",
+                    paddingLeft: "30px",
+                    paddingTop: "10px",
                     justifyContent: "center",
 
                 }}>
                     <h2 style={{fontSize: "1.5em"}}>{"User Name: " + user.name}</h2>
                     <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
-                    {user.interests?.length > 0 ? <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2><ul>
+                    {user.interests?.length > 0 ?
+                        <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2>
+                            {user.interests.map((interest, i) => {
+                                return <Button key={i} style={{
+                                            display: "inline",
+                                            margin: "0.3rem",
+                                            }}>{interest.name + " "}</Button>
 
-                        {user.interests.map((interest, i) => {
-                            return <li key={i}>{interest.name}</li>
-                        })}
-                    </ul></div> : <></>}
-                </div>
+                            })}
+                            </div> : <></>}
+                        </div>
 
                 {activies ?
                     <ActivityCards activities={activies}/>
