@@ -90,8 +90,7 @@ export default function ProfilePage() {
                                 })} <Button onClick={()=>{fetchAllSports()}}>+</Button>
                                 {sports.length > 0 ?
                                     <Form.Select onChange={(e) => {
-                                        //TODO userInterests are objects with ID, this only adds name
-                                        user.interests.push(e.target.value)
+                                        user.interests.push({name: e.target.value})
                                         console.log(e.target.value)
                                         console.log(userInterests)
                                     }} id="type"
