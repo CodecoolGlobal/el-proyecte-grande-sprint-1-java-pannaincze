@@ -17,7 +17,7 @@ export const SignUpButton = ({onSignUp, onWithdraw, activity, user}) => {
                 :
                 <Button className="button" type="button" onClick={() => {
                     onWithdraw(activity.id, user)
-                }} style={{margin: "1rem", padding: "0.3rem", width: "5rem"}} disabled={!user}>Withdraw</Button>
+                }} style={{margin: "1rem", padding: "0.3rem", width: "5.5rem"}} disabled={!user}>Withdraw</Button>
             }
         </>
     )
