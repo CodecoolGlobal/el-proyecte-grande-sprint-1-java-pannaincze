@@ -11,6 +11,7 @@ export default function ProfilePage() {
     const [user, setUser] = useOutletContext();
     const [userActivities, setUserActivities] = useState([]);
     const [sports, setSports] = useState([]);
+    const [userInterests, setUserInterests] = useState([])
     const fetchActivities = () => {
         return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
     }
@@ -26,6 +27,8 @@ export default function ProfilePage() {
             .then((response) => response.json())
             .then((data) => {
                 setUser(data)
+                setUserInterests(data.interests)
+                console.log(data.interests)
             })
             .catch((error) => console.log(error));
     }
@@ -78,7 +81,7 @@ export default function ProfilePage() {
                     <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
                     {user.interests?.length > 0 ?
                             <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2>
-                                {user.interests.map((interest, i) => {
+                                {userInterests.map((interest, i) => {
                                     return <Button key={i} style={{
                                                 display: "inline",
                                                 margin: "0.3rem",
@@ -86,7 +89,12 @@ export default function ProfilePage() {
                                     </Button>
                                 })} <Button onClick={()=>{fetchAllSports()}}>+</Button>
                                 {sports.length > 0 ?
-                                    <Form.Select onChange={(e) => userActivities.push(e.target.value)} id="type"
+                                    <Form.Select onChange={(e) => {
+                                        //TODO userInterests are objects with ID, this only adds name
+                                        user.interests.push(e.target.value)
+                                        console.log(e.target.value)
+                                        console.log(userInterests)
+                                    }} id="type"
                                                  required={true}>
                                         <option value={sports} selected disabled>Select your option</option>
                                         {sports.map((category) => <option value={category.name}
