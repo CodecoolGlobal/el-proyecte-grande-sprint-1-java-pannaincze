@@ -4,14 +4,18 @@ import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import {useOutletContext} from "react-router-dom";
 import ActivityCards from "../components/ActivityCards";
-import {Button} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 
 
 export default function ProfilePage() {
     const [user, setUser] = useOutletContext();
-    const [activies, setActivities] = useState([]);
+    const [userActivities, setUserActivities] = useState([]);
+    const [allActivities, setAllActivities] = useState([]);
     const fetchActivities = () => {
         return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
+    }
+    const fetchAllActivities = () => {
+        return fetch("/api/activities/").then((res) => res.json());
     }
     async function fetchUser(userID) {
         fetch(`/api/users/${userID}`, {
@@ -19,18 +23,16 @@ export default function ProfilePage() {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 setUser(data)
             })
             .catch((error) => console.log(error));
     }
 
     useEffect(() => {
-        console.log(user.id)
         fetchUser(user.id)
         fetchActivities()
             .then((activities) => {
-                setActivities(activities);})
+                setUserActivities(activities);})
     }, [])
     return (
         <div className={"profilePageContainer"} style={{
@@ -78,14 +80,21 @@ export default function ProfilePage() {
                                 return <Button key={i} style={{
                                             display: "inline",
                                             margin: "0.3rem",
-                                            }}>{interest.name + " "}</Button>
-
-                            })}
-                            </div> : <></>}
+                                            }}>{interest.name + " "}
+                                </Button>
+                            })} <Button>+</Button>
+                            {allActivities.length > 0 ?
+                                <Form.Select onChange={(e) => userActivities.push(e.target.value)} id="type"
+                                             required={true}>
+                                    <option selected disabled>Select your option</option>
+                                    {allActivities.map((category) => <option value={category}
+                                                                             key={category}>{category}</option>)}
+                                </Form.Select> : <></>}
+                            </div> : <><Button>+</Button></>}
                         </div>
 
-                {activies ?
-                    <ActivityCards activities={activies}/>
+                {userActivities ?
+                    <ActivityCards activities={userActivities}/>
                  : <></>}
 
         </div>
