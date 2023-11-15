@@ -85,16 +85,16 @@ export default function ProfilePage() {
                 <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
                 {user.interests?.length > 0 ? <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2><ul>
 
-                    {user.interests.map(interest => {
-                        return <li>{interest.name}</li>
+                    {user.interests.map((interest, i) => {
+                        return <li key={i}>{interest.name}</li>
                     })}
                 </ul></div> : <></>}
             </div>
-            <div className={"profileActivities"}>
+
                 {activies ? <div>
                     <ActivityCards activities={activies}/>
                 </div> : <></>}
-            </div>
+
         </div>
     )
 }
