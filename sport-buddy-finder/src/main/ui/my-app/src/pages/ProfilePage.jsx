@@ -10,12 +10,14 @@ import {Button, Form} from "react-bootstrap";
 export default function ProfilePage() {
     const [user, setUser] = useOutletContext();
     const [userActivities, setUserActivities] = useState([]);
-    const [allActivities, setAllActivities] = useState([]);
+    const [sports, setSports] = useState([]);
     const fetchActivities = () => {
         return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
     }
-    const fetchAllActivities = () => {
-        return fetch("/api/activities/").then((res) => res.json());
+    const fetchAllSports = () => {
+        fetch("/api/sports").then((res) => res.json()).then((sports) => {
+            setSports(sports);
+        });
     }
     async function fetchUser(userID) {
         fetch(`/api/users/${userID}`, {
@@ -75,23 +77,23 @@ export default function ProfilePage() {
                     <h2 style={{fontSize: "1.5em"}}>{"User Name: " + user.name}</h2>
                     <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
                     {user.interests?.length > 0 ?
-                        <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2>
-                            {user.interests.map((interest, i) => {
-                                return <Button key={i} style={{
-                                            display: "inline",
-                                            margin: "0.3rem",
-                                            }}>{interest.name + " "}
-                                </Button>
-                            })} <Button>+</Button>
-                            {allActivities.length > 0 ?
-                                <Form.Select onChange={(e) => userActivities.push(e.target.value)} id="type"
-                                             required={true}>
-                                    <option selected disabled>Select your option</option>
-                                    {allActivities.map((category) => <option value={category}
-                                                                             key={category}>{category}</option>)}
-                                </Form.Select> : <></>}
-                            </div> : <><Button>+</Button></>}
-                        </div>
+                            <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2>
+                                {user.interests.map((interest, i) => {
+                                    return <Button key={i} style={{
+                                                display: "inline",
+                                                margin: "0.3rem",
+                                                }}>{interest.name + " "}
+                                    </Button>
+                                })} <Button onClick={()=>{fetchAllSports()}}>+</Button>
+                                {sports.length > 0 ?
+                                    <Form.Select onChange={(e) => userActivities.push(e.target.value)} id="type"
+                                                 required={true}>
+                                        <option value={sports} selected disabled>Select your option</option>
+                                        {sports.map((category) => <option value={category.name}
+                                                                                 key={category.id}>{category.name}</option>)}
+                                    </Form.Select> : <></>}
+                                </div> : <><Button onClick={()=>{fetchAllSports()}}>+</Button></>}
+                </div>
 
                 {userActivities ?
                     <ActivityCards activities={userActivities}/>
