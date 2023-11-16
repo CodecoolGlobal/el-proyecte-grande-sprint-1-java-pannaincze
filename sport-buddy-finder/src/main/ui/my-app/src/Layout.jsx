@@ -9,18 +9,35 @@ import Profile from "./components/Profile"
 export default function Layout() {
 
     let {state} = useLocation();
-    const [id, setId] = useState(null)
-    const [userName, setUserName] = useState(null)
+    const [id, setId] = useState(null);
+    const [userName, setUserName] = useState(null);
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
     const navigate = useNavigate();
+
     useEffect(() => {
-        if (state !== null) {
-            const {name, id, email, password, birthDate, profilePicURL, interests, postedActivities} = state;
-            setUser({name, id, email, password, birthDate, profilePicURL, interests, postedActivities});
-            setId(id);
-            setUserName(name)
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        const storedToken = localStorage.getItem('token');
+
+        if (storedUser && storedToken) {
+            setUser(storedUser);
+            setToken(storedToken);
+            setUserName(storedUser.name)
+            setId(storedUser.id)
+
         }
+        // } else if (state !== null) {
+        //     const {name, id, email, password, birthDate, profilePicURL, interests, postedActivities} = state;
+        //     setUser({name, id, email, password, birthDate, profilePicURL, interests, postedActivities});
+        //     setToken(token)
+        //     setId(id);
+        //     setUserName(name)
+        //
+        //     localStorage.setItem('user', JSON.stringify({ name, id, email, password, birthDate, profilePicURL, interests, postedActivities }))
+        //     localStorage.setItem('token', token)
+        // }
     }, [state]);
+
     return (
         <div>
             <Navbar className="bg-body-tertiary" data-bs-theme="dark">
@@ -36,9 +53,9 @@ export default function Layout() {
                             setUser(null);
                             setUserName(null);
                             setId(null);
-                            // setTimeout(()=>{
-                            // navigate('/');
-                            // },200)
+                            setTimeout(()=>{
+                            navigate('/');
+                            },200)
                         }}>Logout</Button></div> : <LoginAndRegister />}
                         {user && <Link to={"/activities/create"}>
                             <Button style={{margin: "0.5rem"}}>Create new post</Button>
