@@ -14,7 +14,9 @@ export default function ProfilePage() {
         return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
     }
     const addInterest = (interest) => {
-        userInterests.push(interest)
+        let updatedInterests = [...userInterests]
+        updatedInterests.push(interest)
+        setUserInterests(updatedInterests)
         console.log(userInterests)
     }
     async function fetchUser(userID) {
