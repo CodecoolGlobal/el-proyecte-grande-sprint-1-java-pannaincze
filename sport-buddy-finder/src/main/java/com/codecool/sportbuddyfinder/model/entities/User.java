@@ -78,6 +78,9 @@ public class User implements UserDetails {
     public void addPostedActivities(Set<Activity> activities) {
         this.postedActivities.addAll(activities);
     }
+    public void setInterests(Sport interest){
+        this.interests.add(interest);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
