@@ -10,6 +10,6 @@ public class ActivityNotFoundException extends RuntimeException{
     super("Activity not found");
     }
     public ActivityNotFoundException(long id){
-        super(String.format("Activity not found with id:%d", id));
+        super(String.format("Activity not found with id: %d", id));
     }
 }

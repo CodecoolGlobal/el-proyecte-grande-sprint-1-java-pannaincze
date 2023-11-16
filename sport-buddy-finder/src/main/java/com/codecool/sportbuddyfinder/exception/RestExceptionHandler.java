@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({ActivityNotFoundException.class, UserNotFoundException.class})
-    public ResponseEntity<Object> handleEntityNotFoundException(ActivityNotFoundException ex){
+    public ResponseEntity<Object> handleEntityNotFoundException(RuntimeException ex){
         return new ResponseEntity<>(new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), ex), HttpStatus.NOT_FOUND);
     }
 
