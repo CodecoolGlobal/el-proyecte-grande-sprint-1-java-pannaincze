@@ -17,11 +17,27 @@ export default function ProfilePage() {
     const addInterest = (interest) => {
         let updatedInterests = [...userInterests]
         let parsedInterest = JSON.parse(interest)
-        if(!userInterests.includes(parsedInterest)){
-            updatedInterests.push(parsedInterest)
-            setUserInterests(updatedInterests)
+        if (!userInterests.some(interest => areObjectsEqual(interest, parsedInterest))) {
+            updatedInterests.push(parsedInterest);
+            setUserInterests(updatedInterests);
         }
         console.log(userInterests)
+    }
+    function areObjectsEqual(obj1, obj2) {
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+
+        if (keys1.length !== keys2.length) {
+            return false;
+        }
+
+        for (const key of keys1) {
+            if (obj1[key] !== obj2[key]) {
+                return false;
+            }
+        }
+
+        return true;
     }
     async function fetchUser(userID) {
         fetch(`/api/users/${userID}`, {
