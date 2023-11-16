@@ -3,6 +3,7 @@ package com.codecool.sportbuddyfinder.service;
 import com.codecool.sportbuddyfinder.exception.ActivityNotFoundException;
 import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
 import com.codecool.sportbuddyfinder.model.DTO.NewActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.UpdateActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.repository.ActivityRepository;
@@ -51,7 +52,7 @@ public class ActivityService {
         return activityRepository.save(activity);
     }
 
-    public Activity updateActivity(Activity updatedActivity, long id) {
+    public Activity updateActivity(UpdateActivityDTO updatedActivity, long id) {
         return activityRepository.findById(id)
                 .map(activity -> {
                     activity.setTitle(updatedActivity.getTitle());
@@ -64,10 +65,8 @@ public class ActivityService {
 
                     return activityRepository.save(activity);
                 })
-                .orElseGet(() -> {
-                    updatedActivity.setId(id);
-                    return activityRepository.save(updatedActivity);
-                });
+                .orElseThrow();
+
     }
 
     public boolean deleteActivityById(long activityId) {
