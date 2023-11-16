@@ -6,6 +6,7 @@ import {useLocation, useOutletContext, useParams} from "react-router-dom";
 import ActivityCards from "../components/ActivityCards";
 import {UserContext} from "../context/UserContext";
 import Loading from "../components/Loading";
+import UserInterests from "../components/UserInterests";
 
 
 export default function CheckedProfilePage() {
@@ -68,21 +69,14 @@ export default function CheckedProfilePage() {
                     }}>
                         <h2 style={{fontSize: "1.5em"}}>{"User Name: " + checkedUser.name}</h2>
                         <h2 style={{fontSize: "1.5em"}}>{"Email: " + checkedUser.email}</h2>
-                        {checkedUser.interests?.length > 0 ? <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2>
-                            <ul>
-
-                                {checkedUser.interests.map(interest => {
-                                    return <li>{interest.name}</li>
-                                })}
-                            </ul>
-                        </div> : <></>}
                     </div>
-                    <div className={"profileActivities"}>
-                        {activies ? <div>
-                            <ActivityCards activities={activies}/>
-                        </div> : <></>}
+                    {checkedUser.interests?.length > 0 && <div>
+                            <UserInterests userInterests={checkedUser.interests} user={checkedUser} isCheckedUser={true} />
+                            {activies &&
+                                <ActivityCards activities={activies}/>
+                               }
+                        </div>}
                     </div>
-                </div>
             </div>
             }
         </>
