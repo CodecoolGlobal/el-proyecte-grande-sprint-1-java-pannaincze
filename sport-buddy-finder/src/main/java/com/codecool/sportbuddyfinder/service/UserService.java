@@ -35,7 +35,7 @@ public class UserService {
 
     public User getUserById(long id) {
         return userRepository.findById(id)
-                .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     public TokenResponse addUser(NewUserDTO newUserDTO) {
@@ -43,7 +43,7 @@ public class UserService {
         //TODO
         User user = new User(newUserDTO.name(), newUserDTO.email(), passwordEncoder.encode(newUserDTO.password()), newUserDTO.date());
         //user.addInterests(newUserDTO.interests());
-        for (int sportId: newUserDTO.interests()) {
+        for (int sportId : newUserDTO.interests()) {
             user.addInterest(sportRepository.findSportById(sportId).get());
         }
 

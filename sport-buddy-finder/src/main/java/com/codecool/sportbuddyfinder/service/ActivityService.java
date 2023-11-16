@@ -29,7 +29,7 @@ public class ActivityService {
 
     public Activity getActivityById(long activityId) {
         return activityRepository.findById(activityId)
-                .orElseThrow(ActivityNotFoundException::new);
+                .orElseThrow(() -> new ActivityNotFoundException(activityId));
     }
 
     public Optional<List<Activity>> findActivitiesByUserId(long id) {
@@ -37,8 +37,9 @@ public class ActivityService {
     }
 
     public Activity addNewActivityToDB(Activity activity) {
-        User user = userRepository.findById(activity.getUser().getId())
-                .orElseThrow(UserNotFoundException::new);
+        long id = activity.getUser().getId();
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new UserNotFoundException(id));
         activity.setUser(user);
         return activityRepository.save(activity);
     }
@@ -67,22 +68,22 @@ public class ActivityService {
         return true;
     }
 
-    public Activity addUserToParticipants(long id, long userId) {
+    public Activity addUserToParticipants(long activityId, long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(UserNotFoundException::new);
-        Activity activity = activityRepository.findById(id)
-                .orElseThrow(ActivityNotFoundException::new);
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        Activity activity = activityRepository.findById(activityId)
+                .orElseThrow(() -> new ActivityNotFoundException(activityId));
 
         activity.getAppliedUsers().add(user);
 
         return activityRepository.save(activity);
     }
 
-    public Activity removeUserFromParticipants(long id, long userId) {
+    public Activity removeUserFromParticipants(long activityId, long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(UserNotFoundException::new);
-        Activity activity = activityRepository.findById(id)
-                .orElseThrow(ActivityNotFoundException::new);
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        Activity activity = activityRepository.findById(activityId)
+                .orElseThrow(() -> new ActivityNotFoundException(activityId));
 
         activity.getAppliedUsers().remove(user);
 
