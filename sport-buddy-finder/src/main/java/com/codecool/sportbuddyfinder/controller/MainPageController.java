@@ -28,7 +28,7 @@ public class MainPageController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Activity> getActivityById(@PathVariable long id) {
+    public Activity getActivityById(@PathVariable long id) {
         return activityService.getActivityById(id);
     }
 }
