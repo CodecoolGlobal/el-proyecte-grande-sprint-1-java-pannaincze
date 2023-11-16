@@ -44,7 +44,7 @@ public class User implements UserDetails {
         this.postedActivities = new HashSet<>();
         this.appliedActivities = new HashSet<>();
         this.interests = new HashSet<>();
-        this.role = Role.USER;
+        this.role = Role.ROLE_USER;
     }
 
     public User(String name, String email, String password, LocalDate birthDate) {
@@ -56,7 +56,7 @@ public class User implements UserDetails {
         this.postedActivities = new HashSet<>();
         this.appliedActivities = new HashSet<>();
         this.interests = new HashSet<>();
-        this.role = Role.USER;
+        this.role = Role.ROLE_USER;
     }
 
     public Set<Sport> getInterests() {

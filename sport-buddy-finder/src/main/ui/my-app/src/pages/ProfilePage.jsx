@@ -7,12 +7,22 @@ import ActivityCards from "../components/ActivityCards";
 import UserInterests from "../components/UserInterests";
 
 export default function ProfilePage() {
-    const [user, setUser] = useOutletContext();
+    const storedUser = JSON.parse(localStorage.getItem('user'))
+    const storedToken = localStorage.getItem('token')
+    const [user, setUser] = useState(storedUser);
+    const [activies, setActivities] = useState([]);
     const [userActivities, setUserActivities] = useState([]);
     const [userInterests, setUserInterests] = useState([])
+
+    console.log(storedToken)
     const fetchActivities = () => {
-        return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
+        return fetch(`/api/activities/user-id/${user.id}`, {
+            headers: {
+                Authorization: `Bearer ${storedToken}`
+            }
+        }).then((res) => res.json());
     }
+
 
     //TODO send new interest to backend
     const addInterest = (interest) => {
@@ -31,7 +41,7 @@ export default function ProfilePage() {
             headers: {'Content-Type': 'application/json'},
             body: interest
         };
-        fetch(`/api/users/${user.id}`,
+        fetch(`/users/${user.id}`,
             requestOptions)
             .then((res => res.json()));
     }
@@ -48,7 +58,7 @@ export default function ProfilePage() {
     }
 
     async function fetchUser(userID) {
-        fetch(`/api/users/${userID}`, {
+        fetch(`/users/${userID}`, {
             method: "GET",
         })
             .then((response) => response.json())
@@ -61,10 +71,14 @@ export default function ProfilePage() {
     }
 
     useEffect(() => {
+        console.log(user)
+        console.log(user.id)
         fetchUser(user.id)
         fetchActivities()
             .then((activities) => {
-                setUserActivities(activities);})
+                setUserActivities(activities);
+                setActivities(activities);
+            })
     }, [])
 
     return (

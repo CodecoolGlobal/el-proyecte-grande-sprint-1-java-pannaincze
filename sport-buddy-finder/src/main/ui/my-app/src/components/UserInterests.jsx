@@ -3,13 +3,19 @@ import {useState} from "react";
 import InterestSelect from "./InterestSelect";
 
 export default function UserInterests ({userInterests, user, addInterest, isCheckedUser}){
+    const storedToken = localStorage.getItem('token')
+    const [token, setToken] = useState(storedToken)
     const [sports, setSports] = useState([]);
     const [showSelect, setShowSelect] = useState(false)
     const changeShowSelect = (boolean) => {
         setShowSelect(boolean)
     }
     const fetchAllSports = () => {
-        fetch("/api/sports").then((res) => res.json()).then((sports) => {
+        fetch("/sports", {
+            headers: {
+                Authentication: `Bearer ${token}`
+            }
+        }).then((res) => res.json()).then((sports) => {
             setSports(sports);
         });
     }

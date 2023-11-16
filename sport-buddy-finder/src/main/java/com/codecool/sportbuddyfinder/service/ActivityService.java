@@ -2,6 +2,8 @@ package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.exception.ActivityNotFoundException;
 import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
+import com.codecool.sportbuddyfinder.model.DTO.NewActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.UpdateActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.repository.ActivityRepository;
@@ -32,19 +34,27 @@ public class ActivityService {
                 .orElseThrow(() -> new ActivityNotFoundException(activityId));
     }
 
-    public Optional<List<Activity>> findActivitiesByUserId(long id) {
-        return activityRepository.findByUser_Id(id);
+    public Optional<List<Activity>> findActivitiesByUserId(long id){
+        return activityRepository.findActivitiesByUserId(id);
     }
 
-    public Activity addNewActivityToDB(Activity activity) {
-        long id = activity.getUser().getId();
-        User user = userRepository.findById(id)
-                .orElseThrow(()-> new UserNotFoundException(id));
-        activity.setUser(user);
+    public Activity addNewActivityToDB(NewActivityDTO newActivity) {
+        User user = userRepository.findById(newActivity.getUserId()).orElseThrow(() -> new UserNotFoundException(newActivity.getUserId()));
+        Activity activity = Activity.builder()
+                .title(newActivity.getTitle())
+                .description(newActivity.getDescription())
+                .sport(newActivity.getSport())
+                .location(newActivity.getLocation())
+                .minPeopleToFind(newActivity.getMinPeopleToFind())
+                .maxPeopleToFind(newActivity.getMaxPeopleToFind())
+                .user(user)
+                .image(newActivity.getImage())
+                .build();
+
         return activityRepository.save(activity);
     }
 
-    public Activity updateActivity(Activity updatedActivity, long id) {
+    public Activity updateActivity(UpdateActivityDTO updatedActivity, long id) {
         return activityRepository.findById(id)
                 .map(activity -> {
                     activity.setTitle(updatedActivity.getTitle());
@@ -57,10 +67,9 @@ public class ActivityService {
 
                     return activityRepository.save(activity);
                 })
-                .orElseGet(() -> {
-                    updatedActivity.setId(id);
-                    return activityRepository.save(updatedActivity);
-                });
+                //TODO
+                .orElseThrow();
+
     }
 
     public boolean deleteActivityById(long activityId) {

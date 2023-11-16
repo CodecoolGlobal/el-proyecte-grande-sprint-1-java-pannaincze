@@ -10,6 +10,8 @@ import UserInterests from "../components/UserInterests";
 
 
 export default function CheckedProfilePage() {
+    const storedToken = localStorage.getItem('token')
+    const [token, setToken] = useState(storedToken)
     const [user, setUser, checkedUser, setCheckedUser] = useOutletContext();
     const [activies, setActivities] = useState([]);
     //const [checkedUser, setCheckedUser] = useContext(UserContext);
@@ -23,7 +25,11 @@ export default function CheckedProfilePage() {
         // }
         if (checkedUser !== null) {
             console.log(checkedUser)
-            fetch(`/api/activities/user-id/${checkedUser.id}`).then((res) => res.json()).then((activities) => {
+            fetch(`/api/activities/user-id/${checkedUser.id}`, {
+                headers: {
+                    Authentication: `Bearer ${token}`
+                }
+            }).then((res) => res.json()).then((activities) => {
                 setActivities(activities);
             })}
 

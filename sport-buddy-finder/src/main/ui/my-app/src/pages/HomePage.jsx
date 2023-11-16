@@ -4,7 +4,8 @@ import ActivityCards from "../components/ActivityCards";
 import {useOutletContext} from "react-router-dom";
 
 const fetchActivities = () => {
-    return fetch("/api/activities/").then((res) => res.json());
+    return fetch("/main")
+        .then((res) => res.json());
 }
 
 export default function HomePage() {
@@ -14,6 +15,17 @@ export default function HomePage() {
     const [name, setName] = useState(null);
 
     useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem('user'))
+        const storedToken = localStorage.getItem('token')
+
+
+        if (storedUser && storedToken) {
+            setUser({...storedUser, token: storedToken});
+            setName(storedUser.name);
+        }
+
+        console.log(storedUser)
+
         fetchActivities()
             .then((activities) => {
                 setLoading(false);
@@ -23,7 +35,6 @@ export default function HomePage() {
     }, [])
     useEffect(() => {
         if (user !== null) {
-            const {name, id, email, password, birthDate, profilePicURL, interests, postedActivities} = user;
             setName(name);
         }
     }, [user])

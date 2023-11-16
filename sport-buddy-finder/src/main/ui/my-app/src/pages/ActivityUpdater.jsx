@@ -3,23 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ActivityForm} from "../components/ActivityForm";
 import Loading from "../components/Loading";
 
-const fetchActivity = (id) => {
-    return fetch(`/api/activities/${id}`).then((res) => res.json());
-}
 
-const fetchSports = () => {
-    return fetch(`/api/activities/categories`).then((res) => res.json());
-}
-
-const updateActivity = (activity) => {
-    return fetch(`/api/activities/update/${activity.id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(activity),
-    }).then((res) => res.json());
-}
 
 async function fetchImage(sport) {
     const apiKey = '1NvDE7fcKjluIPqLQJarPaOsQHjv9jjl2eRfrb9caySj64lgithsh7yD';
@@ -36,12 +20,42 @@ export const ActivityUpdater = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const storedToken = localStorage.getItem('token')
+    const [token, setToken] = useState(storedToken);
+
     const [activityLoading, setActivityLoading] = useState(true);
     const [sportsLoading, setSportsLoading] = useState(true);
     const [updateLoading, setUpdateLoading] = useState(true);
 
     const [activity, setActivity] = useState(null)
     const [sportCategories, setSportCategories] = useState([]);
+
+    const fetchActivity = (id) => {
+        return fetch(`/api/activities/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+        }).then((res) => res.json());
+    }
+
+    const fetchSports = () => {
+        return fetch(`/api/activities/categories`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+            }).then((res) => res.json());
+    }
+
+    const updateActivity = (activity) => {
+        return fetch(`/api/activities/update/${activity.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(activity),
+        }).then((res) => res.json());
+    }
 
     const handleUpdate = (activity) => {
         setUpdateLoading(true);

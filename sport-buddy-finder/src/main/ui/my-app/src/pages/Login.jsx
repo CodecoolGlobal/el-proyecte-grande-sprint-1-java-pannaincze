@@ -4,14 +4,14 @@ import {useNavigate} from "react-router-dom";
 
 
 export default function () {
-    const [user, setUser] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [user, setUser] = useState([]);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const [loginFail, setLoginFail] = useState(null);
 
     function handleLogin() {
-        fetch(`/api/users/login`, {
+        fetch(`/users/login`, {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email: email, password: password})
@@ -20,17 +20,19 @@ export default function () {
             .then(({token, user}) => {
                 setUser(user);
                 console.log(user);
-                if(user !== null){
-                    setTimeout(()=>{
-                        navigate('/', {state : user})
-                    },300)
-                }else{
+                if (user !== null) {
+                    localStorage.setItem('user', JSON.stringify(user))
+                    localStorage.setItem('token', token)
+                    setTimeout(() => {
+                        navigate('/', {state: {user, token}})
+                    }, 300)
+                } else {
                     setLoginFail(true);
                 }
             })
             .catch((error) => console.log(error));
-
     }
+
     return (
 
         <div>
@@ -39,7 +41,9 @@ export default function () {
                 handleLogin()
             }}>
                 <br/>
-                {loginFail && <div className="container text-center bg-danger text-white">This email-password combination does not exists!</div>}
+                {loginFail &&
+                    <div className="container text-center bg-danger text-white">This email-password combination does not
+                        exists!</div>}
 
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="email" className="form-label">Email address: </Form.Label><br/>
@@ -47,13 +51,13 @@ export default function () {
                                   placeholder="example@gmail.com" required={true}></Form.Control>
                 </Form.Group>
                 <Form.Group className="mb-3 ">
-                <Form.Label htmlFor="password" className="form-label">Password: </Form.Label><br/>
-                <Form.Control onChange={event => setPassword(event.target.value)} id="password" placeholder="******"
-                              type="password" required={true}></Form.Control>
-            </Form.Group>
+                    <Form.Label htmlFor="password" className="form-label">Password: </Form.Label><br/>
+                    <Form.Control onChange={event => setPassword(event.target.value)} id="password" placeholder="******"
+                                  type="password" required={true}></Form.Control>
+                </Form.Group>
                 <Button type={"submit"}>Login</Button>
             </Form>
         </div>
-        )
+    )
 
 }

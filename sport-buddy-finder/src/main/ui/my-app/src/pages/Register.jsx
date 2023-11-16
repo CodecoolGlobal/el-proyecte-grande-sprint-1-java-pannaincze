@@ -20,7 +20,7 @@ export default function () {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({name: name, email: email, password: password, interests: interests, date: date})
             };
-            fetch('/api/users', requestOptions)
+            fetch('/users', requestOptions)
                 .then(response => response.json()).then((bool) => {
                 setRegisterSuccessAs(bool);
                 if(bool){
@@ -47,7 +47,7 @@ export default function () {
     }, [])
 
     async function fetchSports() {
-        fetch("/api/sports", {
+        fetch("/sports", {
             method: "GET",
         })
             .then((response) => response.json())

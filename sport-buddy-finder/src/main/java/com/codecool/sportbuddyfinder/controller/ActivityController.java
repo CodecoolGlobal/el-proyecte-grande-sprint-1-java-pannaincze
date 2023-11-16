@@ -1,5 +1,7 @@
 package com.codecool.sportbuddyfinder.controller;
 
+import com.codecool.sportbuddyfinder.model.DTO.NewActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.UpdateActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import com.codecool.sportbuddyfinder.service.ActivityService;
@@ -19,15 +21,11 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-    @GetMapping("/")
-    public List<Activity> getAllActivities() {
-        return activityService.getAllActivities();
-    }
-
     @GetMapping("/{id}")
     public Activity getActivityById(@PathVariable long id) {
         return activityService.getActivityById(id);
     }
+
     @GetMapping("/user-id/{user_id}")
     public Optional<List<Activity>> getActivitiesByUserId(@PathVariable long user_id) {
         return activityService.findActivitiesByUserId(user_id);
@@ -38,12 +36,12 @@ public class ActivityController {
     }
 
     @PostMapping("/create")
-    public Activity addNewActivity(@RequestBody Activity activity) {
+    public Activity addNewActivity(@RequestBody NewActivityDTO activity) {
         return activityService.addNewActivityToDB(activity);
     }
 
     @PutMapping("/update/{id}")
-    public Activity updateActivity(@RequestBody Activity updatedActivity, @PathVariable long id) {
+    public Activity updateActivity(@RequestBody UpdateActivityDTO updatedActivity, @PathVariable long id) {
         return activityService.updateActivity(updatedActivity, id);
     }
     @PutMapping("/update/{id}/{userId}")

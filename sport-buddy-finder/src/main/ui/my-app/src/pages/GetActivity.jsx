@@ -4,23 +4,35 @@ import Loading from "../components/Loading";
 import DisplayActivity from "../components/DisplayActivity";
 
 const fetchActivity = (id) => {
-    return fetch(`/api/activities/${id}`)
+    return fetch(`/main/${id}`)
         .then((res) => res.json());
 };
 
 const deleteActivity = (id) => {
-    return fetch(`/api/activities/${id}`,
-        {method: "DELETE"})
+    return fetch(`/api/activities/${id}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+    })
         .then((res) => res.json());
 }
 const addUserToParticipants = (id, userId) => {
-    return fetch(`/api/activities/update/${id}/${userId}`,
-        {method: "PUT"})
+    return fetch(`/api/activities/update/${id}/${userId}`, {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+    })
         .then(res => res.json());
 }
 const removeUserToParticipants = (id, userId) => {
-    return fetch(`/api/activities/update/${id}/${userId}`,
-        {method: "DELETE"})
+    return fetch(`/api/activities/update/${id}/${userId}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+    })
         .then(res => res.json());
 }
 

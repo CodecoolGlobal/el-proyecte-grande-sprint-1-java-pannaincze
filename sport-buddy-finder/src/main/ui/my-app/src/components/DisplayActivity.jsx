@@ -12,7 +12,7 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp, o
 
 
     async function checkProfile(userID) {
-        fetch(`/api/users/${userID}`)
+        fetch(`/users/${userID}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
