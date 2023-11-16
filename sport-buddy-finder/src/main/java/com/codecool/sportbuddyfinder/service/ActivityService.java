@@ -27,8 +27,9 @@ public class ActivityService {
         return activityRepository.findAll();
     }
 
-    public Optional<Activity> getActivityById(long activityId) {
-        return activityRepository.findById(activityId);
+    public Activity getActivityById(long activityId) {
+        return activityRepository.findById(activityId)
+                .orElseThrow(ActivityNotFoundException::new);
     }
 
     public Optional<List<Activity>> findActivitiesByUserId(long id) {
@@ -36,7 +37,9 @@ public class ActivityService {
     }
 
     public Activity addNewActivityToDB(Activity activity) {
-        activity.setUser(userRepository.findById(activity.getUser().getId()).get());
+        User user = userRepository.findById(activity.getUser().getId())
+                .orElseThrow(UserNotFoundException::new);
+        activity.setUser(user);
         return activityRepository.save(activity);
     }
 

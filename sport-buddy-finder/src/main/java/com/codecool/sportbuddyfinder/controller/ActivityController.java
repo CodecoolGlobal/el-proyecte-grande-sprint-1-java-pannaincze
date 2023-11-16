@@ -1,6 +1,5 @@
 package com.codecool.sportbuddyfinder.controller;
 
-import com.codecool.sportbuddyfinder.exception.ActivityNotFoundException;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import com.codecool.sportbuddyfinder.service.ActivityService;
@@ -27,8 +26,7 @@ public class ActivityController {
 
     @GetMapping("/{id}")
     public Activity getActivityById(@PathVariable long id) {
-        return activityService.getActivityById(id)
-                .orElseThrow(ActivityNotFoundException::new);
+        return activityService.getActivityById(id);
     }
     @GetMapping("/user-id/{user_id}")
     public Optional<List<Activity>> getActivitiesByUserId(@PathVariable long user_id) {
