@@ -1,8 +1,13 @@
 import {Button, Form} from "react-bootstrap";
 import {useState} from "react";
+import InterestSelect from "./InterestSelect";
 
 export default function UserInterests ({userInterests, user, addInterest}){
     const [sports, setSports] = useState([]);
+    const [showSelect, setShowSelect] = useState(false)
+    const changeShowSelect = (boolean) => {
+        setShowSelect(boolean)
+    }
     const fetchAllSports = () => {
         fetch("/api/sports").then((res) => res.json()).then((sports) => {
             setSports(sports);
@@ -21,18 +26,20 @@ export default function UserInterests ({userInterests, user, addInterest}){
                             margin: "0.3rem",
                         }}>{interest.name + " "}
                         </Button>
-                    })} <Button onClick={()=>{fetchAllSports()}}>+</Button>
-                    {sports.length > 0 ?
-                        <Form.Select style={{width: "20vw", marginTop: "0.3rem"}} onChange={(e) => {
-                            addInterest({name: e.target.value})
-                            console.log(e.target.value)
-                        }} id="type"
-                                     required={true}>
-                            <option value={sports} selected disabled>Select your option</option>
-                            {sports.map((category) => <option value={category.name}
-                                                              key={category.id}>{category.name}</option>)}
-                        </Form.Select> : <></>}
-                </div> : <><Button onClick={()=>{fetchAllSports()}}>+</Button></>}
+                    })}
+                    <Button onClick={()=> {
+                        {
+                            fetchAllSports()
+                            setShowSelect(true)
+                        }
+                    }}>+</Button>
+                </div> : <Button onClick={()=> {
+                    {
+                        fetchAllSports()
+                        setShowSelect(true)
+                    }
+                }}>+</Button>}
+            {showSelect? <InterestSelect sports={sports} addInterest={addInterest} changeShowSelect={changeShowSelect}/>: <></>}
         </div>
     )
 }
