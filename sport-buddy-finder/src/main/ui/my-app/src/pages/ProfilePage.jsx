@@ -16,8 +16,9 @@ export default function ProfilePage() {
     //TODO send new interest to backend
     const addInterest = (interest) => {
         let updatedInterests = [...userInterests]
-        if(!userInterests.includes(interest)){
-            updatedInterests.push(interest)
+        let parsedInterest = JSON.parse(interest)
+        if(!userInterests.includes(parsedInterest)){
+            updatedInterests.push(parsedInterest)
             setUserInterests(updatedInterests)
         }
         console.log(userInterests)
