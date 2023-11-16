@@ -66,6 +66,20 @@ export default function ProfilePage() {
                     backgroundPosition: "10%"
                 }}>
                 </div>
+            <div className={"userInfo"} style={{
+                color: "#e6e7f0",
+                fontFamily: "inherit",
+                borderRadius: "15px",
+                width: "fit-content",
+                height: "fit-content",
+                paddingLeft: "30px",
+                paddingTop: "10px",
+                justifyContent: "center",
+
+            }}>
+                <h2 style={{fontSize: "1.5em"}}>{"User Name: " + user.name}</h2>
+                <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
+            </div>
                 <UserInterests userInterests={userInterests} user={user} addInterest={addInterest}/>
                 {userActivities ?
                     <ActivityCards activities={userActivities}/>

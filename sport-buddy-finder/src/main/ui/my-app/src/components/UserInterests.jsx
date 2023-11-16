@@ -9,19 +9,8 @@ export default function UserInterests ({userInterests, user, addInterest}){
         });
     }
     return (
-        <div className={"userInfo"} style={{
-            color: "#e6e7f0",
-            fontFamily: "inherit",
-            borderRadius: "15px",
-            width: "fit-content",
-            height: "fit-content",
-            paddingLeft: "30px",
-            paddingTop: "10px",
-            justifyContent: "center",
+        <div>
 
-        }}>
-            <h2 style={{fontSize: "1.5em"}}>{"User Name: " + user.name}</h2>
-            <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
             {user.interests?.length > 0 ?
                 <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2>
                     {userInterests.map((interest, i) => {
