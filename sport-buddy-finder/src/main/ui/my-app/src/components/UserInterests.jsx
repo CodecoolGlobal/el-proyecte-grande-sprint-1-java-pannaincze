@@ -9,8 +9,10 @@ export default function UserInterests ({userInterests, user, addInterest}){
         });
     }
     return (
-        <div>
-
+        <div style={{
+            paddingLeft: "30px",
+            paddingTop: "10px"
+        }}>
             {user.interests?.length > 0 ?
                 <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2>
                     {userInterests.map((interest, i) => {
@@ -21,7 +23,7 @@ export default function UserInterests ({userInterests, user, addInterest}){
                         </Button>
                     })} <Button onClick={()=>{fetchAllSports()}}>+</Button>
                     {sports.length > 0 ?
-                        <Form.Select onChange={(e) => {
+                        <Form.Select style={{width: "20vw", marginTop: "0.3rem"}} onChange={(e) => {
                             addInterest({name: e.target.value})
                             console.log(e.target.value)
                         }} id="type"
