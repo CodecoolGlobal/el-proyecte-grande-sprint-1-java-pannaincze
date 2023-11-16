@@ -2,6 +2,7 @@ package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.exception.ActivityNotFoundException;
 import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
+import com.codecool.sportbuddyfinder.model.DTO.NewActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.repository.ActivityRepository;
@@ -26,14 +27,27 @@ public class ActivityService {
     public List<Activity> getAllActivities() {
         return activityRepository.findAll();
     }
+
     public Optional<Activity> getActivityById(long activityId) {
         return activityRepository.findById(activityId);
     }
-    public Optional<List<Activity>> findActivitiesByUserId(long id){
+
+    public Optional<List<Activity>> findActivitiesByUserId(long id) {
         return activityRepository.findByUser_Id(id);
     }
-    public Activity addNewActivityToDB(Activity activity) {
-        activity.setUser(userRepository.findById(activity.getUser().getId()).get());
+
+    public Activity addNewActivityToDB(NewActivityDTO newActivity) {
+        User user = userRepository.findById(newActivity.getUserId()).orElseThrow(() -> new UserNotFoundException());
+        Activity activity = Activity.builder()
+                .title(newActivity.getTitle())
+                .description(newActivity.getDescription())
+                .sport(newActivity.getSport())
+                .minPeopleToFind(newActivity.getMinPeopleToFind())
+                .maxPeopleToFind(newActivity.getMaxPeopleToFind())
+                .user(user)
+                .image(newActivity.getImage())
+                .build();
+
         return activityRepository.save(activity);
     }
 
@@ -71,7 +85,8 @@ public class ActivityService {
 
         return activityRepository.save(activity);
     }
-    public  Activity removeUserFromParticipants(long id, long userId){
+
+    public Activity removeUserFromParticipants(long id, long userId) {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Activity activity = activityRepository.findById(id).orElseThrow(ActivityNotFoundException::new);
 
