@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
     public UserController(UserService userService)
@@ -32,6 +32,12 @@ public class UserController {
     public ResponseEntity<TokenAndUserResponse> loginUser(@RequestBody LoginUserDTO loginRequest){
         return ResponseEntity.ok(userService.loginUser(loginRequest));
     }
+
+    @GetMapping("/current-user")
+    public User getUserByEmailAndPassword(@RequestBody String email,@RequestBody String password) {
+        return userService.getUserByEmailAndPassword(email, password);
+    }
+
     @PostMapping
     public ResponseEntity<TokenResponse> registerUser(@RequestBody NewUserDTO newUserDTO){
         return ResponseEntity.ok(userService.addUser(newUserDTO));

@@ -38,10 +38,8 @@ public class UserService {
     }
 
     public TokenResponse addUser(NewUserDTO newUserDTO) {
-        //return userRepository.addUser(newUserDTO);
-        //TODO
         User user = new User(newUserDTO.name(), newUserDTO.email(), passwordEncoder.encode(newUserDTO.password()), newUserDTO.date());
-        //user.addInterests(newUserDTO.interests());
+
         for (int sportId: newUserDTO.interests()) {
             user.addInterest(sportRepository.findSportById(sportId).get());
         }
@@ -78,4 +76,7 @@ public class UserService {
         userRepository.deleteUserById(userId);
     }
 
+    public User getUserByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password).orElseThrow();
+    }
 }
