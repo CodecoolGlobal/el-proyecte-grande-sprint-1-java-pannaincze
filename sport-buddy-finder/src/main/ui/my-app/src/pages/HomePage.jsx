@@ -10,7 +10,7 @@ const fetchActivities = () => {
 export default function HomePage() {
     const [activities, setActivities] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useOutletContext();
+    const [user, setUser,checkedUser, setCheckedUser] = useOutletContext();
     const [name, setName] = useState(null);
 
     useEffect(() => {
@@ -18,6 +18,7 @@ export default function HomePage() {
             .then((activities) => {
                 setLoading(false);
                 setActivities(activities);
+                setCheckedUser(null);
             })
     }, [])
     useEffect(() => {

@@ -1,11 +1,27 @@
 import {Card, Button} from "react-bootstrap";
 import {Link, useNavigate, useOutletContext} from "react-router-dom";
-import {useState} from "react";
 import {SignUpButton} from "./SignUpButton";
+import {useContext, useEffect} from "react";
+import {UserContext} from "../context/UserContext";
 
 export default function DisplayActivity({activity, onBack, onDelete, onSignUp, onWithdraw}) {
     const navigate = useNavigate();
-    const [user, setUser] = useOutletContext();
+    const [user, setUser, checkedUser, setCheckedUser] = useOutletContext();
+    //const [checkedUser, setCheckedUser] = useContext(UserContext);
+
+
+
+    async function checkProfile(userID) {
+        fetch(`/api/users/${userID}`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                setCheckedUser(data);
+            }).then(navigate('/checked-profile'))
+            .catch((error) => console.log(error));
+
+    }
+
     return (
         <div className="activityConatiner" style={{margin: "3rem"}}>
             <Card className="activity">
@@ -23,24 +39,26 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp, o
                     <Card.Text>
                         Location: {activity.location}
                     </Card.Text>
-                    <Card.Text>
+                    <Card.Text id={activity.user.id} onClick={()=>{checkProfile(activity.user.id)}}>
                         Created: {activity.user.name}
                     </Card.Text>
                     <Card.Text>
                         {`${activity.appliedUsers.length}/${activity.maxPeopleToFind}`}
                     </Card.Text>
                     {activity.appliedUsers.length !== 0 ?
+
                         <Card.Text>
                             Applied users:
                             {activity.appliedUsers.map((user) => (
-                                <Card.Text key={activity.id}>{user.name}</Card.Text>
-                            ))}
+                                    <Card.Text key={activity.id} id={user.id} onClick={()=>{checkProfile(user.id)}}>{user.name} </Card.Text>
+                               ))}
                         </Card.Text> :
                         ""
                     }
                 </Card.Body>
                 {(user && user.id == activity.user?.id) && <Link to={`/activities/update/${activity.id}`}>
-                    <Button className="button" type="button" style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Edit</Button>
+                    <Button className="button" type="button"
+                            style={{margin: "1rem", padding: "0.3rem", width: "5rem"}}>Edit</Button>
                 </Link>}
 
 
@@ -58,7 +76,7 @@ export default function DisplayActivity({activity, onBack, onDelete, onSignUp, o
                     activity={activity}
                     user={user}
                 />
-                {user === null && <p> Sign in to apply!</p>}</>}
+                    {user === null && <p> Sign in to apply!</p>}</>}
             </Card>
         </div>
     )

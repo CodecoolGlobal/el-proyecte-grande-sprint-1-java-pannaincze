@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
@@ -12,18 +12,6 @@ export default function ProfilePage() {
     const fetchActivities = () => {
         return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
     }
-    //
-    //const location = useLocation()
-    // const { id } = location.state
-    // const [user, setUser] = useState({
-    //     name:"",
-    //     email:"",
-    //     password:"",
-    //     birthDate:"",
-    //     userID:"",
-    //     profilePicURL:"",
-    //     interests: [],
-    //     postedActivities: []})
     async function fetchUser(userID) {
         fetch(`/api/users/${userID}`, {
             method: "GET",
