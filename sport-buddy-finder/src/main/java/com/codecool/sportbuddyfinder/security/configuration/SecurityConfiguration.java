@@ -24,10 +24,12 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**")
-                        .permitAll()
-//                        .anyRequest()
-//                        .authenticated()
+                        .requestMatchers("/main/**").permitAll()
+                        .requestMatchers("/users/**").permitAll()
+                        .requestMatchers("/sports/**").permitAll()
+                        .requestMatchers("/api/**").hasRole("USER")
+                        .anyRequest()
+                        .authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
