@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import {useOutletContext} from "react-router-dom";
 
-export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, fetchImage}) => {
+export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, fetchImage, userId}) => {
 
 
     const [title, setTitle] = useState(activity?.title ?? "");
@@ -12,7 +12,9 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, f
     const [minPeople, setMinPeople] = useState(activity?.minPeopleToFind ?? 0);
     const [maxPeople, setMaxPeople] = useState(activity?.maxPeopleToFind ?? 0);
     const [image, setImage] = useState(activity?.image);
-    const [user, setUser] = useOutletContext();
+
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const [user, setUser] = useState(storedUser);
 
     useEffect(() => {
         if (sport) {
@@ -26,7 +28,6 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, f
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(user)
 
         if (activity) {
             return handleSave({
@@ -35,10 +36,10 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, f
                 location,
                 description,
                 sport,
-                user,
                 image,
                 minPeopleToFind: minPeople,
                 maxPeopleToFind: maxPeople,
+                userId
             })
         }
 
@@ -47,10 +48,10 @@ export const ActivityForm = ({handleSave, onCancel, sportCategories, activity, f
             location,
             description,
             sport,
-            user,
             image,
             minPeopleToFind: minPeople,
             maxPeopleToFind: maxPeople,
+            userId
         })
     }
 
