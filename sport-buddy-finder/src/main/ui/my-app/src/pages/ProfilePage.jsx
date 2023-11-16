@@ -13,6 +13,7 @@ export default function ProfilePage() {
     const fetchActivities = () => {
         return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
     }
+    //TODO send new interest to backend
     const addInterest = (interest) => {
         let updatedInterests = [...userInterests]
         if(!userInterests.includes(interest)){
