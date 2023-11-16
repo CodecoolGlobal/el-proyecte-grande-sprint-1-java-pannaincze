@@ -7,25 +7,22 @@ import ActivityCards from "../components/ActivityCards";
 
 
 export default function ProfilePage() {
-    const [user, setUser] = useOutletContext();
+    const storedUser = JSON.parse(localStorage.getItem('user'))
+    const storedToken = localStorage.getItem('token')
+    const [user, setUser] = useState(storedUser);
     const [activies, setActivities] = useState([]);
+
+    console.log(storedToken)
     const fetchActivities = () => {
-        return fetch(`/api/activities/user-id/${user.id}`).then((res) => res.json());
+        return fetch(`/api/activities/user-id/${user.id}`, {
+            headers: {
+                Authorization: `Bearer ${storedToken}`
+            }
+        }).then((res) => res.json());
     }
-    //
-    //const location = useLocation()
-    // const { id } = location.state
-    // const [user, setUser] = useState({
-    //     name:"",
-    //     email:"",
-    //     password:"",
-    //     birthDate:"",
-    //     userID:"",
-    //     profilePicURL:"",
-    //     interests: [],
-    //     postedActivities: []})
+
     async function fetchUser(userID) {
-        fetch(`/api/users/${userID}`, {
+        fetch(`/users/${userID}`, {
             method: "GET",
         })
             .then((response) => response.json())
@@ -37,11 +34,13 @@ export default function ProfilePage() {
     }
 
     useEffect(() => {
+        console.log(user)
         console.log(user.id)
         fetchUser(user.id)
         fetchActivities()
             .then((activities) => {
-                setActivities(activities);})
+                setActivities(activities);
+            })
     }, [])
     return (
         <div className={"profilePageContainer"} style={{
@@ -83,12 +82,14 @@ export default function ProfilePage() {
             }}>
                 <h2 style={{fontSize: "1.5em"}}>{"User Name: " + user.name}</h2>
                 <h2 style={{fontSize: "1.5em"}}>{"Email: " + user.email}</h2>
-                {user.interests?.length > 0 ? <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2><ul>
+                {user.interests?.length > 0 ? <div><h2 style={{fontSize: "1.5em"}}>{"Interests:"}</h2>
+                    <ul>
 
-                    {user.interests.map(interest => {
-                        return <li>{interest.name}</li>
-                    })}
-                </ul></div> : <></>}
+                        {user.interests.map(interest => {
+                            return <li>{interest.name}</li>
+                        })}
+                    </ul>
+                </div> : <></>}
             </div>
             <div className={"profileActivities"}>
                 {activies ? <div>
