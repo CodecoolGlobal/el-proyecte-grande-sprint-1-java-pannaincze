@@ -14,6 +14,7 @@ import GetActivity from "./pages/GetActivity";
 import {ActivityCreator} from "./pages/ActivityCreator";
 import Login from "./pages/Login";
 import {ActivityUpdater} from "./pages/ActivityUpdater";
+import CheckedProfilePage from "./pages/CheckedProfilePage";
 
 const router = createBrowserRouter([
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
             {
                 path: "activities/update/:id",
                 element: <ActivityUpdater/>
+            },
+            {
+                path: "/checked-profile",
+                element: <CheckedProfilePage/>
             }
         ]
 

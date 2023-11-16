@@ -32,8 +32,7 @@ public class User implements UserDetails {
     private String profilePicURL;
     @ManyToMany
     private final Set<Sport> interests;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
     private final Set<Activity> postedActivities;
     @ManyToMany
     private final Set<Activity> appliedActivities;
@@ -78,6 +77,9 @@ public class User implements UserDetails {
 
     public void addPostedActivities(Set<Activity> activities) {
         this.postedActivities.addAll(activities);
+    }
+    public void setInterests(Sport interest){
+        this.interests.add(interest);
     }
 
     @Override

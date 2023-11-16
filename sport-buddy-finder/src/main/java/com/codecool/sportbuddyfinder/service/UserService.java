@@ -3,6 +3,10 @@ package com.codecool.sportbuddyfinder.service;
 import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
 import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
+
+import com.codecool.sportbuddyfinder.model.entities.Role;
+import com.codecool.sportbuddyfinder.model.entities.Sport;
+
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.model.payload.TokenAndUserResponse;
 import com.codecool.sportbuddyfinder.model.payload.TokenResponse;
@@ -68,9 +72,10 @@ public class UserService {
                 .build();
     }
 
-    public boolean updateUser(int userID, User updatedUser) {
-        // TODO
-        //return userRepository.updateUser(userID, updatedUser);
+    public boolean updateUser(int userID, Sport interest) {
+        User user = getUserById(userID);
+        user.setInterests(interest);
+        userRepository.save(user);
         return false;
     }
 
