@@ -3,7 +3,7 @@ import {Button, Form} from "react-bootstrap";
 export default function InterestSelect({sports, addInterest, changeShowSelect}){
     return (
         <div style={{ display: "flex"}}>
-        <Form.Select style={{width: "20vw", marginTop: "0.3rem"}} onChange={(e) => {
+        <Form.Select style={{width: "20vw", marginTop: "0.3rem", marginRight: "0.3rem"}} onChange={(e) => {
             addInterest(e.target.value)
             console.log(e.target.value)
         }} id="type"
