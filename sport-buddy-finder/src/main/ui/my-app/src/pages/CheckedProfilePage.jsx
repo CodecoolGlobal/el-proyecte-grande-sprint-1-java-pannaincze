@@ -32,8 +32,6 @@ export default function CheckedProfilePage() {
             {(!checkedUser && loading) ? <Loading/> : <div>
                 <div className={"profilePageContainer"} style={{
                     backgroundColor: "#282c34",
-                    width: "100vw",
-                    height: "100vh"
                 }}>
                     <Container style={{
                         paddingTop: "4vh",
@@ -44,7 +42,7 @@ export default function CheckedProfilePage() {
                         <Col xs={6} md={4}>
                             <Image src={checkedUser.profilePicURL} roundedCircle style={{
                                 width: "40vh",
-
+                                marginBottom: "1.3vh"
                             }}/>
                         </Col>
                     </Container>
@@ -61,9 +59,10 @@ export default function CheckedProfilePage() {
                         color: "#e6e7f0",
                         fontFamily: "inherit",
                         borderRadius: "15px",
-                        width: "25vw",
-                        height: "20vh",
-                        padding: "50px",
+                        width: "fit-content",
+                        height: "fit-content",
+                        paddingLeft: "30px",
+                        paddingTop: "10px",
                         justifyContent: "center",
 
                     }}>
