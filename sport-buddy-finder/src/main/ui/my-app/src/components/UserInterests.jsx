@@ -1,4 +1,4 @@
-import {Button, Form} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {useState} from "react";
 import InterestSelect from "./InterestSelect";
 
@@ -34,11 +34,12 @@ export default function UserInterests ({userInterests, user, addInterest}){
                         }
                     }}>+</Button>
                 </div> : <Button onClick={()=> {
-                    {
-                        fetchAllSports()
-                        setShowSelect(true)
-                    }
-                }}>+</Button>}
+                        {
+                            fetchAllSports()
+                            setShowSelect(true)
+                        }
+                        }}>+
+                        </Button>}
             {showSelect? <InterestSelect sports={sports} addInterest={addInterest} changeShowSelect={changeShowSelect}/>: <></>}
         </div>
     )

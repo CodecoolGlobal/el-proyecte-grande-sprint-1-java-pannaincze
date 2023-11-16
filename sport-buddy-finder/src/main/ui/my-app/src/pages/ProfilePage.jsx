@@ -15,8 +15,10 @@ export default function ProfilePage() {
     }
     const addInterest = (interest) => {
         let updatedInterests = [...userInterests]
-        updatedInterests.push(interest)
-        setUserInterests(updatedInterests)
+        if(!userInterests.includes(interest)){
+            updatedInterests.push(interest)
+            setUserInterests(updatedInterests)
+        }
         console.log(userInterests)
     }
     async function fetchUser(userID) {
