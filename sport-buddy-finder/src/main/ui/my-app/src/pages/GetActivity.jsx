@@ -12,7 +12,7 @@ const deleteActivity = (id) => {
     return fetch(`/api/activities/${id}`, {
         method: "DELETE",
         headers: {
-            authorization: `bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
         }
     })
         .then((res) => res.json());
@@ -21,7 +21,7 @@ const addUserToParticipants = (id, userId) => {
     return fetch(`/api/activities/update/${id}/${userId}`, {
         method: "PUT",
         headers: {
-            authorization: `bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
         }
     })
         .then(res => res.json());
@@ -30,7 +30,7 @@ const removeUserToParticipants = (id, userId) => {
     return fetch(`/api/activities/update/${id}/${userId}`, {
         method: "DELETE",
         headers: {
-            authorization: `bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
         }
     })
         .then(res => res.json());

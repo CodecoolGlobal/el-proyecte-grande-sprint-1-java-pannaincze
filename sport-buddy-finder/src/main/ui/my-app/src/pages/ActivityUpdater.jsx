@@ -3,13 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ActivityForm} from "../components/ActivityForm";
 import Loading from "../components/Loading";
 
-const fetchActivity = (id) => {
-    return fetch(`/api/activities/${id}`).then((res) => res.json());
-}
 
-const fetchSports = () => {
-    return fetch(`/api/activities/categories`).then((res) => res.json());
-}
 
 async function fetchImage(sport) {
     const apiKey = '1NvDE7fcKjluIPqLQJarPaOsQHjv9jjl2eRfrb9caySj64lgithsh7yD';
@@ -35,6 +29,22 @@ export const ActivityUpdater = () => {
 
     const [activity, setActivity] = useState(null)
     const [sportCategories, setSportCategories] = useState([]);
+
+    const fetchActivity = (id) => {
+        return fetch(`/api/activities/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+        }).then((res) => res.json());
+    }
+
+    const fetchSports = () => {
+        return fetch(`/api/activities/categories`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+            }).then((res) => res.json());
+    }
 
     const updateActivity = (activity) => {
         return fetch(`/api/activities/update/${activity.id}`, {
