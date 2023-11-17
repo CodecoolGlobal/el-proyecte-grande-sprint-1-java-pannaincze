@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.controller;
 
+import com.codecool.sportbuddyfinder.model.DTO.ActivityCardDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.service.ActivityService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class MainPageController {
     }
 
     @GetMapping
-    public List<Activity> getAllActivities() {
+    public List<ActivityCardDTO> getAllActivities() {
         return activityService.getAllActivities();
     }
 
