@@ -13,6 +13,7 @@ public class ActivityCardDTO {
     private Integer minPeopleToFind;
     private Integer maxPeopleToFind;
     private String image;
+    private Integer numberOfAppliedUsers;
 
     public ActivityCardDTO(long id, String title, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind, String image) {
         this.id = id;
@@ -22,6 +23,7 @@ public class ActivityCardDTO {
         this.minPeopleToFind = minPeopleToFind;
         this.maxPeopleToFind = maxPeopleToFind;
         this.image = image;
+        this.numberOfAppliedUsers = 0;
     }
 
     public ActivityCardDTO(Activity activity) {
@@ -32,5 +34,6 @@ public class ActivityCardDTO {
         this.minPeopleToFind = activity.getMinPeopleToFind();
         this.maxPeopleToFind = activity.getMaxPeopleToFind();
         this.image = activity.getImage();
+        this.numberOfAppliedUsers = activity.getAppliedUsers().size();
     }
 }
