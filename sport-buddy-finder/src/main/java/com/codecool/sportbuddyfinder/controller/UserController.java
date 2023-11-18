@@ -1,7 +1,7 @@
 package com.codecool.sportbuddyfinder.controller;
 
-import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
-import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
+import com.codecool.sportbuddyfinder.model.DTO.user.LoginUserDTO;
+import com.codecool.sportbuddyfinder.model.DTO.user.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.Sport;
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.model.payload.TokenAndUserResponse;
@@ -10,7 +10,6 @@ import com.codecool.sportbuddyfinder.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.Set;
 
 @RestController

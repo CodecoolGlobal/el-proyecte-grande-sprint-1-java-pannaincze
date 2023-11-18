@@ -1,8 +1,8 @@
 package com.codecool.sportbuddyfinder.controller;
 
-import com.codecool.sportbuddyfinder.model.DTO.ActivityCardDTO;
-import com.codecool.sportbuddyfinder.model.DTO.NewActivityDTO;
-import com.codecool.sportbuddyfinder.model.DTO.UpdateActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.ActivityCardDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.NewActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.UpdateActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import com.codecool.sportbuddyfinder.service.ActivityService;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/activities")

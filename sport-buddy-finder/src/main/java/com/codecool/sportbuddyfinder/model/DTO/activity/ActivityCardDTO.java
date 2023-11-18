@@ -1,4 +1,4 @@
-package com.codecool.sportbuddyfinder.model.DTO;
+package com.codecool.sportbuddyfinder.model.DTO.activity;
 
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
@@ -15,7 +15,7 @@ public class ActivityCardDTO {
     private String image;
     private Integer numberOfAppliedUsers;
 
-    public ActivityCardDTO(long id, String title, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind, String image) {
+    public ActivityCardDTO(long id, String title, Sport sport, String location, Integer minPeopleToFind, Integer maxPeopleToFind, String image, Integer numberOfAppliedUsers) {
         this.id = id;
         this.title = title;
         this.sport = sport;
@@ -23,7 +23,7 @@ public class ActivityCardDTO {
         this.minPeopleToFind = minPeopleToFind;
         this.maxPeopleToFind = maxPeopleToFind;
         this.image = image;
-        this.numberOfAppliedUsers = 0;
+        this.numberOfAppliedUsers = numberOfAppliedUsers;
     }
 
     public ActivityCardDTO(Activity activity) {

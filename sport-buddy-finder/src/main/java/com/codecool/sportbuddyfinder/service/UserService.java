@@ -1,11 +1,9 @@
 package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
-import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
-import com.codecool.sportbuddyfinder.model.DTO.LoginUserDTO;
-import com.codecool.sportbuddyfinder.model.DTO.NewUserDTO;
+import com.codecool.sportbuddyfinder.model.DTO.user.LoginUserDTO;
+import com.codecool.sportbuddyfinder.model.DTO.user.NewUserDTO;
 
-import com.codecool.sportbuddyfinder.model.entities.Role;
 import com.codecool.sportbuddyfinder.model.entities.Sport;
 
 import com.codecool.sportbuddyfinder.model.entities.User;

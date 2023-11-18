@@ -1,4 +1,4 @@
-package com.codecool.sportbuddyfinder.model.DTO;
+package com.codecool.sportbuddyfinder.model.DTO.activity;
 
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import lombok.Data;

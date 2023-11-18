@@ -2,9 +2,9 @@ package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.exception.ActivityNotFoundException;
 import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
-import com.codecool.sportbuddyfinder.model.DTO.ActivityCardDTO;
-import com.codecool.sportbuddyfinder.model.DTO.NewActivityDTO;
-import com.codecool.sportbuddyfinder.model.DTO.UpdateActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.ActivityCardDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.NewActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.UpdateActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.entities.User;
 import com.codecool.sportbuddyfinder.repository.ActivityRepository;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ActivityService {
