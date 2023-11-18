@@ -35,8 +35,10 @@ public class ActivityService {
                 .orElseThrow(() -> new ActivityNotFoundException(activityId));
     }
 
-    public Optional<List<Activity>> findActivitiesByUserId(long id){
-        return activityRepository.findActivitiesByUserId(id);
+    public List<ActivityCardDTO> findActivitiesByUserId(long id){
+        return activityRepository.findActivitiesByUserId(id)
+                .orElseThrow()
+                .stream().map(ActivityCardDTO::new).toList();
     }
 
     public Activity addNewActivityToDB(NewActivityDTO newActivity) {

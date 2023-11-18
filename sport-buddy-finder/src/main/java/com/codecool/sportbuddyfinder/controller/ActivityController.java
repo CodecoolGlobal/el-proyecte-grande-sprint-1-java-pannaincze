@@ -1,5 +1,6 @@
 package com.codecool.sportbuddyfinder.controller;
 
+import com.codecool.sportbuddyfinder.model.DTO.ActivityCardDTO;
 import com.codecool.sportbuddyfinder.model.DTO.NewActivityDTO;
 import com.codecool.sportbuddyfinder.model.DTO.UpdateActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
@@ -27,7 +28,7 @@ public class ActivityController {
     }
 
     @GetMapping("/user-id/{user_id}")
-    public Optional<List<Activity>> getActivitiesByUserId(@PathVariable long user_id) {
+    public List<ActivityCardDTO> getActivitiesByUserId(@PathVariable long user_id) {
         return activityService.findActivitiesByUserId(user_id);
     }
     @GetMapping("/categories")
