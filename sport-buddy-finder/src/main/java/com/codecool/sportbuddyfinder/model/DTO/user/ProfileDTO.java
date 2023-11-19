@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class GetUserDTO {
+public class ProfileDTO {
     private long id;
     private String name;
     private String email;
@@ -15,7 +15,7 @@ public class GetUserDTO {
     private String profilePicURL;
     private Set<Sport> interests;
 
-    public GetUserDTO(User user) {
+    public ProfileDTO(User user) {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();

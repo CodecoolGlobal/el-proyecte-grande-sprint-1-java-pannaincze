@@ -1,6 +1,6 @@
 package com.codecool.sportbuddyfinder.controller;
 
-import com.codecool.sportbuddyfinder.model.DTO.user.GetUserDTO;
+import com.codecool.sportbuddyfinder.model.DTO.user.ProfileDTO;
 import com.codecool.sportbuddyfinder.model.DTO.user.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.user.NewUserDTO;
 import com.codecool.sportbuddyfinder.model.entities.Sport;
@@ -26,7 +26,7 @@ public class UserController {
         return userService.getAllUsers();
     }
     @GetMapping("/{userID}")
-    public GetUserDTO getUserByID(@PathVariable long userID){
+    public ProfileDTO getUserByID(@PathVariable long userID){
         return userService.getUserById(userID);
     }
     @PostMapping("/login")

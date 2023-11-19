@@ -1,7 +1,7 @@
 package com.codecool.sportbuddyfinder.service;
 
 import com.codecool.sportbuddyfinder.exception.UserNotFoundException;
-import com.codecool.sportbuddyfinder.model.DTO.user.GetUserDTO;
+import com.codecool.sportbuddyfinder.model.DTO.user.ProfileDTO;
 import com.codecool.sportbuddyfinder.model.DTO.user.LoginUserDTO;
 import com.codecool.sportbuddyfinder.model.DTO.user.NewUserDTO;
 
@@ -37,10 +37,10 @@ public class UserService {
         return null;
     }
 
-    public GetUserDTO getUserById(long id) {
+    public ProfileDTO getUserById(long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
-        return new GetUserDTO(user);
+        return new ProfileDTO(user);
     }
 
     public TokenResponse addUser(NewUserDTO newUserDTO) {
