@@ -1,6 +1,7 @@
 package com.codecool.sportbuddyfinder.controller;
 
 import com.codecool.sportbuddyfinder.model.DTO.activity.ActivityCardDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.DisplayActivityDTO;
 import com.codecool.sportbuddyfinder.model.DTO.activity.NewActivityDTO;
 import com.codecool.sportbuddyfinder.model.DTO.activity.UpdateActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
@@ -22,7 +23,7 @@ public class ActivityController {
     }
 
     @GetMapping("/{id}")
-    public Activity getActivityById(@PathVariable long id) {
+    public DisplayActivityDTO getActivityById(@PathVariable long id) {
         return activityService.getActivityById(id);
     }
 

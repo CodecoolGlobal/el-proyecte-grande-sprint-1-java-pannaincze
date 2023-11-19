@@ -1,7 +1,7 @@
 package com.codecool.sportbuddyfinder.controller;
 
 import com.codecool.sportbuddyfinder.model.DTO.activity.ActivityCardDTO;
-import com.codecool.sportbuddyfinder.model.activity.Activity;
+import com.codecool.sportbuddyfinder.model.DTO.activity.DisplayActivityDTO;
 import com.codecool.sportbuddyfinder.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +27,7 @@ public class MainPageController {
     }
 
     @GetMapping("/{id}")
-    public Activity getActivityById(@PathVariable long id) {
+    public DisplayActivityDTO getActivityById(@PathVariable long id) {
         return activityService.getActivityById(id);
     }
 }
