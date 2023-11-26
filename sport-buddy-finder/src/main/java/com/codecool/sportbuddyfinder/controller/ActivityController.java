@@ -1,7 +1,9 @@
 package com.codecool.sportbuddyfinder.controller;
 
-import com.codecool.sportbuddyfinder.model.DTO.NewActivityDTO;
-import com.codecool.sportbuddyfinder.model.DTO.UpdateActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.ActivityCardDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.DisplayActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.NewActivityDTO;
+import com.codecool.sportbuddyfinder.model.DTO.activity.UpdateActivityDTO;
 import com.codecool.sportbuddyfinder.model.activity.Activity;
 import com.codecool.sportbuddyfinder.model.activity.Sport;
 import com.codecool.sportbuddyfinder.service.ActivityService;
@@ -9,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/activities")
@@ -22,12 +23,12 @@ public class ActivityController {
     }
 
     @GetMapping("/{id}")
-    public Activity getActivityById(@PathVariable long id) {
+    public DisplayActivityDTO getActivityById(@PathVariable long id) {
         return activityService.getActivityById(id);
     }
 
     @GetMapping("/user-id/{user_id}")
-    public Optional<List<Activity>> getActivitiesByUserId(@PathVariable long user_id) {
+    public List<ActivityCardDTO> getActivitiesByUserId(@PathVariable long user_id) {
         return activityService.findActivitiesByUserId(user_id);
     }
     @GetMapping("/categories")
