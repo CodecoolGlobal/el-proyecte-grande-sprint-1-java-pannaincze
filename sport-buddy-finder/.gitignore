@@ -203,4 +203,6 @@ secrets.yml
 .gradletasknamecache
 
 
+/src/main/docker/my_secret.txt
+
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij+all
