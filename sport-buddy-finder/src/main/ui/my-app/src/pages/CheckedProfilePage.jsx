@@ -18,20 +18,25 @@ export default function CheckedProfilePage() {
     const [chUser, setChUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const fetchActivities = () => {
+        return fetch(`/api/activities/user-id/${checkedUser.id}`, {
+            headers: {
+                Authorization: `Bearer ${storedToken}`
+            }
+        }).then((res) => res.json());
+    }
 
     useEffect(() => {
         // const fetchActivities = () => {
         //     return fetch(`/api/activities/user-id/${checkedUser.id}`).then((res) => res.json());
         // }
         if (checkedUser !== null) {
-            console.log(checkedUser)
-            fetch(`/api/activities/user-id/${checkedUser.id}`, {
-                headers: {
-                    Authentication: `Bearer ${token}`
-                }
-            }).then((res) => res.json()).then((activities) => {
-                setActivities(activities);
-            })}
+            fetchActivities()
+                .then((activities) => {
+                    //setUserActivities(activities);
+                    setActivities(activities);
+                })
+            }
 
     }, [checkedUser])
 
@@ -78,7 +83,7 @@ export default function CheckedProfilePage() {
                     </div>
                     {checkedUser.interests?.length > 0 && <div>
                             <UserInterests userInterests={checkedUser.interests} user={checkedUser} isCheckedUser={true} />
-                            {activies &&
+                            {activies != null &&
                                 <ActivityCards activities={activies}/>
                                }
                         </div>}
