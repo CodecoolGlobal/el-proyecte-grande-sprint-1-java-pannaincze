@@ -28,11 +28,13 @@ export default function ProfilePage() {
     const addInterest = (interest) => {
         let updatedInterests = [...userInterests]
         let parsedInterest = JSON.parse(interest)
+
         if (!userInterests.some(interest => areObjectsEqual(interest, parsedInterest))) {
             updatedInterests.push(parsedInterest);
             setUserInterests(updatedInterests);
             updateUserInterests(interest)
         }
+
         console.log(userInterests)
     }
     const updateUserInterests = (interest) => {
