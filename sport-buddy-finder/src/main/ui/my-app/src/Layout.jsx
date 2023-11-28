@@ -45,14 +45,12 @@ export default function Layout() {
                             {user !== null ? <div><Button onClick={() => {
                                 navigate("/profile")
                             }}>{userName}</Button>&nbsp;&nbsp;<Button onClick={() => {
+                                localStorage.clear()
                                 navigate('/');
                                 state = null;
                                 setUser(null);
                                 setUserName(null);
                                 setId(null);
-                                setTimeout(() => {
-                                    navigate('/');
-                                }, 200)
                             }}>Logout</Button></div> : <LoginAndRegister/>}
                             {user && <Link to={"/activities/create"}>
                                 <Button style={{margin: "0.5rem"}}>Create new post</Button>
