@@ -8,6 +8,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,11 +36,17 @@ class UserControllerTest {
 
     @Test
     void registerUserIsASuccess() throws Exception {
-        //TODO Java 8 date/time type not supported by default
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new ParameterNamesModule());
+        objectMapper.registerModule(new Jdk8Module());
+        objectMapper.registerModule(new JavaTimeModule());
+
+        ObjectWriter objectWriter = objectMapper.writer().with(SerializationFeature.INDENT_OUTPUT);
+
         int[] interests = new int[]{ 1,2,3,4,5,6,7,8,9,10 };
         NewUserDTO user = new NewUserDTO("Kenny", "ken@ken.com", "111", interests, LocalDate.now());
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectWriter objectWriter = objectMapper.writer().with(SerializationFeature.INDENT_OUTPUT);
+
         String jsonUser = objectWriter.writeValueAsString(user);
 
         when(userService.addUser(user)).thenReturn(TokenResponse.builder().build());
