@@ -42,9 +42,6 @@ class SportControllerTest {
     void getAllShouldReturnSportObjectsFromServiceWithExactValues() throws Exception {
         List<Sport> mockSports = Arrays.asList(new Sport(1,"Boxing"),new Sport(2,"Dancing"));
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectWriter objectWriter = objectMapper.writer().with(SerializationFeature.INDENT_OUTPUT);
-        String jsonSports = objectWriter.writeValueAsString(mockSports);
         when(sportService.getAll()).thenReturn(mockSports);
         this.mockMvc.perform(get("/sports")).andDo(print())
                 .andExpect(status().isOk())
@@ -58,9 +55,6 @@ class SportControllerTest {
     void getAllShouldReturnSportsArrayFromService() throws Exception {
         List<Sport> mockSports = Arrays.asList(new Sport(1,"Boxing"),new Sport(2,"Dancing"));
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectWriter objectWriter = objectMapper.writer().with(SerializationFeature.INDENT_OUTPUT);
-        String jsonSports = objectWriter.writeValueAsString(mockSports);
         when(sportService.getAll()).thenReturn(mockSports);
         this.mockMvc.perform(get("/sports")).andDo(print())
                 .andExpect(status().isOk())
