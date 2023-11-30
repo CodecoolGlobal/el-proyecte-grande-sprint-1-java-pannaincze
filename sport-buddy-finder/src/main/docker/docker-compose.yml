@@ -3,8 +3,10 @@ version: '2'
 services:
   app:
     image: 'sport-buddy-finder:latest'
+    ports:
+      - "8080:8080"
     build:
-      context: .
+      context: docker
     container_name: backend
     depends_on:
       - db
@@ -15,8 +17,17 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   db:
-    image: 'postgres:latest'
+    image: 'postgres:16.1-alpine3.18'
     container_name: db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD= /my_secret.txt
+      - POSTGRES_DB=sportbuddy
+
+  frontend:
+    image: 'frontend:latest'
+    container_name: frontend
+    depends_on:
+      - app
+    ports:
+      - "3000:3000"
