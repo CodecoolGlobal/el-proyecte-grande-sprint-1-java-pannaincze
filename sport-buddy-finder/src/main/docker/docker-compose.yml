@@ -23,6 +23,13 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD= /my_secret.txt
       - POSTGRES_DB=sportbuddy
+    volumes:
+      - ./import.sql:/docker-entrypoint-initdb.d/import.sql
+  db-init:
+    image: 'postgres:16.1-alpine3.18'
+    depends_on:
+      - db
+    entrypoint: ["sh", "-c", "sleep 10 && psql -h db -U docker -f docker-entrypoint-initdb.d/import.sql"]
 
   frontend:
     image: 'frontend:latest'

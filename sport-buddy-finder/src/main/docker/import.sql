@@ -1,3 +1,4 @@
+CREATE TABLE IF NOT EXISTS SPORT (sport_id INT, NAME varchar(200));
 INSERT INTO SPORT (sport_id, NAME) VALUES (1, 'Football');
 INSERT INTO SPORT (sport_id, NAME) VALUES (2, 'Basketball');
 INSERT INTO SPORT (sport_id, NAME) VALUES (3, 'Tennis');
@@ -21,5 +22,3 @@ INSERT INTO SPORT (sport_id, NAME) VALUES (20, 'Ice skating');
 INSERT INTO SPORT (sport_id, NAME) VALUES (21, 'Gymnastics');
 INSERT INTO SPORT (sport_id, NAME) VALUES (22, 'Rock climbing');
 INSERT INTO SPORT (sport_id, NAME) VALUES (23, 'Yoga');
-INSERT INTO APP_USER (id, birth_date,email,name,password,profile_picurl) VALUES (1,'1996-10-10','ex@gmail.com','Johny','123','http://vlmi');
-
